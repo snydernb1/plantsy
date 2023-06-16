@@ -1,6 +1,6 @@
-# MVP Feature List
+# Feature List
 
-Plantsy is a plant themed clone of etsy
+Plantsy is a plant themed clone of Etsy
 
 ### 1. Sign Up, Login, Log Out and Demo Login
 
@@ -11,7 +11,7 @@ Plantsy is a plant themed clone of etsy
 ### 2. Listings
 
 * Everyone can view all listings.
-* Eveyone can view listing details.
+* Everyone can view listing details.
 * Shop owner can create a listing.
 * Shop owner can edit or delete listing.
 
@@ -30,10 +30,10 @@ Plantsy is a plant themed clone of etsy
 * Logged in user can create a review.
 * Review owner can edit/delete review.
 
-### 5. Catagories
+### 5. Categories
 
-* Shop owner can add catagory to listing.
-* User can search items by catagory.
+* Shop owner can add category to listing.
+* User can search items by category.
 
 ## Bonus Features
 
