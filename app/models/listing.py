@@ -15,7 +15,7 @@ class Listing(db.Model):
     description = db.Column(db.String, nullable=False)
     price = db.Column(db.Float, nullable=False)
     free_shipping = db.Column(db.Boolean, nullable=False)
-    discount = db.Column(db.Boolean)
+    discount = db.Column(db.Float)
     # Foreign Keys
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     shop_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('shops.id')), nullable=False)
@@ -42,4 +42,5 @@ class Listing(db.Model):
             'discount': self.discount,
             'owner_id': self.owner_id,
             'shop_id': self.shop_id,
+            'imgs': [img.to_dict() for img in self.imgs]
         }
