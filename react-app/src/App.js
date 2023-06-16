@@ -23,12 +23,14 @@ function App() {
           <Route path='/'>
             <AllListings/>
           </Route>
+
           {/* <Route path="/login" >
             <LoginFormPage />
           </Route>
           <Route path="/signup">
             <SignupFormPage />
           </Route> */}
+
         </Switch>
       )}
     </>
