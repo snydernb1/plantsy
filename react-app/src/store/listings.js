@@ -10,9 +10,9 @@ const allListings = (listings) => {
 
 export const fetchAllListings = () => async (dispatch) => {
     const response = await fetch('/api/listings/')
-
     if (response.ok) {
 		const listings = await response.json();
+
 		dispatch(allListings(listings));
 		return null;
 	} else {

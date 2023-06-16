@@ -6,6 +6,9 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import AllListings from "./components/AllListings";
+import ListingDetails from "./components/ListingDetails";
+import ManageListings from './components/ManageListings';
+import CreateListing from "./components/CreateListing";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,8 +23,20 @@ function App() {
       {isLoaded && (
         <Switch>
 
-          <Route path='/'>
+          <Route exact path='/'>
             <AllListings/>
+          </Route>
+
+          <Route exact path='/listings'>
+            <CreateListing/>
+          </Route>
+
+          <Route path='/listings/:listId'>
+            <ListingDetails/>
+          </Route>
+
+          <Route path='/users/:userId/listings'>
+            <ManageListings />
           </Route>
 
           {/* <Route path="/login" >

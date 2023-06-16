@@ -1,0 +1,38 @@
+.imgContainer {
+    display: flex;
+    gap: 2em;
+}
+
+.imgContainerColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.imageTiles {
+    height: 5em;
+    width: 5em;
+    cursor: pointer;
+}
+
+.leftColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+.listingDetailContainer {
+    display: flex;
+    margin: auto;
+    gap: 5em;
+    padding: 2em 2em 0 2em;
+}
+
+.mainImg {
+    width: 30em;
+    height: 30em;
+}
+
+.namePrice {
+    display: flex;
+    gap: 3em;
+}

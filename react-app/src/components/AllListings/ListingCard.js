@@ -4,7 +4,6 @@ import './ListingCard.css'
 
 export default function ListingCard ({listing}) {
 
-    console.log('==>', listing)
     let prevImage;
     const imgs = listing.imgs
     // Grabs img preview
@@ -14,7 +13,6 @@ export default function ListingCard ({listing}) {
         }
     }
 
-    console.log('==>', prevImage)
 
     return (
         <>

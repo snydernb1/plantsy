@@ -29,13 +29,15 @@ function ProfileButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  const handleLogout = (e) => {
-    e.preventDefault();
-    dispatch(logout());
-  };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch(logout());
+    closeMenu()
+  };
 
   return (
     <>
