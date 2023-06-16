@@ -3,7 +3,7 @@
 
 ## DB Schema
 
-![database-schema](https://imgur.com/AMZWwdT.jpg)
+![database-schema](https://imgur.com/V4CbG8G.jpg)
 
 ## Backend Routes
 
