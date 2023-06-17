@@ -22,6 +22,8 @@ export default function ListingForm ({listing, formType}) {
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
 
+    console.log('what are the imgs?', imgs)
+
 
     //====Checking for Errors=======================================
     useEffect(() => {
@@ -66,6 +68,7 @@ export default function ListingForm ({listing, formType}) {
         if (Object.values(errors).length === 0) {
             if (formType === 'create') {
                 const newListing = await dispatch(createNewListing(listingData))
+                console.log('this is the new listing', newListing)
 
                 const preview = {
                     listing_id: newListing.id,
@@ -75,18 +78,19 @@ export default function ListingForm ({listing, formType}) {
                 await dispatch(createNewListingImg(preview))
 
                 const images = Object.values(imgs)
+                console.log('Are these the valuse', images)
                 for (let img of images) {
                     if (img.url.length > 0) {
                         const newImg = {
                             listing_id: newListing.id,
-                            image_url: prevImg,
+                            image_url: img.url,
                             preview: false
                         }
                         await dispatch(createNewListingImg(newImg))
                     }
                 }
 
-                // history.push(`/listings/${newListing.id}`)
+                history.push(`/listings/${newListing.id}`)
 
             }
         }

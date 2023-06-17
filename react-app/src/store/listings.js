@@ -9,14 +9,12 @@ const allListings = (listings) => {
     };
 };
 const newListing = (listing) => {
-    console.log("are we making it to the listing action")
     return {
         type: NEW_LISTING,
         listing
     };
 };
 const newListingImg = (listingImg) => {
-    console.log("are we making it to the img action")
     return {
         type: NEW_LISTING_IMG,
         listingImg
@@ -44,7 +42,6 @@ export const createNewListing = (data) => async (dispatch) => {
     })
     if (response.ok) {
 		const listing = await response.json();
-
 		dispatch(newListing(listing));
 		return listing;
 	} else {
@@ -53,14 +50,13 @@ export const createNewListing = (data) => async (dispatch) => {
 };
 
 export const createNewListingImg = (data) => async (dispatch) => {
-    const response = await fetch('/api/listings/', {
+    const response = await fetch('/api/listings/imgs', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
     })
     if (response.ok) {
 		const img = await response.json();
-
 		dispatch(newListingImg(img));
 		return null;
 	} else {
@@ -86,6 +82,21 @@ const listingsReducer = (state = initialState, action) => {
             return listingState
 
         case NEW_LISTING:
+
+            const newListing = action.listing
+            listingState = {...state, listings: {...state.listings}}
+
+            listingState.listings[newListing.id] = newListing
+
+            return listingState
+
+        case NEW_LISTING_IMG:
+
+            const newListingImg = action.listingImg
+            console.log('===================>', newListingImg)
+            listingState = {...state, listings: {...state.listings}}
+
+            listingState.listings[newListingImg.listing_id].imgs = [...listingState.listings[newListingImg.listing_id].imgs, newListingImg]
 
             return state
 

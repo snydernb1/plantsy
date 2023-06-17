@@ -5,9 +5,9 @@ export default function CreateListing () {
     const listing = {
         name: '',
         description: '',
-        price: '',
+        price: 0,
         free_shipping: '',
-        discount: '',
+        discount: 0,
         shop_id: 1
     }
 
