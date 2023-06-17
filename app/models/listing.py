@@ -21,7 +21,7 @@ class Listing(db.Model):
     shop_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('shops.id')), nullable=False)
 
     # Relationships
-    imgs = db.relationship('ListingImages', back_populates='listing')
+    imgs = db.relationship('ListingImages', cascade='all, delete-orphan', back_populates='listing')
     user = db.relationship('User', back_populates='listings')
     shop = db.relationship('Shop', back_populates='listings')
 

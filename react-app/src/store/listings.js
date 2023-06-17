@@ -2,6 +2,7 @@ const ALL_LISTINGS = 'listings/ALL_LISTINGS';
 const NEW_LISTING = 'listings/NEW_LISTING';
 const NEW_LISTING_IMG = 'listings/NEW_LISTING_IMG';
 const EDIT_LISTING = 'listings/EDIT_LISTING';
+const DELETE_LISTING = 'listings/DELETE_LISTING';
 
 const allListings = (listings) => {
     return {
@@ -24,6 +25,12 @@ const newListingImg = (listingImg) => {
 const editListing = (listing) => {
     return {
         type: EDIT_LISTING,
+        listing
+    };
+};
+const deleteListing = (listing) => {
+    return {
+        type: DELETE_LISTING,
         listing
     };
 };
@@ -70,6 +77,23 @@ export const putListing = (data) => async (dispatch) => {
 		return ["An error occurred. Please try again."];
 	};
 };
+
+
+export const delListing = (id) => async (dispatch) => {
+    const response = await fetch(`/api/listings/${id}`, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'}
+    })
+
+    if (response.ok) {
+		const listing = await response.json();
+		dispatch(deleteListing(id));
+		return null;
+	} else {
+		return ["An error occurred. Please try again."];
+	};
+};
+
 
 export const createNewListingImg = (data) => async (dispatch) => {
     const response = await fetch('/api/listings/imgs', {
@@ -118,6 +142,17 @@ const listingsReducer = (state = initialState, action) => {
             listingState = {...state, listings: {...state.listings}}
 
             listingState.listings[editListing.id] = editListing
+
+            return listingState
+
+        case DELETE_LISTING:
+
+            const id = action.listing
+            listingState = {...state, listings: {...state.listings}}
+            console.log('did we get into the reducer?', listingState.listings)
+            console.log('did we get into the reducer?', listingState.listings[id])
+
+            delete listingState.listings[id]
 
             return listingState
 

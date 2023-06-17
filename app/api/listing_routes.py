@@ -83,6 +83,19 @@ def edit_listing(listing_id):
     return listing.to_dict()
 
 
+@listing_routes.route('/<int:listing_id>', methods = ['DELETE'])
+def delete_listing(listing_id):
+    '''
+    Adds a new listing to the db
+    '''
+    listing = Listing.query.get(listing_id)
+    print('=======================> Are we hitting the BE route?', listing)
+
+    db.session.delete(listing)
+    db.session.commit()
+    return {"Message": "Successfully Deleted"}
+
+
 @listing_routes.route('/imgs', methods = ['POST'])
 def create_listing_img():
     '''
