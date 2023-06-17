@@ -17,7 +17,7 @@ export default function ManageListings () {
     }
 
     const toListForm = () => {
-        history.push('/listing')
+        history.push('/listings')
     }
 
     return (
