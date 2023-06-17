@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 
-import {createNewListing} from '../../store/listings'
-import {createNewListingImg} from '../../store/listings'
+import { createNewListing } from '../../store/listings'
+import { createNewListingImg } from '../../store/listings'
+import { putListing } from "../../store/listings";
 
 export default function ListingForm ({listing, formType}) {
     const [errors, setErrors] = useState({})
@@ -11,7 +12,7 @@ export default function ListingForm ({listing, formType}) {
     const [name, setName] = useState(listing?.name)
     const [description, setDescription] = useState(listing?.description)
     const [price, setPrice] = useState(listing?.price)
-    const [shipping, setShipping] = useState(listing?.shipping)
+    const [shipping, setShipping] = useState(listing?.free_shipping)
     const [discount, setDiscount] = useState(listing?.discount)
     const [prevImg, setPrevImg] = useState("")
     const [imgs, setImgs] = useState({})
@@ -22,16 +23,15 @@ export default function ListingForm ({listing, formType}) {
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
 
-    console.log('what are the imgs?', imgs)
-
+    console.log('what is the form type', formType)
 
     //====Checking for Errors=======================================
     useEffect(() => {
         const errors = {}
-        if (description.length < 30) errors.description = "Please add a description of at least 30 characters"
         if (!name.length) errors.name = "Please provide a title for your item"
         if (!price.toString().length) errors.price = "Please provide a price for your item"
         if (!shipping?.length) errors.shipping = "Please select shipping preference"
+        if (description.length < 30) errors.description = "Please add a description of at least 30 characters"
         if (formType === "create") {
             if (!prevImg.length ) errors.prevImg = "Please provide a preview image"
 
@@ -93,6 +93,10 @@ export default function ListingForm ({listing, formType}) {
                 history.push(`/listings/${newListing.id}`)
 
             }
+        } else {
+            console.log('this is what is being sent to backend',listingData)
+            const editedListing = await dispatch(putListing(listingData))
+            history.push(`/listings/${editedListing.id}`)
         }
 
     }
@@ -105,7 +109,7 @@ export default function ListingForm ({listing, formType}) {
     let makeDisabled = false;
 
 
-    if (name.length) {
+    if (name?.length) {
       makeDisabled = true
     }
 
@@ -113,7 +117,12 @@ export default function ListingForm ({listing, formType}) {
     //====Form ================================================
     return (
         <section>
+            {
+            formType === 'create' ?
             <h2>Listing details</h2>
+            :
+            <h2>Update listing details</h2>
+            }
             <p>Tell the world all about your item and why they'll love it.</p>
 
             <form onSubmit={handleSubmit}>
@@ -196,6 +205,7 @@ export default function ListingForm ({listing, formType}) {
                     <select
                         type="number"
                         className='formInput'
+                        defaultValue={shipping}
                         onChange={(e) => setShipping(e.target.value)}
                         >
                         <option></option>
@@ -223,6 +233,7 @@ export default function ListingForm ({listing, formType}) {
                         />
             </section>
 
+            {formType === 'create' &&
             <section>
                         <div>
                             <h4>Photos*</h4>
@@ -279,6 +290,7 @@ export default function ListingForm ({listing, formType}) {
                     )}
 
             </section>
+            }
 
             <div  id='createSpotDiv'>
                 <button

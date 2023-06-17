@@ -63,10 +63,30 @@ def create_listing():
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
+@listing_routes.route('/<int:listing_id>', methods = ['PUT'])
+def edit_listing(listing_id):
+    '''
+    Adds a new listing to the db
+    '''
+    listing = Listing.query.get(listing_id)
+    data = request.get_json()
+
+    listing.owner_id = data["owner_id"]
+    listing.name = data["name"]
+    listing.price = data["price"]
+    listing.description = data["description"]
+    listing.discount = data["discount"]
+    listing.free_shipping = data["free_shipping"]
+    listing.shop_id = data["shop_id"]
+
+    db.session.commit()
+    return listing.to_dict()
+
+
 @listing_routes.route('/imgs', methods = ['POST'])
 def create_listing_img():
     '''
-    Adds a new listing to the db
+    Adds a new listing image to the db
     '''
     data = request.get_json()
 

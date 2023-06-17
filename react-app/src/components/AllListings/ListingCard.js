@@ -1,8 +1,14 @@
-import { Link } from "react-router-dom";
+import { useState } from 'react';
+import { Link, useHistory } from "react-router-dom";
+import OpenModalMenuItem from '../OpenModalButton'
+import DeleteConfirm from '../DeleteConfirmModal';
 
 import './ListingCard.css'
 
-export default function ListingCard ({listing}) {
+
+export default function ListingCard ({listing, manage}) {
+    const history = useHistory()
+    const [showMenu, setShowMenu] = useState(false);
 
     let prevImage;
     const imgs = listing.imgs
@@ -11,6 +17,13 @@ export default function ListingCard ({listing}) {
         if (img.preview === true) {
             prevImage = img.img_url
         }
+    }
+
+    const closeMenu = () => setShowMenu(false);
+
+    const handleUpdate = (e) => {
+        e.preventDefault();
+        history.push(`/listings/${listing.id}/edit`)
     }
 
 
@@ -64,6 +77,19 @@ export default function ListingCard ({listing}) {
                 </div>
 
             </Link>
+
+            {manage === "manage" &&
+                <div className='updateDelete'>
+                    <button onClick={handleUpdate} id='updateButton'>Update</button>
+                    <div id='deleteButton'>
+                        <OpenModalMenuItem
+                        itemText="Delete"
+                        onItemClick={closeMenu}
+                        modalComponent={<DeleteConfirm id={listing.id} deleteType='listing'/>}
+                        />
+                    </div>
+                </div>
+            }
         </>
     );
 };

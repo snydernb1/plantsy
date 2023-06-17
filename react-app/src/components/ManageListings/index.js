@@ -30,9 +30,12 @@ export default function ManageListings () {
                     <ListingCard
                     key={listing.id}
                     listing={listing}
+                    manage={"manage"}
                     />
                 ))}
             </div>
+
+
         </section>
     );
 };

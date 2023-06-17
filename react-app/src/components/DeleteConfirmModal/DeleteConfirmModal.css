@@ -1,0 +1,36 @@
+#areYouSure {
+    padding-top: .5em;
+}
+
+#confirmDelete {
+    margin-top: 1.5em;
+    width: 100%;
+    background-color: rgba(255, 56, 96, 1);
+    border: 1px solid black;
+    box-shadow: 2px 2px 4px 1px grey;
+    height: 3em;
+    font-family: 'Urbanist', sans-serif;
+    align-self: center;
+    color: white;
+    cursor: pointer;
+}
+
+#confirmKeep {
+    margin-top: .75em;
+    width: 100%;
+    background-color: rgb(88, 88, 88);
+    border: 1px solid black;
+    box-shadow: 2px 2px 4px 1px grey;
+    height: 3em;
+    font-family: 'Urbanist', sans-serif;
+    align-self: center;
+    color: white;
+}
+
+#deleteConfirmModal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: .75em 1em 1.2em 1em;
+    width: 26em;
+}
