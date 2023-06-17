@@ -1,0 +1,112 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Urbanist', sans-serif;
+    text-decoration: none;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#deleteButton {
+    border-radius: none;
+    border: 1px solid black;
+    width: 65px;
+    background-color: rgb(88, 88, 88);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 1px 1px 3px 1px grey;
+}
+
+#rating {
+    display: flex;
+
+    font-weight: 600;
+}
+
+#updateButton {
+    border-radius: none;
+    height: 2em;
+    border: 1px solid black;
+    width: 65px;
+    background-color: rgb(88, 88, 88);
+    color: white;
+    box-shadow: 1px 1px 3px 1px grey;
+    cursor: pointer;
+}
+
+.boldText {
+    font-weight: 650;
+    font-size: .9em;
+}
+
+.bolderText {
+    font-weight: 650;
+}
+
+.fa-star {
+    height: 60%;
+    scale: 100%;
+}
+
+.imgDiv {
+    width: 18em;
+    height: 15em;
+    padding-bottom: .25em;
+}
+
+.price {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1em;
+    padding-top: .75em;
+}
+
+.spotCard {
+    display: inline-flex;
+    flex-direction: column;
+    width: 18em;
+    height: 20em;
+    color: black;
+}
+
+.imgDiv .toolTipText {
+    visibility: hidden;
+    background-color: rgba(255, 255, 255, 0.836);
+    position: relative;
+    bottom: 2em;
+    left: 1em;
+    color: black;
+    padding: 3px;
+    font-family: 'Urbanist', sans-serif;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.imgDiv:hover .toolTipText {
+    visibility: visible;
+}
+
+.toolTip {
+    border-radius: 8px;
+}
+
+.updateDelete {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    padding-top: 1em;
+}

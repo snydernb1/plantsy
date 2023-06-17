@@ -5,6 +5,11 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
+import AllListings from "./components/AllListings";
+import ListingDetails from "./components/ListingDetails";
+import ManageListings from './components/ManageListings';
+import CreateListing from "./components/CreateListing";
+import UpdateListing from "./components/UpdateListing";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,12 +23,34 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route path="/login" >
+
+          <Route exact path='/'>
+            <AllListings/>
+          </Route>
+
+          <Route exact path='/listings'>
+            <CreateListing/>
+          </Route>
+
+          <Route path='/listings/:listId/edit'>
+            <UpdateListing/>
+          </Route>
+
+          <Route path='/listings/:listId'>
+            <ListingDetails/>
+          </Route>
+
+          <Route path='/users/:userId/listings'>
+            <ManageListings />
+          </Route>
+
+          {/* <Route path="/login" >
             <LoginFormPage />
           </Route>
           <Route path="/signup">
             <SignupFormPage />
-          </Route>
+          </Route> */}
+
         </Switch>
       )}
     </>
