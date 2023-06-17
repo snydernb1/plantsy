@@ -83,7 +83,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     if environment == "production":
-        op.execute(f"ALTER TABLE users carts SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE carts SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
