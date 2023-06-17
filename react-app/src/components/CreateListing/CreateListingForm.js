@@ -92,11 +92,10 @@ export default function ListingForm ({listing, formType}) {
 
                 history.push(`/listings/${newListing.id}`)
 
+            } else {
+                const editedListing = await dispatch(putListing(listingData))
+                history.push(`/listings/${editedListing.id}`)
             }
-        } else {
-            console.log('this is what is being sent to backend',listingData)
-            const editedListing = await dispatch(putListing(listingData))
-            history.push(`/listings/${editedListing.id}`)
         }
 
     }
