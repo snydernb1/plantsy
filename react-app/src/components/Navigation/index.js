@@ -20,6 +20,10 @@ function Navigation({ isLoaded }){
 		history.push(`/users/${sessionUser.id}/listings`)
 	}
 
+	const toCart = () => {
+		history.push(`/users/${sessionUser.id}/cart`)
+	}
+
 	return (
 		<ul className='navbar'>
 			<li>
@@ -28,6 +32,11 @@ function Navigation({ isLoaded }){
 			{sessionUser !== null &&
 			<li onClick={toListings}>
 				Listings
+			</li>
+			}
+			{sessionUser !== null &&
+			<li onClick={toCart}>
+				Cart
 			</li>
 			}
 			{isLoaded && (

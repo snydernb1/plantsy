@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 
+import { addItemToCart } from "../../store/cart";
+
 import './ListingDetail.css'
 
 
@@ -51,7 +53,6 @@ export default function ListingDetails () {
         await dispatch(addItemToCart(listing.id))
     }
 
-    console.log('List comp', listing)
 
     return (
         <section className="listingDetailContainer">
@@ -78,7 +79,7 @@ export default function ListingDetails () {
 
             <div className="rightColumn">
 
-                <p>In {ranNum} carts</p>
+                <p>In {ranNum} {ranNum > 1 ? 'carts' : 'cart'}</p>
 
                 <div className="namePrice">
                     <h3>{listing.name}</h3>
@@ -90,7 +91,7 @@ export default function ListingDetails () {
                     }
                 </div>
 
-                {listing.owner_id !== sessionUser.id ?
+                {listing.owner_id !== sessionUser?.id ?
                 <button onClick={addToCart}>Add to cart</button>
                 :
                 <button onClick={handleEdit}>Edit listing</button>
