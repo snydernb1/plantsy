@@ -10,6 +10,7 @@ import ListingDetails from "./components/ListingDetails";
 import ManageListings from './components/ManageListings';
 import CreateListing from "./components/CreateListing";
 import UpdateListing from "./components/UpdateListing";
+import Cart from "./components/Cart";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,10 @@ function App() {
 
           <Route path='/users/:userId/listings'>
             <ManageListings />
+          </Route>
+
+          <Route path='/users/:userId/cart'>
+            <Cart />
           </Route>
 
           {/* <Route path="/login" >

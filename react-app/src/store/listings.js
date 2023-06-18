@@ -54,6 +54,7 @@ export const createNewListing = (data) => async (dispatch) => {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
     })
+
     if (response.ok) {
 		const listing = await response.json();
 		dispatch(newListing(listing));

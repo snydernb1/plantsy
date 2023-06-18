@@ -2,12 +2,16 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 
+import { addItemToCart } from "../../store/cart";
+
 import './ListingDetail.css'
 
 
 export default function ListingDetails () {
+    const dispatch = useDispatch()
     const history = useHistory()
     const listingsObj = useSelector(state => state.listings.listings)
+    const sessionUser = useSelector(state => state.session.user);
     const [mainImg, setMainImg] = useState('loading')
     const [ranNum, setRanNum] = useState(0)
     const {listId} = useParams();
@@ -40,7 +44,15 @@ export default function ListingDetails () {
         history.push('/')
     }
 
-    console.log('List comp', listing)
+    const handleEdit = () => {
+        history.push(`/listings/${listing.id}/edit`)
+    }
+
+    const addToCart = async (e) => {
+        e.preventDefault()
+        await dispatch(addItemToCart(listing.id))
+    }
+
 
     return (
         <section className="listingDetailContainer">
@@ -67,7 +79,7 @@ export default function ListingDetails () {
 
             <div className="rightColumn">
 
-                <p>In {ranNum} carts</p>
+                <p>In {ranNum} {ranNum > 1 ? 'carts' : 'cart'}</p>
 
                 <div className="namePrice">
                     <h3>{listing.name}</h3>
@@ -79,7 +91,13 @@ export default function ListingDetails () {
                     }
                 </div>
 
-                <button>Add to cart</button>
+                {listing.owner_id !== sessionUser?.id ?
+                <button onClick={addToCart}>Add to cart</button>
+                :
+                <button onClick={handleEdit}>Edit listing</button>
+                }
+
+
                 <h4>Description</h4>
                 <p>{listing.description}</p>
             </div>
