@@ -6,8 +6,10 @@ import './ListingDetail.css'
 
 
 export default function ListingDetails () {
+    const dispatch = useDispatch()
     const history = useHistory()
     const listingsObj = useSelector(state => state.listings.listings)
+    const sessionUser = useSelector(state => state.session.user);
     const [mainImg, setMainImg] = useState('loading')
     const [ranNum, setRanNum] = useState(0)
     const {listId} = useParams();
@@ -38,6 +40,15 @@ export default function ListingDetails () {
 
     const returnHome = () => {
         history.push('/')
+    }
+
+    const handleEdit = () => {
+        history.push(`/listings/${listing.id}/edit`)
+    }
+
+    const addToCart = async (e) => {
+        e.preventDefault()
+        await dispatch(addItemToCart(listing.id))
     }
 
     console.log('List comp', listing)
@@ -79,7 +90,13 @@ export default function ListingDetails () {
                     }
                 </div>
 
-                <button>Add to cart</button>
+                {listing.owner_id !== sessionUser.id ?
+                <button onClick={addToCart}>Add to cart</button>
+                :
+                <button onClick={handleEdit}>Edit listing</button>
+                }
+
+
                 <h4>Description</h4>
                 <p>{listing.description}</p>
             </div>
