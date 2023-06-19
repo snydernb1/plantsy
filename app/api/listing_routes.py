@@ -71,6 +71,7 @@ def edit_listing(listing_id):
     Adds a new listing to the db
     '''
     listing = Listing.query.get(listing_id)
+    print('================> what is listing?', listing)
     data = request.get_json()
 
     listing.owner_id = data["owner_id"]

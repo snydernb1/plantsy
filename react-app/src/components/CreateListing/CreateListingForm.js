@@ -23,14 +23,16 @@ export default function ListingForm ({listing, formType}) {
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
 
-    console.log('what is the form type', formType)
+    console.log('what is the form type', shipping)
 
     //====Checking for Errors=======================================
     useEffect(() => {
         const errors = {}
         if (!name.length) errors.name = "Please provide a title for your item"
         if (!price.toString().length) errors.price = "Please provide a price for your item"
-        if (!shipping?.length) errors.shipping = "Please select shipping preference"
+
+        if (shipping !== true && shipping !== false) errors.shipping = "Please select shipping preference"
+
         if (description.length < 30) errors.description = "Please add a description of at least 30 characters"
         if (formType === "create") {
             if (!prevImg.length ) errors.prevImg = "Please provide a preview image"
@@ -92,7 +94,8 @@ export default function ListingForm ({listing, formType}) {
 
                 history.push(`/listings/${newListing.id}`)
 
-            } else {
+            } else if (formType === 'update') {
+                console.log('are we getting into the else?')
                 const editedListing = await dispatch(putListing(listingData))
                 history.push(`/listings/${editedListing.id}`)
             }
@@ -205,11 +208,11 @@ export default function ListingForm ({listing, formType}) {
                         type="number"
                         className='formInput'
                         defaultValue={shipping}
-                        onChange={(e) => setShipping(e.target.value)}
+                        onChange={(e) => setShipping(e.target.value === 'true' ? true : false)}
                         >
                         <option></option>
-                        <option value={true} >Free Shipping</option>
-                        <option value={false} >Calculate Shipping at Checkout</option>
+                        <option value={'true'} >Free Shipping</option>
+                        <option value={'false'} >Calculate Shipping at Checkout</option>
                     </select>
 
                     {submit && errors.shipping && (

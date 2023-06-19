@@ -30,11 +30,15 @@ export const fetchUserCart = () => async (dispatch) => {
 };
 
 
-
 export const addItemToCart = (data) => async (dispatch) => {
-    const response = await fetch('/api/cart/');
+    const response = await fetch('/api/cart/', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    });
 
     if (response.ok) {
+        console.log('are we getting here?')
 		const cartItem = await response.json();
 		dispatch(addCart(cartItem));
 		return null;

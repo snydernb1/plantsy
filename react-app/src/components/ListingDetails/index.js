@@ -13,6 +13,7 @@ export default function ListingDetails () {
     const listingsObj = useSelector(state => state.listings.listings)
     const sessionUser = useSelector(state => state.session.user);
     const [mainImg, setMainImg] = useState('loading')
+    const [quantity, setQuantity] = useState('1')
     const [ranNum, setRanNum] = useState(0)
     const {listId} = useParams();
 
@@ -50,7 +51,13 @@ export default function ListingDetails () {
 
     const addToCart = async (e) => {
         e.preventDefault()
-        await dispatch(addItemToCart(listing.id))
+
+        const cartItem = {
+            quantity,
+            listing_id: listId
+        }
+
+        await dispatch(addItemToCart(cartItem))
     }
 
 
@@ -92,7 +99,21 @@ export default function ListingDetails () {
                 </div>
 
                 {listing.owner_id !== sessionUser?.id ?
-                <button onClick={addToCart}>Add to cart</button>
+                <form onSubmit={addToCart}>
+                    <select onChange={(e) => setQuantity(e.target.value)}>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                    <button type='submit'>Add to cart</button>
+                </form>
                 :
                 <button onClick={handleEdit}>Edit listing</button>
                 }

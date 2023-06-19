@@ -12,20 +12,36 @@ def add_cart():
     '''
     Route to add item to cart
     '''
+
     data = request.get_json()
     user = current_user
-    item = Listing.query.get(data)
 
-    add_item = Cart (
-        quantity = data['quantity'],
-        user_id = user.id,
-        listing_id = item.id
-    )
+    item = Cart.query.filter(Cart.user_id == user.id, Cart.listing_id == data['listing_id']).all()
 
-    db.session.add(add_item)
-    db.session.commit()
+    print('================? Checking out item', item.quantity)
 
-    return add_item.to_dict()
+    if item:
+        print('====================> are we getting in first if?')
+        item.quantity = item.quantity + data['quantity']
+
+        db.session.commit()
+        print ('=================>', item.to_dict())
+        return item.to_dict()
+
+    else :
+        print('================> are we getting in else?')
+        add_item = Cart (
+            quantity = data['quantity'],
+            user_id = user.id,
+            listing_id = data['listing_id']
+        )
+
+        db.session.add(add_item)
+        db.session.commit()
+
+        return add_item.to_dict()
+
+
 
 @cart_routes.route('/')
 @login_required

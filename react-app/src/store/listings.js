@@ -101,7 +101,8 @@ export const createNewListingImg = (data) => async (dispatch) => {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
-    })
+    });
+
     if (response.ok) {
 		const img = await response.json();
 		dispatch(newListingImg(img));
