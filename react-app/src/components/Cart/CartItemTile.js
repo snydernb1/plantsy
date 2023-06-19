@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { removeItemFromCart } from "../../store/cart";
+import { updateQuantity } from "../../store/cart";
 
-export default function CartItemTile ({item}) {
+export default function CartItemTile ({item, cartData}) {
+    const dispatch = useDispatch()
     const [ranNum, setRanNum] = useState(0)
     const [shipping, setShipping] = useState(0)
+    const [quantity, setQuantity] = useState(cartData.quantity)
     const [minDate, setMinDate] = useState("")
     const [maxDate, setMaxDate] = useState("")
-
 
     const months = {
         'Jan': 31,
@@ -49,7 +53,6 @@ export default function CartItemTile ({item}) {
     }
 
     if ((maxRanAdd + minTempDays) > months[minTempMonth]) {
-        console.log('are we getting in here?')
         const keys = Object.keys(months)
         prevMonthDays = months[month]
         const i = keys.indexOf(month)
@@ -61,13 +64,11 @@ export default function CartItemTile ({item}) {
     }
 
 
-
     useEffect(()=> {
         setRanNum(Math.floor(Math.random() * 21))
         setShipping((Math.random() * 30).toFixed(2))
         setMinDate(`${minTempMonth} ${minTempDays}`)
         setMaxDate(`${maxTempMonth} ${maxTempDays}`)
-
     }, [item])
 
     let prevImage;
@@ -80,12 +81,14 @@ export default function CartItemTile ({item}) {
         }
     }
 
+    const removeItem = async () => {
+        await dispatch(removeItemFromCart(cartData.id, cartData.listing_id))
+    }
 
-
-
-
-
-
+    const updateItem = async () => {
+        cartData.quantity = quantity
+        await dispatch(updateQuantity(cartData))
+    }
 
     return (
         <section>
@@ -97,7 +100,7 @@ export default function CartItemTile ({item}) {
 
                 <div>
                     <p>{item.name}</p>
-                    <select>
+                    <select onChange={(e) => setQuantity(Number(e.target.value))} value={quantity}>
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -109,7 +112,9 @@ export default function CartItemTile ({item}) {
                         <option>9</option>
                         <option>10</option>
                     </select>
-                    <button>Remove</button>
+
+                    <button onClick={updateItem}>Update</button>
+                    <button onClick={removeItem}>Remove</button>
                 </div>
 
 

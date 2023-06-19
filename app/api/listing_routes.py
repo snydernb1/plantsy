@@ -34,6 +34,7 @@ def all_listings():
 
 
 @listing_routes.route('/', methods = ['POST'])
+@login_required
 def create_listing():
     '''
     Adds a new listing to the db
@@ -64,6 +65,7 @@ def create_listing():
 
 
 @listing_routes.route('/<int:listing_id>', methods = ['PUT'])
+@login_required
 def edit_listing(listing_id):
     '''
     Adds a new listing to the db
@@ -84,12 +86,12 @@ def edit_listing(listing_id):
 
 
 @listing_routes.route('/<int:listing_id>', methods = ['DELETE'])
+@login_required
 def delete_listing(listing_id):
     '''
     Adds a new listing to the db
     '''
     listing = Listing.query.get(listing_id)
-    print('=======================> Are we hitting the BE route?', listing)
 
     db.session.delete(listing)
     db.session.commit()
@@ -97,6 +99,7 @@ def delete_listing(listing_id):
 
 
 @listing_routes.route('/imgs', methods = ['POST'])
+@login_required
 def create_listing_img():
     '''
     Adds a new listing image to the db

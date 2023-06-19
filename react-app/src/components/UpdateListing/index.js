@@ -8,7 +8,7 @@ export default function UpdateListing () {
     const listingsObj = useSelector(state => state.listings.listings)
 
     const listing = listingsObj[listId]
-    console.log('listing', listing)
+    console.log('=========> listing', listing)
 
 
 

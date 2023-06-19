@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from .cart import cart
+# from .cart import cart
 
 
 
@@ -24,13 +24,14 @@ class Listing(db.Model):
     imgs = db.relationship('ListingImages', cascade='all, delete-orphan', back_populates='listing')
     user = db.relationship('User', back_populates='listings')
     shop = db.relationship('Shop', back_populates='listings')
+    cart = db.relationship('Cart', back_populates='items')
 
     # Join Table
-    user = db.relationship(
-        'User',
-        secondary=cart,
-        back_populates='items'
-    )
+    # user = db.relationship(
+    #     'User',
+    #     secondary=cart,
+    #     back_populates='items'
+    # )
 
     def to_dict(self):
         return {
