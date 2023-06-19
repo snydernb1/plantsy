@@ -3,11 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeItemFromCart } from "../../store/cart";
 import { updateQuantity } from "../../store/cart";
 
+import './CartItemTile.css'
+
 export default function CartItemTile ({item, cartData}) {
     const dispatch = useDispatch()
     const [ranNum, setRanNum] = useState(0)
     const [shipping, setShipping] = useState(0)
-    const [quantity, setQuantity] = useState(cartData.quantity)
+    const [quantity, setQuantity] = useState(cartData?.quantity)
     const [minDate, setMinDate] = useState("")
     const [maxDate, setMaxDate] = useState("")
 
@@ -72,6 +74,7 @@ export default function CartItemTile ({item, cartData}) {
     }, [item])
 
     let prevImage;
+    if (!item) return
 
     const imgs = item.imgs
 
@@ -90,53 +93,73 @@ export default function CartItemTile ({item, cartData}) {
         await dispatch(updateQuantity(cartData))
     }
 
+    const classPrice = item.discount !== null ? 'cross' : 'nocross'
+
     return (
         <section>
-            <div>
+            <div className="checkoutContainer">
 
-                <div>
-                    <img src={prevImage}/>
-                </div>
+                <section className="checkoutEdit">
 
-                <div>
-                    <p>{item.name}</p>
-                    <select onChange={(e) => setQuantity(Number(e.target.value))} value={quantity}>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
-                    </select>
+                    <div className="checkoutUpperLeft">
+                        <div id="checkoutImgDiv">
+                            <img src={prevImage} id="checkoutImg"/>
+                        </div>
 
-                    <button onClick={updateItem}>Update</button>
-                    <button onClick={removeItem}>Remove</button>
-                </div>
+                        <div className="checkoutName">
+
+                            <p>{item.name}</p>
+
+                            <div className="checkoutQuantity">
+                            <select onChange={(e) => setQuantity(Number(e.target.value))} value={quantity} id="checkoutInput">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                            </select>
+
+                            <button onClick={updateItem} className="checkoutButtons">Update</button>
+                            </div>
+
+                            <button onClick={removeItem} className="checkoutButtons" id="checkoutRemove">Remove</button>
+                        </div>
+                    </div>
 
 
-                <div>
-                    <p>${item.price}</p>
 
-                    {item.discount !== null ?
-                        <p>${(Number(item.price) - (Number(item.discount) * Number(item.price))).toFixed(2)}</p>
-                        :
-                        null
-                        }
-                        {item.discount !== null ?
-                        <p>({item.discount * 100}% off)</p>
-                        :
-                        null
-                        }
 
-                    <p>{ranNum} people have this item in their {ranNum > 1 ? 'carts' : 'cart'}</p>
-                </div>
+                    <div className="checkoutCardPrice">
 
-                <div>
-                    <div>
+                        <div className="checkoutCardPriceText">
+                            <p className={classPrice}>${item.price}</p>
+
+                            {item.discount !== null ?
+                                <p className="greenText">${(Number(item.price) - (Number(item.discount) * Number(item.price))).toFixed(2)}</p>
+                                :
+                                null
+                            }
+                                {item.discount !== null ?
+                                <p className="greenText">({item.discount * 100}% off)</p>
+                                :
+                                null
+                            }
+                        </div>
+
+                        <p id="checkoutRed">{ranNum} people have this item in their {ranNum > 1 ? 'carts' : 'cart'}</p>
+
+                    </div>
+                </section>
+
+
+
+                <div className="checkoutBotCard">
+                    <div className="checkoutBox">
                         <input type='checkbox'/>
                         <div>
                             <p>This order is a gift</p>
