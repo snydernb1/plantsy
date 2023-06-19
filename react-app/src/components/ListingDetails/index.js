@@ -11,6 +11,7 @@ export default function ListingDetails () {
     const dispatch = useDispatch()
     const history = useHistory()
     const listingsObj = useSelector(state => state.listings.listings)
+    const cartObj = useSelector(state => state.cart.cart)
     const sessionUser = useSelector(state => state.session.user);
     const [mainImg, setMainImg] = useState('loading')
     const [quantity, setQuantity] = useState('1')
@@ -54,7 +55,8 @@ export default function ListingDetails () {
 
         const cartItem = {
             quantity,
-            listing_id: listId
+            listing_id: listId,
+            id: cartObj[listId].id
         }
 
         await dispatch(addItemToCart(cartItem))

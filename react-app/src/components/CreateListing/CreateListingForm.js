@@ -23,8 +23,6 @@ export default function ListingForm ({listing, formType}) {
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
 
-    console.log('what is the form type', shipping)
-
     //====Checking for Errors=======================================
     useEffect(() => {
         const errors = {}
@@ -95,7 +93,6 @@ export default function ListingForm ({listing, formType}) {
                 history.push(`/listings/${newListing.id}`)
 
             } else if (formType === 'update') {
-                console.log('are we getting into the else?')
                 const editedListing = await dispatch(putListing(listingData))
                 history.push(`/listings/${editedListing.id}`)
             }

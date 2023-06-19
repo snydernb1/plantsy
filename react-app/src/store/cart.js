@@ -38,7 +38,6 @@ export const addItemToCart = (data) => async (dispatch) => {
     });
 
     if (response.ok) {
-        console.log('are we getting here?')
 		const cartItem = await response.json();
 		dispatch(addCart(cartItem));
 		return null;
@@ -61,6 +60,14 @@ const cartReducer = (state = initialState, action) => {
             allItems.forEach(item => {
                 cartState.cart[item.listing_id] = item
             });
+            return cartState
+
+        case ADD_CART:
+            const item = action.cartItem;
+            cartState = {...state, cart: {...state.cart}}
+
+            cartState.cart[item.listing_id] = item
+
             return cartState
 
         default:
