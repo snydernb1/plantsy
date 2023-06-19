@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {fetchAllListings} from '../../store/listings'
+import { fetchUserCart } from '../../store/cart';
 import { useHistory, NavLink } from 'react-router-dom';
 
 import ProfileButton from './ProfileButton';
@@ -14,6 +15,7 @@ function Navigation({ isLoaded }){
 
 	useEffect(()=> {
         dispatch(fetchAllListings())
+		dispatch(fetchUserCart())
     }, [dispatch])
 
 	const toListings = () => {

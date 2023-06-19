@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: c37ecfa37490
+Revision ID: 802a0698b6ab
 Revises:
-Create Date: 2023-06-18 11:28:25.923476
+Create Date: 2023-06-19 08:27:31.610123
 
 """
 from alembic import op
@@ -13,7 +13,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = 'c37ecfa37490'
+revision = '802a0698b6ab'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -53,10 +53,13 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('carts',
-    sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.Column('listing_id', sa.Integer(), nullable=True),
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('quantity', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('listing_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['listing_id'], ['listings.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], )
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('listings_images',
     sa.Column('id', sa.Integer(), nullable=False),

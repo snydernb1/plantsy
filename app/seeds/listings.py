@@ -36,6 +36,7 @@ def seed_listings():
     db.session.commit()
 
 
+
 def undo_listings():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.listings RESTART IDENTITY CASCADE;")

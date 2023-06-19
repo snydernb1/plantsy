@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 
-export default function CartItemTile ({item}) {
+export default function CartItemTile ({item, cartData}) {
     const [ranNum, setRanNum] = useState(0)
     const [shipping, setShipping] = useState(0)
     const [minDate, setMinDate] = useState("")
     const [maxDate, setMaxDate] = useState("")
-
 
     const months = {
         'Jan': 31,
@@ -49,7 +48,6 @@ export default function CartItemTile ({item}) {
     }
 
     if ((maxRanAdd + minTempDays) > months[minTempMonth]) {
-        console.log('are we getting in here?')
         const keys = Object.keys(months)
         prevMonthDays = months[month]
         const i = keys.indexOf(month)
@@ -59,7 +57,6 @@ export default function CartItemTile ({item}) {
         maxTempDays = maxRanAdd + minTempDays
         maxTempMonth = minTempMonth
     }
-
 
 
     useEffect(()=> {
