@@ -83,7 +83,7 @@ export default function ListingCard ({listing, manage}) {
                     <button onClick={handleUpdate} id='updateButton'>Update</button>
                     <div id='deleteButton'>
                         <OpenModalMenuItem
-                        itemText="Delete"
+                        buttonText="Delete"
                         onItemClick={closeMenu}
                         modalComponent={<DeleteConfirm id={listing.id} deleteType='listing'/>}
                         />

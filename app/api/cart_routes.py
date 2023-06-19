@@ -48,6 +48,20 @@ def remove_item(item_id):
     return {"Message": "Successfully Removed"}
 
 
+@cart_routes.route('/', methods = ['DELETE'])
+@login_required
+def purchase():
+    '''
+    Removes item from cart
+    '''
+    user = current_user
+    items = Cart.query.filter(Cart.user_id == user.id).all()
+
+    [db.session.delete(item) for item in items]
+    db.session.commit()
+    return {"Message": "Successfully Removed"}
+
+
 @cart_routes.route('/<int:item_id>', methods = ['PUT'])
 @login_required
 def update_item(item_id):

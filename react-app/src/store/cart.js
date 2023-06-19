@@ -2,6 +2,7 @@ const ADD_CART = 'cart/ADD_CART';
 const GET_CART = 'cart/GET_CART';
 const REMOVE_ITEM = 'cart/REMOVE_ITEM';
 const UPDATE_ITEM = 'cart/UPDATE_ITEM';
+const PURCHASE = 'cart/PURCHASE';
 
 const addCart = (cartItem) => {
     return {
@@ -28,6 +29,12 @@ const updateItem = (cartItem) => {
     return {
         type: UPDATE_ITEM,
         cartItem
+    };
+};
+
+const purchase = () => {
+    return {
+        type: PURCHASE,
     };
 };
 
@@ -97,6 +104,21 @@ export const updateQuantity = (cartItem) => async (dispatch) => {
 };
 
 
+export const purchaseItems = () => async (dispatch) => {
+    const response = await fetch(`/api/cart/`, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+    });
+
+    if (response.ok) {
+		dispatch(purchase());
+		return null;
+	} else {
+		return ["An error occurred. Please try again."];
+	};
+};
+
+
 
 
 
@@ -137,6 +159,11 @@ const cartReducer = (state = initialState, action) => {
             cartState = {...state, cart: {...state.cart}}
 
             delete cartState.cart[id]
+
+            return cartState
+
+        case PURCHASE:
+            cartState = initialState
 
             return cartState
 
