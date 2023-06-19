@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 export default function CartItemTile ({item, cartData}) {
     const [ranNum, setRanNum] = useState(0)
     const [shipping, setShipping] = useState(0)
+    const [quantity, setQuantity] = useState(cartData.quantity)
     const [minDate, setMinDate] = useState("")
     const [maxDate, setMaxDate] = useState("")
 
@@ -78,12 +79,6 @@ export default function CartItemTile ({item, cartData}) {
     }
 
 
-
-
-
-
-
-
     return (
         <section>
             <div>
@@ -94,7 +89,7 @@ export default function CartItemTile ({item, cartData}) {
 
                 <div>
                     <p>{item.name}</p>
-                    <select>
+                    <select onChange={(e) => setQuantity(e.target.value)} value={quantity}>
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>

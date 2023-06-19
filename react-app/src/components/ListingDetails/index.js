@@ -13,9 +13,11 @@ export default function ListingDetails () {
     const listingsObj = useSelector(state => state.listings.listings)
     const cartObj = useSelector(state => state.cart.cart)
     const sessionUser = useSelector(state => state.session.user);
+    const [errors, setErrors] = useState({})
     const [mainImg, setMainImg] = useState('loading')
     const [quantity, setQuantity] = useState('1')
     const [ranNum, setRanNum] = useState(0)
+    const [submit, setSubmit] = useState(false)
     const {listId} = useParams();
 
     const listing = listingsObj[Number(listId)]
@@ -25,7 +27,15 @@ export default function ListingDetails () {
     useEffect(()=> {
         setMainImg(prevImage)
         setRanNum(Math.floor(Math.random() * 21))
-    }, [listing])
+        setSubmit(false)
+    }, [])
+
+    //====Checking for Errors=======================================
+    useEffect(() => {
+        const errors = {}
+        if (cartObj[listId]?.quantity + quantity > 10) errors.quantity = "The seller has limited the purchase quantity to 10. If you would like to purchase more, please place a second order after checkout."
+        setErrors(errors)
+        }, [quantity])
 
     if (listing === undefined) return  false
 
@@ -50,17 +60,23 @@ export default function ListingDetails () {
         history.push(`/listings/${listing.id}/edit`)
     }
 
+
+
+
     const addToCart = async (e) => {
         e.preventDefault()
+        setSubmit(true);
 
-        const cartItem = {
-            quantity,
-            listing_id: listId,
-            id: cartObj[listId].id
-        }
+        if (errors.length === 0) {
+            const cartItem = {
+                quantity,
+                listing_id: listId,
+                id: cartObj[listId]?.id
+            };
 
-        await dispatch(addItemToCart(cartItem))
-    }
+            await dispatch(addItemToCart(cartItem))
+        };
+    };
 
 
     return (
@@ -115,6 +131,9 @@ export default function ListingDetails () {
                         <option>10</option>
                     </select>
                     <button type='submit'>Add to cart</button>
+                    {submit && errors.quantity && (
+                        <div className="createSpotErrors">* {errors.quantity}</div>
+                        )}
                 </form>
                 :
                 <button onClick={handleEdit}>Edit listing</button>

@@ -15,9 +15,11 @@ def add_cart():
     data = request.get_json()
     user = current_user
 
-    item = Cart.query.get(data['id'])
+    print('==============>', data.keys())
 
-    if item:
+
+    if 'id' in data.keys():
+        item = Cart.query.get(data['id'])
         item.quantity = item.quantity + int(data['quantity'])
 
         db.session.commit()
