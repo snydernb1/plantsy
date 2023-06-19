@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { removeItemFromCart } from "../../store/cart";
 
 export default function CartItemTile ({item, cartData}) {
+    const dispatch = useDispatch()
     const [ranNum, setRanNum] = useState(0)
     const [shipping, setShipping] = useState(0)
     const [quantity, setQuantity] = useState(cartData.quantity)
@@ -78,6 +81,11 @@ export default function CartItemTile ({item, cartData}) {
         }
     }
 
+    const removeItem = async () => {
+        console.log('cart item id', cartData.id)
+        await dispatch(removeItemFromCart(cartData.id, cartData.listing_id))
+    }
+
 
     return (
         <section>
@@ -101,7 +109,7 @@ export default function CartItemTile ({item, cartData}) {
                         <option>9</option>
                         <option>10</option>
                     </select>
-                    <button>Remove</button>
+                    <button onClick={removeItem}>Remove</button>
                 </div>
 
 

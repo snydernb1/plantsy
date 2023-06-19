@@ -66,15 +66,15 @@ export default function ListingDetails () {
     const addToCart = async (e) => {
         e.preventDefault()
         setSubmit(true);
-
-        if (errors.length === 0) {
+        if (!errors.length) {
+            console.log('are we getting ehre?')
             const cartItem = {
                 quantity,
                 listing_id: listId,
                 id: cartObj[listId]?.id
             };
-
             await dispatch(addItemToCart(cartItem))
+
         };
     };
 

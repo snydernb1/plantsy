@@ -15,9 +15,6 @@ def add_cart():
     data = request.get_json()
     user = current_user
 
-    print('==============>', data.keys())
-
-
     if 'id' in data.keys():
         item = Cart.query.get(data['id'])
         item.quantity = item.quantity + int(data['quantity'])
@@ -36,6 +33,20 @@ def add_cart():
         db.session.commit()
 
         return add_item.to_dict()
+
+
+@cart_routes.route('/<int:item_id>', methods = ['DELETE'])
+@login_required
+def remove_item(item_id):
+    '''
+    Removes item from cart
+    '''
+    item = Cart.query.get(item_id)
+
+    db.session.delete(item)
+    db.session.commit()
+    return {"Message": "Successfully Removed"}
+
 
 
 

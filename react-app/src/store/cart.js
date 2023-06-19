@@ -1,5 +1,6 @@
 const ADD_CART = 'cart/ADD_CART';
 const GET_CART = 'cart/GET_CART';
+const REMOVE_ITEM = 'cart/REMOVE_ITEM';
 
 const addCart = (cartItem) => {
     return {
@@ -12,6 +13,13 @@ const getCart = (cart) => {
     return {
         type: GET_CART,
         cart
+    };
+};
+
+const removeItem = (id) => {
+    return {
+        type: REMOVE_ITEM,
+        id
     };
 };
 
@@ -47,6 +55,27 @@ export const addItemToCart = (data) => async (dispatch) => {
 };
 
 
+export const removeItemFromCart = (id, itemId) => async (dispatch) => {
+    const response = await fetch(`/api/cart/${id}`, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(id)
+    });
+
+    if (response.ok) {
+		const cartItem = await response.json();
+		dispatch(removeItem(itemId));
+		return null;
+	} else {
+		return ["An error occurred. Please try again."];
+	};
+};
+
+
+
+
+
+
 const initialState = { cart: {} }
 
 const cartReducer = (state = initialState, action) => {
@@ -67,6 +96,14 @@ const cartReducer = (state = initialState, action) => {
             cartState = {...state, cart: {...state.cart}}
 
             cartState.cart[item.listing_id] = item
+
+            return cartState
+
+        case REMOVE_ITEM:
+            const id = action.id
+            cartState = {...state, cart: {...state.cart}}
+
+            delete cartState.cart[id]
 
             return cartState
 

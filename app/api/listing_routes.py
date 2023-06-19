@@ -93,7 +93,6 @@ def delete_listing(listing_id):
     Adds a new listing to the db
     '''
     listing = Listing.query.get(listing_id)
-    print('=======================> Are we hitting the BE route?', listing)
 
     db.session.delete(listing)
     db.session.commit()
