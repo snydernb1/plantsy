@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { removeItemFromCart } from "../../store/cart";
+import { updateQuantity } from "../../store/cart";
 
 export default function CartItemTile ({item, cartData}) {
     const dispatch = useDispatch()
@@ -68,7 +69,6 @@ export default function CartItemTile ({item, cartData}) {
         setShipping((Math.random() * 30).toFixed(2))
         setMinDate(`${minTempMonth} ${minTempDays}`)
         setMaxDate(`${maxTempMonth} ${maxTempDays}`)
-
     }, [item])
 
     let prevImage;
@@ -82,10 +82,13 @@ export default function CartItemTile ({item, cartData}) {
     }
 
     const removeItem = async () => {
-        console.log('cart item id', cartData.id)
         await dispatch(removeItemFromCart(cartData.id, cartData.listing_id))
     }
 
+    const updateItem = async () => {
+        cartData.quantity = quantity
+        await dispatch(updateQuantity(cartData))
+    }
 
     return (
         <section>
@@ -97,7 +100,7 @@ export default function CartItemTile ({item, cartData}) {
 
                 <div>
                     <p>{item.name}</p>
-                    <select onChange={(e) => setQuantity(e.target.value)} value={quantity}>
+                    <select onChange={(e) => setQuantity(Number(e.target.value))} value={quantity}>
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -109,6 +112,8 @@ export default function CartItemTile ({item, cartData}) {
                         <option>9</option>
                         <option>10</option>
                     </select>
+
+                    <button onClick={updateItem}>Update</button>
                     <button onClick={removeItem}>Remove</button>
                 </div>
 

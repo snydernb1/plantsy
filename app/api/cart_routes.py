@@ -48,6 +48,21 @@ def remove_item(item_id):
     return {"Message": "Successfully Removed"}
 
 
+@cart_routes.route('/<int:item_id>', methods = ['PUT'])
+@login_required
+def update_item(item_id):
+    '''
+    Removes item from cart
+    '''
+    item = Cart.query.get(item_id)
+    data = request.get_json()
+
+    item.quantity = data['quantity']
+
+    db.session.commit()
+    return item.to_dict()
+
+
 
 
 @cart_routes.route('/')

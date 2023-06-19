@@ -66,6 +66,7 @@ export default function ListingDetails () {
     const addToCart = async (e) => {
         e.preventDefault()
         setSubmit(true);
+        setRanNum(ranNum + 1)
         if (!errors.length) {
             console.log('are we getting ehre?')
             const cartItem = {

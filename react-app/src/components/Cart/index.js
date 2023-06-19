@@ -13,20 +13,23 @@ export default function Cart () {
         items.push(listingsObj[Number(itemId)])
     });
 
+
     return (
         <section>
             <h2>{cartKeys.length} {cartKeys.length !== 1? 'items': 'item'} in your cart</h2>
 
-            <div className='cartItems'>
+            {
+                items !== undefined &&
+                <div className='cartItems'>
                 {items.map((item)=> (
                     <CartItemTile
                     item={item}
                     cartData={cartObj[item.id]}
                     key={item.id}
                     />
-                ))}
-
+                    ))}
             </div>
+            }
 
 
 
