@@ -87,6 +87,7 @@ def get_cart():
     '''
 
     user = current_user
+    print('============> current user?', user.id)
     cart = Cart.query.filter(Cart.user_id == user.id).all()
 
     return [item.to_dict() for item in cart]

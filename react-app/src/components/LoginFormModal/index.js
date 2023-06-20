@@ -54,8 +54,6 @@ function LoginFormModal({form}) {
     setType(!type)
   }
 
-  console.log('formtype==>', type)
-
   return (
     <section className="signInModal">
 
