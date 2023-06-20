@@ -108,7 +108,7 @@ export default function CartItemTile ({item, cartData}) {
 
                         <div className="checkoutName">
 
-                            <p>{item.name}</p>
+                            <p id="checkoutItemName">{item.name}</p>
 
                             <div className="checkoutQuantity">
                             <select onChange={(e) => setQuantity(Number(e.target.value))} value={quantity} id="checkoutInput">
@@ -160,16 +160,16 @@ export default function CartItemTile ({item, cartData}) {
 
                 <div className="checkoutBotCard">
                     <div className="checkoutBox">
-                        <input type='checkbox'/>
-                        <div>
+                        <input type='checkbox' id="checkoutGift"/>
+                        <div className="checkoutGift">
                             <p>This order is a gift</p>
-                            <p>Prices will not be shown on packing slip</p>
+                            <p className="checkoutSmallText">Prices will not be shown on packing slip</p>
                         </div>
                     </div>
 
-                    <div>
+                    <div className="checkoutShipping">
                         <h4>Shipping: ${shipping}</h4>
-                        <p>Estimated delivery: {minDate} - {maxDate}</p>
+                        <p className="checkoutSmallText">Estimated delivery: {minDate} - {maxDate}</p>
                     </div>
 
                 </div>

@@ -1,3 +1,8 @@
+#checkoutGift {
+    margin-top: 4px;
+    scale: 150%;
+}
+
 #checkoutImg {
     background-size: fill;
     border-radius: 10px;
@@ -9,13 +14,17 @@
 }
 
 #checkoutInput {
-    height: 3em;
+    height: 2.7em;
     border-radius: 5px;
     box-shadow: 2px 2px 6px 2px rgba(58, 58, 58, 0.144);
-    width: 5em;
+    width: 4.7em;
     padding-left: 10px;
     border: none;
     font-size: large;
+}
+
+#checkoutItemName {
+    padding-bottom: 1em;
 }
 
 #checkoutRed {
@@ -34,8 +43,8 @@
 
 .checkoutBox {
     display: flex;
-    justify-content: top;
-    gap: .5em;
+    align-items: start;
+    gap: .7em;
 }
 
 .checkoutButtons {
@@ -66,7 +75,7 @@
     box-shadow: 1px 3px 5px 6px rgba(58, 58, 58, 0.144);
     border-radius: 15px;
     gap: 5em;
-    padding: 1.5em 1em 2em 1em;
+    padding: 3.5em 1em 2em 1em;
 }
 
 .checkoutEdit {
@@ -75,11 +84,28 @@
     justify-content: space-between;
 }
 
+.checkoutGift {
+    display: flex;
+    flex-direction: column;
+    gap: .4em;
+}
+
  .checkoutName {
     display: flex;
     flex-direction: column;
     gap: 1em;
-    justify-content: left;
+    align-items: start;
+ }
+
+ .checkoutShipping {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    gap: .4em;
+ }
+
+ .checkoutSmallText {
+    font-size: small;
  }
 
  .checkoutQuantity {
