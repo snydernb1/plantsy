@@ -4,6 +4,12 @@
     position: relative;
     top: -2px;
     font-weight: 600;
+    width: 5em;
+}
+
+#demoButton {
+    padding: .6em;
+    border-bottom: 1px solid rgba(46, 43, 28, 0.2);
 }
 
 #modal-content {
@@ -46,6 +52,11 @@
     border: .5px solid black;
     padding: 12px 0 12px 0;
     cursor: pointer;
+    width: 100%;
+}
+
+.paddingModalDiv {
+    padding: 1.5em;
 }
 
 .signInButton {
@@ -64,7 +75,6 @@
  display: flex;
  flex-direction: column;
  border-radius: 1.2em;
- padding: 1.5em;
 }
 
 .signInForm {
