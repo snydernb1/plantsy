@@ -24,12 +24,6 @@ img {
     box-shadow: 1px 1px 3px 1px grey;
 }
 
-#rating {
-    display: flex;
-
-    font-weight: 600;
-}
-
 #updateButton {
     border-radius: none;
     height: 2em;
@@ -41,18 +35,19 @@ img {
     cursor: pointer;
 }
 
-.boldText {
-    font-weight: 650;
-    font-size: .9em;
+#freeShipping {
+    background-color: rgb(99, 106, 72);
+    padding: 3px 6px 3px 6px;
+    border-radius: 2em;
+    font-size: small;
+    color: white;
+    width: min-content;
+    white-space: nowrap;
 }
 
-.bolderText {
-    font-weight: 650;
-}
-
-.fa-star {
-    height: 60%;
-    scale: 100%;
+.discount {
+    color: rgb(212, 104, 68);
+    font-weight: 600;
 }
 
 .imgDiv {
@@ -67,15 +62,7 @@ img {
     align-items: center;
 }
 
-.rating {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 1em;
-    padding-top: .75em;
-}
-
-.spotCard {
+.listCard {
     display: inline-flex;
     flex-direction: column;
     width: 18em;
@@ -83,25 +70,16 @@ img {
     color: black;
 }
 
-.imgDiv .toolTipText {
-    visibility: hidden;
-    background-color: rgba(255, 255, 255, 0.836);
-    position: relative;
-    bottom: 2em;
-    left: 1em;
-    color: black;
-    padding: 3px;
-    font-family: 'Urbanist', sans-serif;
-    border-radius: 8px;
-    text-decoration: none;
+.img {
+    border-radius: 3px;
 }
 
-.imgDiv:hover .toolTipText {
-    visibility: visible;
+.itemName {
+    font-weight: 600;
 }
 
-.toolTip {
-    border-radius: 8px;
+.slash {
+    text-decoration: line-through;
 }
 
 .updateDelete {

@@ -8,15 +8,16 @@
 }
 
 #checkoutButton {
-    background-color: black;
-    padding: .7em 5em .7em 5em;
+    background-color: rgb(144, 170, 135);
+    padding: .7em 5em .8em 5em;
     border-radius: 5em;
+    color: white;
 }
 
-#modalButton {
+.modalButtonBlack {
     border: none;
-    background-color: black;
-    color: white;
+    background-color: rgba(255, 255, 255, 0);
+    color: black;
     cursor: pointer;
     white-space: nowrap;
 }

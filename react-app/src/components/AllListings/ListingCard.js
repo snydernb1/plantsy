@@ -26,6 +26,7 @@ export default function ListingCard ({listing, manage}) {
         history.push(`/listings/${listing.id}/edit`)
     }
 
+    const priceClass = listing.discount > 0 ? 'slash' : 'noslash'
 
     return (
         <>
@@ -36,7 +37,7 @@ export default function ListingCard ({listing, manage}) {
                 >
 
                 <div className='imgDiv'>
-                    <img src={prevImage} className='toolTip'/>
+                    <img src={prevImage} className='img'/>
                 </div>
 
                 {/* <div className='rating'>
@@ -49,32 +50,31 @@ export default function ListingCard ({listing, manage}) {
                 </div> */}
 
                 <div>
-                    <p>{listing.name}</p>
+                    <p className='itemName'>{listing.name}</p>
                 </div>
 
                 <div className='price'>
                     {listing.discount !== null ?
-                    <p>${(Number(listing.price) - (Number(listing.discount) * Number(listing.price))).toFixed(2)}</p>
+                    <p className='discount'>${(Number(listing.price) - (Number(listing.discount) * Number(listing.price))).toFixed(2)}</p>
                     :
                     null
                     }
 
-                    <p className="addLater">${Number(listing.price).toFixed(2)}</p>
+                    <p className={priceClass}>${Number(listing.price).toFixed(2)}</p>
 
                     {listing.discount !== null ?
-                    <p>({listing.discount * 100}% off)</p>
+                    <p className='discount'>({listing.discount * 100}% off)</p>
                     :
                     null
                     }
                 </div>
 
-                <div>
                     {listing.free_shipping ?
-                    <p>FREE shipping</p>
+                    <p id='freeShipping'>FREE shipping</p>
                     :
                     null
                     }
-                </div>
+
 
             </Link>
 

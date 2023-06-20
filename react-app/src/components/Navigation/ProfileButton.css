@@ -1,0 +1,46 @@
+.authButtons {
+    width: 4em;
+    white-space: nowrap;
+    display: flex;
+    gap: .5em;
+    align-items: center;
+}
+
+.fa-user-circle {
+    scale: 140%;
+    cursor: pointer;
+}
+.fa-user-circle:hover {
+    background-color: rgba(46, 43, 28, 0.2);
+    padding: .5em;
+    border-radius: 4em;
+}
+
+.signOut {
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    cursor: pointer;
+}
+
+.profile-dropdown {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: start;
+    border: .5px solid rgba(46, 43, 28, 0.2);
+    padding: 1em;
+    position: absolute;
+    top: 4.3em;
+    right: 7em;
+    width: 10em;
+    border-radius: 10px;
+    background-color: white;
+    z-index: 1;
+  }
+
+
+
+.hidden {
+    display: none;
+  }

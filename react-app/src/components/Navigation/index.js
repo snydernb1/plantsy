@@ -17,8 +17,11 @@ function Navigation({ isLoaded }){
 
 	useEffect(()=> {
         dispatch(fetchAllListings())
-		dispatch(fetchUserCart())
     }, [dispatch])
+
+	useEffect(()=> {
+		dispatch(fetchUserCart())
+    }, [sessionUser])
 
 	const toListings = () => {
 		history.push(`/users/${sessionUser.id}/listings`)
@@ -51,7 +54,9 @@ function Navigation({ isLoaded }){
 			{sessionUser !== null &&
 			<div className='cartDiv'>
 			<i onClick={toCart} class="fa-solid fa-cart-shopping"></i>
-			<p id='cartNum'>{cartKeys.length ? cartKeys.length : null}</p>
+			{cartKeys.length > 0 &&
+				<p id='cartNum'>{cartKeys.length ? cartKeys.length : null}</p>
+			}
 			</div>
 			}
 		</div>
