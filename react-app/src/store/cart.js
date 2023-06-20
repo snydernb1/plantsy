@@ -131,7 +131,9 @@ const cartReducer = (state = initialState, action) => {
     switch(action.type) {
         case GET_CART:
             const allItems = action.cart;
-            cartState = initialState
+            cartState = { cart: {} }
+            console.log('What is cart state?', cartState)
+            console.log('What is cart state?', initialState)
 
             allItems.forEach(item => {
                 cartState.cart[item.listing_id] = item
@@ -163,7 +165,7 @@ const cartReducer = (state = initialState, action) => {
             return cartState
 
         case PURCHASE:
-            cartState = initialState
+            cartState = { cart: {} }
 
             return cartState
 
