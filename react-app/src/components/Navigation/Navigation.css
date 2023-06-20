@@ -4,19 +4,83 @@
   box-sizing: border-box;
 }
 
+#cartNum {
+
+  text-align: center;
+  position: relative;
+  font-weight: 600;
+  width: 23px;
+  height: 23px;
+  right: 5px;
+  bottom: 18px;
+  background-color: rgb(212, 104, 68);
+  border: 2px solid white;
+  padding: 2px;
+  border-radius: 1em;
+  font-size: small;
+}
+
+#plantsy {
+  font-size: 30px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: 550;
+  color: rgb(99, 106, 72);
+}
+
+#searchBar {
+  width: 55em;
+  height: 4em;
+  border-radius: 4em;
+  border: .5px solid rgba(46, 43, 28, 0.5);
+  padding-left: 20px;
+}
+
+.cartDiv {
+display: flex;
+}
+
+.fa-magnifying-glass {
+  position: relative;
+  right: 4em;
+  color: rgba(46, 43, 28, 0.5);
+  scale: 120%;
+}
+
+.fa-store {
+  scale: 140%;
+  cursor: pointer;
+}
+
+.fa-cart-shopping {
+  scale: 140%;
+  cursor: pointer;
+}
+
+.fa-store:hover {
+  background-color: rgba(46, 43, 28, 0.2);
+  padding: .5em;
+  border-radius: 4em;
+}
+
+.fa-cart-shopping:hover {
+  background-color: rgba(46, 43, 28, 0.2);
+  padding: .5em;
+  border-radius: 4em;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
+  width: auto;
+  margin: auto;
+  align-items: center;
   list-style-type: none;
-  padding: 1em 2em 1em 2em;
-  border-bottom: .5px lightseagreen solid;
+  padding: 1em 2em 2em 2em;
+  border-bottom: .5px rgb(46, 43, 28) solid;
 }
 
-.hidden {
-  display: none;
-}
-
-.profile-dropdown {
-  position: absolute;
-  right: 3em;
+.titleSearch {
+  display: flex;
+  align-items: center;
+  gap: 1em;
 }

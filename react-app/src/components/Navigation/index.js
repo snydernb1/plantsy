@@ -12,11 +12,16 @@ function Navigation({ isLoaded }){
 	const history = useHistory()
 	const dispatch = useDispatch()
 	const sessionUser = useSelector(state => state.session.user);
+	const cartObj = useSelector(state => state.cart.cart);
+	const cartKeys = Object.keys(cartObj);
 
 	useEffect(()=> {
         dispatch(fetchAllListings())
-		dispatch(fetchUserCart())
     }, [dispatch])
+
+	useEffect(()=> {
+		dispatch(fetchUserCart())
+    }, [sessionUser])
 
 	const toListings = () => {
 		history.push(`/users/${sessionUser.id}/listings`)
@@ -27,26 +32,34 @@ function Navigation({ isLoaded }){
 	}
 
 	return (
-		<ul className='navbar'>
-			<li>
-				<NavLink exact to="/">Plantsy</NavLink>
-			</li>
+		<div className='navbar'>
+
+			<div className='titleSearch'>
+			<NavLink exact to="/" id='plantsy'>Plantsy</NavLink>
+			<input disabled={true} placeholder='Feature coming soon' id='searchBar'/>
+			<i class="fa-solid fa-magnifying-glass"></i>
+			</div>
+
 			{sessionUser !== null &&
-			<li onClick={toListings}>
-				Listings
-			</li>
+			<i onClick={toListings} class="fa-solid fa-store"></i>
 			}
-			{sessionUser !== null &&
-			<li onClick={toCart}>
-				Cart
-			</li>
-			}
+
+
 			{isLoaded && (
-				<li>
+				<div>
 					<ProfileButton user={sessionUser} />
-				</li>
+				</div>
 			)}
-		</ul>
+
+			{sessionUser !== null &&
+			<div className='cartDiv'>
+			<i onClick={toCart} class="fa-solid fa-cart-shopping"></i>
+			{cartKeys.length > 0 &&
+				<p id='cartNum'>{cartKeys.length ? cartKeys.length : null}</p>
+			}
+			</div>
+			}
+		</div>
 	);
 }
 

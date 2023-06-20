@@ -1,0 +1,129 @@
+#checkoutGift {
+    margin-top: 4px;
+    scale: 150%;
+}
+
+#checkoutImg {
+    background-size: fill;
+    border-radius: 10px;
+}
+
+#checkoutImgDiv {
+    width: 12em;
+    height: 10em;
+}
+
+#checkoutInput {
+    height: 2.7em;
+    border-radius: 5px;
+    box-shadow: 2px 2px 6px 2px rgba(58, 58, 58, 0.144);
+    width: 4.7em;
+    padding-left: 10px;
+    border: none;
+    font-size: large;
+}
+
+#checkoutItemName {
+    padding-bottom: 1em;
+}
+
+#checkoutRed {
+    color: rgb(212, 104, 68);
+}
+
+#checkoutRemove {
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.checkoutBotCard {
+    display: flex;
+    justify-content: space-between;
+}
+
+.checkoutBox {
+    display: flex;
+    align-items: start;
+    gap: .7em;
+}
+
+.checkoutButtons {
+    background-color: white;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.checkoutCardPrice {
+    align-items: right;
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    text-align: right;
+}
+
+.checkoutCardPriceText {
+    justify-content: right;
+    align-items: end;
+    display: flex;
+    gap: .5em;
+}
+
+.checkoutContainer {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 3px 5px 6px rgba(58, 58, 58, 0.144);
+    border-radius: 15px;
+    gap: 5em;
+    padding: 3.5em 1em 2em 1em;
+}
+
+.checkoutEdit {
+    display: flex;
+    gap: 1em;
+    justify-content: space-between;
+}
+
+.checkoutGift {
+    display: flex;
+    flex-direction: column;
+    gap: .4em;
+}
+
+ .checkoutName {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: start;
+ }
+
+ .checkoutShipping {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    gap: .4em;
+ }
+
+ .checkoutSmallText {
+    font-size: small;
+ }
+
+ .checkoutQuantity {
+    display: flex;
+    gap: 2em;
+ }
+
+ .checkoutUpperLeft {
+    display: flex;
+    gap: 1em;
+ }
+
+ .cross {
+    text-decoration: line-through;
+    font-size: small;
+ }
+
+ .greenText {
+    color: rgb(144, 170, 135);
+    font-weight: 600;
+ }

@@ -6,6 +6,8 @@ import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { useHistory } from "react-router-dom";
 
+import './ProfileButton.css'
+
 function ProfileButton({ user }) {
   const history = useHistory()
   const dispatch = useDispatch();
@@ -44,36 +46,43 @@ function ProfileButton({ user }) {
   };
 
   return (
-    <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
-      <ul className={ulClassName} ref={ulRef}>
+    <section>
+
+      <i onClick={openMenu} className="fas fa-user-circle" />
+
+      <div className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.email}</li>
-            <li>
-              <button onClick={handleLogout}>Log Out</button>
-            </li>
+            <p>{user.first_name}</p>
+            <div onClick={handleLogout} className="signOut">
+            <i className="fas fa-arrow-right-from-bracket" />
+            <p>sign out</p>
+            </div>
+
           </>
         ) : (
           <>
+            <div className="authButtons">
+            <i class="fas fa-tree"></i>
             <OpenModalButton
-              buttonText="Log In"
+              buttonText="Sign in"
               onItemClick={closeMenu}
-              modalComponent={<LoginFormModal />}
-            />
+              modalComponent={<LoginFormModal form={true}/>}
+              />
+            </div>
 
+            <div className="authButtons">
+            <i className="fas fa-seedling" />
             <OpenModalButton
-              buttonText="Sign Up"
+              buttonText="Sign up"
               onItemClick={closeMenu}
-              modalComponent={<SignupFormModal />}
-            />
+              modalComponent={<LoginFormModal form={false}/>}
+              />
+              </div>
           </>
         )}
-      </ul>
-    </>
+      </div>
+    </section>
   );
 }
 

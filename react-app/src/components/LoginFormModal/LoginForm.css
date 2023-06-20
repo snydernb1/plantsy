@@ -1,0 +1,73 @@
+#authReg {
+    padding: 4px 8px 4px 8px;
+    border-radius: 2em;
+    position: relative;
+    top: -2px;
+    font-weight: 600;
+}
+
+#modal-content {
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.authLabel {
+    font-size: small;
+    font-weight: 600;
+}
+
+.authInput {
+    margin-bottom: 1em;
+    border: rgba(46, 43, 28, 0.2) solid .5px;
+    height: 2.6em;
+    border-radius: 5px;
+    padding-left: 7px;
+}
+
+.authInput:focus {
+    border: rgb(99, 106, 72) solid .5px;
+    outline: none;
+    box-shadow: 1px 1px 5px .5px rgba(46, 43, 28, 0.2);
+}
+
+
+.authTitle {
+    margin-bottom: 1.2em;
+}
+
+.authTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.demoButton {
+    background-color: white;
+    border-radius: 3em;
+    border: .5px solid black;
+    padding: 12px 0 12px 0;
+    cursor: pointer;
+}
+
+.signInButton {
+    background-color: black;
+    border-radius: 3em;
+    border: none;
+    color: white;
+    padding: 12px 0 12px 0;
+    margin-bottom: 1em;
+    cursor: pointer;
+}
+
+.signInModal {
+ width: 20em;
+ background-color: white;
+ display: flex;
+ flex-direction: column;
+ border-radius: 1.2em;
+ padding: 1.5em;
+}
+
+.signInForm {
+    display: flex;
+    flex-direction: column;
+}
