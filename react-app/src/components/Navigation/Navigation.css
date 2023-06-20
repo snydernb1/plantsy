@@ -4,19 +4,88 @@
   box-sizing: border-box;
 }
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  list-style-type: none;
-  padding: 1em 2em 1em 2em;
-  border-bottom: .5px lightseagreen solid;
+#cartNum {
+  text-align: center;
+  position: relative;
+  font-weight: 600;
+  width: 17px;
+  height: 17px;
+  right: 5px;
+  bottom: 12px;
+  background-color: rgb(212, 104, 68);
+  padding: 2px;
+  border-radius: 1em;
+  font-size: small;
 }
+
+#plantsy {
+  font-size: 30px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: 550;
+  color: rgb(99, 106, 72);
+}
+
+#searchBar {
+  width: 55em;
+  height: 4em;
+  border-radius: 4em;
+  border: .5px solid rgba(46, 43, 28, 0.5);
+  padding-left: 20px;
+}
+
+.cartDiv {
+display: flex;
+}
+
+.fa-magnifying-glass {
+  position: relative;
+  right: 4em;
+  color: rgba(46, 43, 28, 0.5);
+  scale: 120%;
+}
+
+.fa-store {
+  scale: 120%;
+  cursor: pointer;
+}
+
+.fa-cart-shopping {
+  scale: 120%;
+  cursor: pointer;
+}
+
+.fa-store:hover {
+  background-color: rgba(46, 43, 28, 0.5);
+  padding: 1em;
+  border-radius: 4em;
+}
+
+.fa-cart-shopping:hover {
+  background-color: rgba(46, 43, 28, 0.5);
+  padding: 1em;
+  border-radius: 4em;
+}
+
 
 .hidden {
   display: none;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style-type: none;
+  padding: 1em 2em 2em 2em;
+  border-bottom: .5px rgb(46, 43, 28) solid;
 }
 
 .profile-dropdown {
   position: absolute;
   right: 3em;
+}
+
+.titleSearch {
+  display: flex;
+  align-items: center;
+  gap: 1em;
 }

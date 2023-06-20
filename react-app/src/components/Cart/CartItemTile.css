@@ -28,7 +28,7 @@
 }
 
 #checkoutRed {
-    color: rgb(126, 0, 0);
+    color: rgb(212, 104, 68);
 }
 
 #checkoutRemove {
@@ -124,5 +124,6 @@
  }
 
  .greenText {
-    color: rgb(0, 151, 0);
+    color: rgb(144, 170, 135);
+    font-weight: 600;
  }

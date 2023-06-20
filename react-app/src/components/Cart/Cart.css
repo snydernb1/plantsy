@@ -1,0 +1,60 @@
+#botLine {
+    padding-bottom: 1em;
+    border-bottom: .5px rgba(77, 77, 77, 0.445) solid;
+}
+
+#cartTitle {
+    padding: 1em 0 2em 0;
+}
+
+#checkoutButton {
+    background-color: black;
+    padding: .7em 5em .7em 5em;
+    border-radius: 5em;
+}
+
+#modalButton {
+    border: none;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+#noteColor {
+    color: rgba(77, 77, 77, 0.671);
+}
+
+.cartContainer {
+    padding: 1em 2em 1em 2em;
+}
+
+.cartItems {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.cartRight {
+    position: sticky;
+    top: 5em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.cartSection {
+    display: flex;
+    justify-content: space-between;
+    gap: 2em;
+}
+
+.itemTotal {
+    display: flex;
+    justify-content: space-between;
+}
+
+.noteDiv {
+    display: flex;
+    justify-content: center;
+}

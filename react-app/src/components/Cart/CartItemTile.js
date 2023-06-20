@@ -5,10 +5,9 @@ import { updateQuantity } from "../../store/cart";
 
 import './CartItemTile.css'
 
-export default function CartItemTile ({item, cartData}) {
+export default function CartItemTile ({item, cartData, shipping}) {
     const dispatch = useDispatch()
     const [ranNum, setRanNum] = useState(0)
-    const [shipping, setShipping] = useState(0)
     const [quantity, setQuantity] = useState(cartData?.quantity)
     const [minDate, setMinDate] = useState("")
     const [maxDate, setMaxDate] = useState("")
@@ -68,7 +67,6 @@ export default function CartItemTile ({item, cartData}) {
 
     useEffect(()=> {
         setRanNum(Math.floor(Math.random() * 21))
-        setShipping((Math.random() * 30).toFixed(2))
         setMinDate(`${minTempMonth} ${minTempDays}`)
         setMaxDate(`${maxTempMonth} ${maxTempDays}`)
     }, [item])
