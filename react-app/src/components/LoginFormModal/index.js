@@ -45,8 +45,12 @@ function LoginFormModal({form}) {
 		}
 	};
 
-  const demoLogin = () => {
+  const demoSeller = () => {
     dispatch(login('demo@aa.io', 'password'))
+    closeModal()
+  }
+  const demoShopper = () => {
+    dispatch(login('bobbie@aa.io', 'password'))
     closeModal()
   }
 
@@ -145,12 +149,23 @@ function LoginFormModal({form}) {
 			</form>
       }
 
-        <button onClick={demoLogin} className="demoButton">Demo sign in</button>
+        <div className="demoButtons">
+          <button onClick={demoSeller} className="demoButton">Demo seller</button>
+
+          <button onClick={demoShopper} className="demoButton">Demo shopper</button>
+        </div>
 
         </div>
 
         <div id="demoButton"></div>
-        <p>OR</p>
+        <p id="signInOr">OR</p>
+
+        <a href='https://github.com/snydernb1' target='_blank' className="githubLink">
+          <i className="fa fa-github" />
+          <p>Nick Snyder</p>
+        </a>
+
+        <p id="disclaimer">* By clicking sign in or creating a new account, you are not agreeing to anything. Plantsy will not contact you for any reason.</p>
 
     </section>
   );
