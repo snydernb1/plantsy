@@ -15,7 +15,7 @@ export default function ListingDetails () {
     const sessionUser = useSelector(state => state.session.user);
     const [errors, setErrors] = useState({})
     const [mainImg, setMainImg] = useState('loading')
-    const [quantity, setQuantity] = useState('1')
+    const [quantity, setQuantity] = useState(1)
     const [ranNum, setRanNum] = useState(0)
     const [submit, setSubmit] = useState(false)
     const {listId} = useParams();
@@ -33,7 +33,10 @@ export default function ListingDetails () {
     //====Checking for Errors=======================================
     useEffect(() => {
         const errors = {}
-        if (cartObj[listId]?.quantity + quantity > 10) errors.quantity = "The seller has limited the purchase quantity to 10. If you would like to purchase more, please place a second order after checkout."
+        console.log('is this even a number?', cartObj[listId]?.quantity + quantity > 10)
+        console.log('math', Number(cartObj[listId]?.quantity) + Number(quantity))
+        console.log('quantity?', quantity)
+        if (Number(cartObj[listId]?.quantity) + Number(quantity) > 10) errors.quantity = "The seller has limited the purchase quantity to 10. If you would like to purchase more, please place a second order after checkout."
         setErrors(errors)
         }, [quantity])
 
@@ -67,7 +70,8 @@ export default function ListingDetails () {
         e.preventDefault()
         setSubmit(true);
         setRanNum(ranNum + 1)
-        if (!errors.length) {
+        console.log('what are errors', errors)
+        if (Object.values(errors).length === 0) {
             console.log('are we getting ehre?')
             const cartItem = {
                 quantity,
@@ -79,7 +83,6 @@ export default function ListingDetails () {
         };
     };
 
-    console.log(sessionUser)
 
     const priceClass = listing.discount > 0 ? 'slash' : 'noslash'
 
