@@ -1,0 +1,50 @@
+#footer {
+    position: relative;
+    bottom: 0px;
+    width: 100%
+}
+
+#footerImg {
+    position: relative;
+    z-index: -1;
+    top: 2em;
+}
+
+#githibLink {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.footerBot {
+    background-color: rgb(46, 43, 28);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4em;
+    padding: 0 1.5em 0 1.5em;
+    color: white;
+}
+
+.footerBotBold {
+    font-weight: 600;
+}
+
+.footerBotRight {
+    display: flex;
+    gap: .8em;
+}
+
+.footerGithub {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    flex-direction: column;
+    position: relative;
+    top: 5em;
+}
+
+.techLinks {
+    color: white;
+    text-decoration: underline;
+}

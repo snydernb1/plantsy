@@ -54,7 +54,7 @@ export default function ListingCard ({listing, manage}) {
                 </div>
 
                 <div className='price'>
-                    {listing.discount !== null ?
+                    {listing.discount > 0 ?
                     <p className='discount'>${(Number(listing.price) - (Number(listing.discount) * Number(listing.price))).toFixed(2)}</p>
                     :
                     null
@@ -62,7 +62,7 @@ export default function ListingCard ({listing, manage}) {
 
                     <p className={priceClass}>${Number(listing.price).toFixed(2)}</p>
 
-                    {listing.discount !== null ?
+                    {listing.discount > 0 ?
                     <p className='discount'>({listing.discount * 100}% off)</p>
                     :
                     null

@@ -13,7 +13,7 @@ export default function AllListings(){
 
 
     return (
-        <section>
+        <section className="allListingContainer">
             <div className="banner">
 
             </div>

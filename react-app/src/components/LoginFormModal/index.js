@@ -45,8 +45,12 @@ function LoginFormModal({form}) {
 		}
 	};
 
-  const demoLogin = () => {
+  const demoSeller = () => {
     dispatch(login('demo@aa.io', 'password'))
+    closeModal()
+  }
+  const demoShopper = () => {
+    dispatch(login('bobbie@aa.io', 'password'))
     closeModal()
   }
 
@@ -56,10 +60,12 @@ function LoginFormModal({form}) {
 
   return (
     <section className="signInModal">
+      <div className="paddingModalDiv">
+
 
       <div className="authTop">
-        <h3 className="authTitle">Sign in</h3>
-        <button className="demoButton" id="authReg" onClick={changeForm}>Register</button>
+        <h3 className="authTitle">{type === true ? 'Sign in': 'Sign up'}</h3>
+        <button className="demoButton" id="authReg" onClick={changeForm}>{type === true ? 'Register': 'Sign in'}</button>
       </div>
 
       { type === true ?
@@ -90,7 +96,7 @@ function LoginFormModal({form}) {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        <button type="submit" className="signInButton">Log In</button>
+        <button type="submit" className="signInButton">Sign in</button>
       </form>
         :
         <form onSubmit={handleSignUp} className="signInForm">
@@ -130,7 +136,7 @@ function LoginFormModal({form}) {
 						required
 					/>
 				<label className="authLabel">
-					Confirm Password
+					Confirm password
         </label>
 					<input
 						type="password"
@@ -139,11 +145,27 @@ function LoginFormModal({form}) {
 						onChange={(e) => setNewConfirmPassword(e.target.value)}
 						required
 					/>
-				<button type="submit" className="signInButton">Sign Up</button>
+				<button type="submit" className="signInButton">Sign up</button>
 			</form>
       }
 
-        <button onClick={demoLogin} className="demoButton">Demo Log In</button>
+        <div className="demoButtons">
+          <button onClick={demoSeller} className="demoButton">Demo seller</button>
+
+          <button onClick={demoShopper} className="demoButton">Demo shopper</button>
+        </div>
+
+        </div>
+
+        <div id="demoButton"></div>
+        <p id="signInOr">OR</p>
+
+        <a href='https://github.com/snydernb1' target='_blank' className="githubLink">
+          <i className="fa fa-github" />
+          <p>Nick Snyder</p>
+        </a>
+
+        <p id="disclaimer">* By clicking sign in or creating a new account, you are not agreeing to anything. Plantsy will not contact you for any reason.</p>
 
     </section>
   );

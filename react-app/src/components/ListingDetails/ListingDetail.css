@@ -1,3 +1,97 @@
+
+
+#detailInput {
+    height: 2.2em;
+    border-radius: 5px;
+    box-shadow: 2px 2px 6px 2px rgba(58, 58, 58, 0.144);
+    padding-left: 15px;
+    border: none;
+    font-size: large;
+    cursor: pointer;
+}
+
+#detailsName {
+    font-weight: 600;
+}
+
+#imgSelect {
+    border: 2px solid rgb(46, 43, 28);
+}
+
+#inCarts {
+    color: rgb(212, 104, 68);
+    padding-bottom: .5em;
+}
+
+#mainImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.backToListings {
+    display: flex;
+    align-items: center;
+    gap: .4em;
+    cursor: pointer;
+    padding-bottom: 2em;
+    color: rgba(46, 43, 28);
+}
+
+.discountDetail {
+    color: rgb(144, 170, 135);
+    font-weight: 600;
+}
+
+.detailAdd {
+    background-color: rgb(144, 170, 135);
+    border: none;
+    padding: .7em 5em .8em 5em;
+    border-radius: 5em;
+    color: white;
+    margin: .5em 0 1.5em 0;
+    cursor: pointer;
+}
+
+.detailAddDisabled {
+    background-color: rgba(46, 43, 28, .5);
+    border: none;
+    padding: .7em 5em .8em 5em;
+    border-radius: 5em;
+    color: white;
+    margin: .5em 0 1.5em 0;
+    cursor: not-allowed;
+}
+
+.detailDesc {
+    display: flex;
+    flex-direction: column;
+    gap: .7em;
+}
+
+.detailEdit {
+    background-color: rgb(144, 170, 135);
+    border: none;
+    padding: .7em 5em .8em 5em;
+    border-radius: 5em;
+    color: white;
+    margin: .5em 0 1.5em 0;
+    width: 100%;
+    cursor: pointer;
+}
+
+.detailErrors {
+    color: rgb(249, 102, 69);
+    font-weight: 600;
+    padding-bottom: 1em;
+}
+
+.detailForm {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+}
+
 .imgContainer {
     display: flex;
     gap: 2em;
@@ -6,7 +100,11 @@
 .imgContainerColumn {
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    gap: .4em;
+}
+
+.img {
+    border-radius: 6px;
 }
 
 .imageTiles {
@@ -25,14 +123,17 @@
     margin: auto;
     gap: 5em;
     padding: 2em 2em 0 2em;
+    width: 1100px;
 }
 
-.mainImg {
-    width: 30em;
-    height: 30em;
+.mainImgContainer {
+    width: 26.6em;
+    height: 26.6em;
 }
 
 .namePrice {
     display: flex;
-    gap: 3em;
+    flex-direction: column;
+    gap: .5em;
+    padding-bottom: 2em;
 }

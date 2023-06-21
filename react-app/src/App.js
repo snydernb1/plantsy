@@ -11,6 +11,7 @@ import ManageListings from './components/ManageListings';
 import CreateListing from "./components/CreateListing";
 import UpdateListing from "./components/UpdateListing";
 import Cart from "./components/Cart";
+import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -58,6 +59,7 @@ function App() {
 
         </Switch>
       )}
+      <Footer />
     </>
   );
 }
