@@ -79,25 +79,31 @@ export default function ListingDetails () {
         };
     };
 
+    console.log(sessionUser)
+
+    const priceClass = listing.discount > 0 ? 'slash' : 'noslash'
 
     return (
         <section className="listingDetailContainer">
             <div className="leftColumn">
 
-                <p onClick={returnHome}>Back to listings</p>
+                <div className="backToListings"  onClick={returnHome}>
+                    <i className="fas fa-arrow-left" />
+                    <p>Back to listings</p>
+                </div>
 
                 <div className="imgContainer">
                     <div className="imgContainerColumn">
                         {listing.imgs.map((img)=> (
                             <div key={img.id} className="imageTiles">
-                                <img onClick={setImg} src={img.img_url} data-user={img.img_url}/>
+                                <img onClick={setImg} src={img.img_url} data-user={img.img_url} className="img" id={img.img_url === mainImg ? 'imgSelect' : null}/>
                             </div>
                         ))}
                     </div>
 
                     <div>
-                        <div className="mainImg">
-                            <img src={mainImg} />
+                        <div className="mainImgContainer">
+                            <img src={mainImg} className="img" id="mainImg"/>
                         </div>
                     </div>
                 </div>
@@ -105,21 +111,36 @@ export default function ListingDetails () {
 
             <div className="rightColumn">
 
-                <p>In {ranNum} {ranNum > 1 ? 'carts' : 'cart'}</p>
+                <p id="inCarts">In {ranNum} {ranNum > 1 ? 'carts' : 'cart'}</p>
 
                 <div className="namePrice">
-                    <h3>{listing.name}</h3>
 
-                    {listing.discount !== null ?
-                    <p>${(Number(listing.price) - (Number(listing.discount) * Number(listing.price))).toFixed(2)}</p>
+                    <div className="price">
+
+                    {listing.discount > 0 ?
+                    <p className='discountDetail'>${(Number(listing.price) - (Number(listing.discount) * Number(listing.price))).toFixed(2)}</p>
                     :
                     null
                     }
+
+                    <p className={priceClass}>${Number(listing.price).toFixed(2)}</p>
+
+                    {listing.discount > 0 ?
+                    <p className='discountDetail'>({listing.discount * 100}% off)</p>
+                    :
+                    null
+                    }
+                    </div>
+
+
+                    <p id="detailsName">{listing.name}</p>
                 </div>
 
+
                 {listing.owner_id !== sessionUser?.id ?
-                <form onSubmit={addToCart}>
-                    <select onChange={(e) => setQuantity(e.target.value)}>
+                <form onSubmit={addToCart} className="detailForm">
+                    <p >Quantity: </p>
+                    <select onChange={(e) => setQuantity(e.target.value)} id="detailInput">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -131,18 +152,21 @@ export default function ListingDetails () {
                         <option>9</option>
                         <option>10</option>
                     </select>
-                    <button type='submit'>Add to cart</button>
+                    <button type='submit' className={sessionUser === null ? 'detailAddDisabled' : "detailAdd"} disabled={sessionUser === null ? true : false}>Add to cart</button>
+
                     {submit && errors.quantity && (
-                        <div className="createSpotErrors">* {errors.quantity}</div>
+                        <div className="detailErrors">* {errors.quantity}</div>
                         )}
+
                 </form>
                 :
-                <button onClick={handleEdit}>Edit listing</button>
+                <button onClick={handleEdit} className="detailEdit">Edit listing</button>
                 }
 
-
-                <h4>Description</h4>
-                <p>{listing.description}</p>
+                <section className="detailDesc">
+                    <h4 id="descTitle">Description</h4>
+                    <p>{listing.description}</p>
+                </section>
             </div>
 
 
