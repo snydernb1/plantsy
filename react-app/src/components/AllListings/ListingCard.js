@@ -29,7 +29,23 @@ export default function ListingCard ({listing, manage}) {
     const priceClass = listing.discount > 0 ? 'slash' : 'noslash'
 
     return (
-        <>
+        <section className='listCardContainer'>
+
+            {manage === "manage" &&
+                <div className='updateDelete'>
+
+                    <button onClick={handleUpdate} id='updateButton'>Update</button>
+
+                    <div id='deleteButton'>
+                        <OpenModalMenuItem
+                        buttonText="Delete"
+                        onItemClick={closeMenu}
+                        modalComponent={<DeleteConfirm id={listing.id} deleteType='listing'/>}
+                        />
+                    </div>
+                </div>
+            }
+
             <Link
 
                 className="listCard"
@@ -78,18 +94,7 @@ export default function ListingCard ({listing, manage}) {
 
             </Link>
 
-            {manage === "manage" &&
-                <div className='updateDelete'>
-                    <button onClick={handleUpdate} id='updateButton'>Update</button>
-                    <div id='deleteButton'>
-                        <OpenModalMenuItem
-                        buttonText="Delete"
-                        onItemClick={closeMenu}
-                        modalComponent={<DeleteConfirm id={listing.id} deleteType='listing'/>}
-                        />
-                    </div>
-                </div>
-            }
-        </>
+
+        </ section>
     );
 };

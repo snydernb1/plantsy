@@ -2,6 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import ListingCard from "../AllListings/ListingCard";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
+import './ManageListings.css'
+import img from './imgs/empty.png'
+
 export default function ManageListings () {
     const listingsObj = useSelector(state => state.listings.listings)
     const sessionUser = useSelector(state => state.session.user);
@@ -21,10 +24,27 @@ export default function ManageListings () {
     }
 
     return (
-        <section>
+        <section className="storeContainer">
 
-            <button onClick={toListForm}>Sell something!</button>
+            <div className="emptyStore">
 
+            {userListings.length === 0 ?
+            <div id="emptyContent">
+                <h2 id="storeTitle">Hmmm, looks like you haven't added anything to sell.</h2>
+                <h2>Click the button below to get started!</h2>
+                <div id="storeImgDiv">
+                    <img src={img} id='storeImg'/>
+                </div>
+            </div>
+            :
+            null
+            }
+
+            <button onClick={toListForm} id="storeeSellButton">Sell something!</button>
+
+
+            </div>
+            {userListings.length !== 0 ?
             <div className="listings">
                 {userListings.map((listing) => (
                     <ListingCard
@@ -34,6 +54,9 @@ export default function ManageListings () {
                     />
                 ))}
             </div>
+              :
+              null
+              }
 
 
         </section>

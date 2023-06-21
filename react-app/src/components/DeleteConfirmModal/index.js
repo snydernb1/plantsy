@@ -27,8 +27,13 @@ export default function DeleteConfirm({id, deleteType}) {
 
     <h3 id='areYouSure'>{deleteType === 'listing' ? 'Are you sure you want to remove this item from your listings?' : 'Are you sure you want to delete this review?'}</h3>
 
-    <button id='confirmDelete' onClick={handleDelete}>Yes (Delete {deleteType === 'listing' ? 'Item' : 'Review'})</button>
+    <div className="confirmButtonsContainer">
 
-    <button id='confirmKeep' onClick={closeModal}>No (Keep {deleteType === 'listing' ? 'Item' : 'Review'})</button>
+        <button id='confirmDelete' onClick={handleDelete}>Yes (Delete {deleteType === 'listing' ? 'Item' : 'Review'})</button>
+
+        <button id='confirmKeep' onClick={closeModal}>No (Keep {deleteType === 'listing' ? 'Item' : 'Review'})</button>
+
+    </div>
+
     </section>);
 };
