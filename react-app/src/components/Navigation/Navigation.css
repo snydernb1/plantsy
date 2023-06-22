@@ -53,6 +53,8 @@ display: flex;
 .fa-store {
   scale: 140%;
   cursor: pointer;
+  position: relative;
+  right: 15px;
 }
 
 .fa-cart-shopping {
@@ -81,10 +83,14 @@ display: flex;
   margin: auto;
   align-items: center;
   list-style-type: none;
-  padding: 1em 2em 2em 2em;
-
-  width: 1000px;
+  padding: 1em 4em 2em 4em;
   margin: auto;
+}
+
+.navButtons {
+  display: flex;
+  align-items: center;
+  gap: 2.5em;
 }
 
 .navContents {
