@@ -1,11 +1,13 @@
 #checkoutGift {
     margin-top: 4px;
     scale: 150%;
+    cursor: pointer;
 }
 
 #checkoutImg {
     background-size: fill;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 #checkoutImgDiv {

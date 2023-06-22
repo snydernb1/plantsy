@@ -5,6 +5,8 @@
 
 #cartTitle {
     padding: 1em 0 2em 0;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 1.6em;
 }
 
 #checkoutButton {
@@ -12,6 +14,23 @@
     padding: .7em 5em .8em 5em;
     border-radius: 5em;
     color: white;
+}
+
+#paymentOption {
+    cursor: pointer;
+    height: 1em;
+    width: 1em;
+    border-radius: 6em;
+}
+
+#viewListings {
+    background-color: rgb(144, 170, 135);
+    margin: 2em 0 1.5em 0;
+    padding: .7em 5em .8em 5em;
+    border-radius: 5em;
+    color: white;
+    border: none;
+    cursor: pointer;
 }
 
 .modalButtonBlack {
@@ -28,6 +47,8 @@
 
 .cartContainer {
     padding: 1em 2em 1em 2em;
+    margin: auto;
+    width: 1024px;
 }
 
 .cartItems {
@@ -58,4 +79,10 @@
 .noteDiv {
     display: flex;
     justify-content: center;
+}
+
+.paymentChecks {
+    display: flex;
+    gap: 1em;
+    align-items: center;
 }

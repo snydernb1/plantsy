@@ -33,8 +33,10 @@ function ProfileButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
+  console.log(showMenu)
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+
   const closeMenu = () => setShowMenu(false);
 
   const handleLogout = (e) => {
@@ -62,20 +64,18 @@ function ProfileButton({ user }) {
           </>
         ) : (
           <>
-            <div className="authButtons">
-            <i class="fas fa-tree"></i>
+            <div className="authButtons" onClick={closeMenu}>
+              <i class="fas fa-tree"></i>
             <OpenModalButton
               buttonText="Sign in"
-              onItemClick={closeMenu}
               modalComponent={<LoginFormModal form={true}/>}
               />
             </div>
 
-            <div className="authButtons">
+            <div className="authButtons" onClick={closeMenu}>
             <i className="fas fa-seedling" />
             <OpenModalButton
               buttonText="Sign up"
-              onItemClick={closeMenu}
               modalComponent={<LoginFormModal form={false}/>}
               />
               </div>

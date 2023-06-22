@@ -12,6 +12,7 @@ import CreateListing from "./components/CreateListing";
 import UpdateListing from "./components/UpdateListing";
 import Cart from "./components/Cart";
 import Footer from "./components/Footer";
+import PurchaseRedirect from "./components/PurchaseRedirect";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,10 @@ function App() {
 
           <Route path='/users/:userId/cart'>
             <Cart />
+          </Route>
+
+          <Route path='/users/:userId/purchase'>
+            <PurchaseRedirect />
           </Route>
 
           {/* <Route path="/login" >

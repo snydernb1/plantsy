@@ -15,7 +15,7 @@ export default function ListingForm ({listing, formType}) {
     const [description, setDescription] = useState(listing?.description)
     const [price, setPrice] = useState(listing?.price)
     const [shipping, setShipping] = useState(listing?.free_shipping)
-    const [discount, setDiscount] = useState(listing?.discount)
+    const [wholediscount, setWholeDiscount] = useState(Number(listing?.discount) * 100)
     const [prevImg, setPrevImg] = useState("")
     const [imgs, setImgs] = useState({})
 
@@ -34,28 +34,38 @@ export default function ListingForm ({listing, formType}) {
 
         if (shipping !== true && shipping !== false) errors.shipping = "Please select shipping preference"
 
+        console.log(Number(wholediscount) < 10 || Number(wholediscount) > 90)
+        console.log(Number(wholediscount))
+        console.log(wholediscount)
+
+        if (Number(wholediscount) < 10 || Number(wholediscount) > 90) errors.discount = "Please select discount between 10 and 90"
+
         if (description.length < 30) errors.description = "Please add a description of at least 30 characters"
         if (formType === "create") {
             if (!prevImg.length ) errors.prevImg = "Please provide a preview image"
 
-        if (prevImg.length === 0 || prevImg.endsWith('.png') || prevImg.endsWith('.jpg') ||prevImg.endsWith('.jpeg')) {} else{errors.image = "Image URL must end in .png, .jpg, or .jpeg"}
+        if (prevImg.length === 0 || prevImg.endsWith('.png') || prevImg.endsWith('.jpg') ||prevImg.endsWith('.jpeg') || prevImg.startsWith('http://') || prevImg.startsWith('https://')) {} else{errors.image = 'Image URL must end in .png, .jpg, or .jpeg and start with "http://" or "https://"'}
 
             const images = Object.values(imgs) // this might mess up img order, can revisit later
             for (let image of images) {
-                if (image.url.length === 0 || image.url.endsWith('.png') || image.url.endsWith('.jpg') || image.url.endsWith('.jpeg')) {} else{errors.image = "Image URL must end in .png, .jpg, or .jpeg"}
+                if (image.url.length === 0 || image.url.endsWith('.png') || image.url.endsWith('.jpg') || image.url.endsWith('.jpeg') || prevImg.startsWith('http://') || prevImg.startsWith('https://')) {} else{errors.image = 'Image URL must end in .png, .jpg, or .jpeg and start with "http://" or "https://"'}
             }
         }
         setErrors(errors)
-      }, [description, name, price, prevImg, imgs, shipping])
+      }, [description, name, price, prevImg, imgs, shipping, wholediscount])
 
       useEffect(()=> {
         setSubmit(false)
       }, [])
 
+
+
     //====Submit Logic================================================
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSubmit(true);
+
+        let discount = wholediscount / 100
 
         const listingData = {
             ...listing,
@@ -237,14 +247,18 @@ export default function ListingForm ({listing, formType}) {
                         <h4>Discount</h4>
                         <p>We don't suggest adding a discount initially, BUT a discount can be a great way to encourage shoppers and build up some great reviews!</p>
                     </div>
-
+                    <div className='listingInputDiv'>
                     <input
                         type="number"
-                        value={discount}
+                        value={wholediscount}
                         className='listingFormInput'
                         placeholder="optional"
-                        onChange={(e) => setDiscount(e.target.value)}
+                        onChange={(e) => setWholeDiscount(e.target.value)}
                         />
+                        {submit && errors.discount && (
+                            <div className="createListingErrors">* {errors.discount}</div>
+                        )}
+                            </div>
 
             </section>
 

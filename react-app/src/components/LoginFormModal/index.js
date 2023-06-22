@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { login } from "../../store/session";
 import { signUp } from "../../store/session";
 import { useDispatch } from "react-redux";
@@ -9,7 +9,8 @@ function LoginFormModal({form}) {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState({});
+  const [submit, setSubmit] = useState(false)
 
   const [newEmail, setNewEmail] = useState("");
 	const [newName, setNewName] = useState("");
@@ -19,31 +20,50 @@ function LoginFormModal({form}) {
   const [type, setType] = useState(form);
   const { closeModal } = useModal();
 
+
+  useEffect(() => {
+    const errors = {}
+    if (!newEmail.includes('.')) errors.newEmail = "Please provide a valid email"
+
+    let emailTest = newEmail.split('.')
+    if (emailTest[1]?.length <= 1) errors.newEmail = "Please provide a valid email"
+    if (newConfirmPassword !== newPassword) errors.newPassword = "Please confirm passwords match"
+
+
+    setErrors(errors)
+  }, [newEmail, newPassword, newConfirmPassword])
+
+  useEffect(()=> {
+    setSubmit(false)
+  }, [])
+
   const handleSignIn = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(email, password));
-    if (data) {
-      setErrors(data);
-    } else {
+    setSubmit(true);
+      const data = await dispatch(login(email, password));
+      if (data) {
+        const errors = {}
+        errors.login = "Invalid credentials, please try again";
+        setErrors(errors)
+      } else {
         closeModal()
-    }
+      }
+
   };
 
   const handleSignUp = async (e) => {
 		e.preventDefault();
-		if (newPassword === newConfirmPassword) {
+    setSubmit(true);
+		if (newPassword === newConfirmPassword && Object.values(errors).length === 0) {
 			const data = await dispatch(signUp(newName, newEmail, newPassword));
 			if (data) {
 				setErrors(data);
 			} else {
 				closeModal();
 			}
-		} else {
-			setErrors([
-				"Confirm Password field must be the same as the Password field",
-			]);
 		}
-	};
+		};
+
 
   const demoSeller = () => {
     dispatch(login('demo@aa.io', 'password'))
@@ -71,11 +91,9 @@ function LoginFormModal({form}) {
       { type === true ?
 
       <form onSubmit={handleSignIn} className="signInForm">
-        <ul>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
+       {submit && errors.login && (
+            <div className="createListingErrors">* {errors.login}</div>
+          )}
         <label className="authLabel">
           Email address
         </label>
@@ -101,20 +119,23 @@ function LoginFormModal({form}) {
         :
         <form onSubmit={handleSignUp} className="signInForm">
 				<ul>
-					{errors.map((error, idx) => (
+					{/* {errors.map((error, idx) => (
 						<li key={idx}>{error}</li>
-					))}
+					))} */}
 				</ul>
 				<label className="authLabel">
 					Email address
         </label>
 					<input
-						type="text"
+						type="email"
             className="authInput"
 						value={newEmail}
 						onChange={(e) => setNewEmail(e.target.value)}
 						required
 					/>
+          {submit && errors.newEmail && (
+            <div className="createListingErrors">* {errors.newEmail}</div>
+          )}
 				<label className="authLabel">
 					First name
         </label>
@@ -135,6 +156,9 @@ function LoginFormModal({form}) {
 						onChange={(e) => setNewPassword(e.target.value)}
 						required
 					/>
+               {submit && errors.newPassword && (
+            <div className="createListingErrors">* {errors.newPassword}</div>
+          )}
 				<label className="authLabel">
 					Confirm password
         </label>
@@ -145,6 +169,7 @@ function LoginFormModal({form}) {
 						onChange={(e) => setNewConfirmPassword(e.target.value)}
 						required
 					/>
+
 				<button type="submit" className="signInButton">Sign up</button>
 			</form>
       }
@@ -162,6 +187,11 @@ function LoginFormModal({form}) {
 
         <a href='https://github.com/snydernb1' target='_blank' className="githubLink">
           <i className="fa fa-github" />
+          <p>Nick Snyder</p>
+        </a>
+
+        <a href='https://www.linkedin.com/in/nicholas-snyder-2714a5a1/' target='_blank' className="githubLink">
+          <i className="fa fa-linkedin" />
           <p>Nick Snyder</p>
         </a>
 

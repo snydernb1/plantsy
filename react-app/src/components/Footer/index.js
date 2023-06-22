@@ -7,16 +7,22 @@ export default function Footer ({}) {
 
             <div className='footerGithub'>
                 <h3>Have a question? Well, I've got some answers.</h3>
+                <div className='links'>
                     <a href='https://github.com/snydernb1' target='_blank' className="githubLink" id='githibLink'>
                     <i className="fa fa-github" />
                     <p>Nick Snyder</p>
-                </a>
+                    </a>
+                    <a href='https://www.linkedin.com/in/nicholas-snyder-2714a5a1/' target='_blank' className="githubLink" id='githibLink'>
+                    <i className="fa fa-linkedin" />
+                    <p>Nick Snyder</p>
+                    </a>
+                </div>
             </div>
 
             <img src={img} id='footerImg'/>
             <section className='footerBot'>
                 <div>
-                    <p className='footerBotBold'>United States  |  English (US)  |  $(USD)</p>
+                    <p className='footerBotBold'>United States  |  English (US)  |  $ (USD)</p>
                 </div>
                 <div className='footerBotRight'>
                     <p className='footerBotBold'>2023 Plantsy</p>

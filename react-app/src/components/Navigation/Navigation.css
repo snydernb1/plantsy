@@ -4,7 +4,11 @@
   box-sizing: border-box;
 }
 
-#cartNum {
+#iFix {
+  top: 0px;
+}
+
+.cartNum {
 
   text-align: center;
   position: relative;
@@ -12,7 +16,7 @@
   width: 23px;
   height: 23px;
   right: 5px;
-  bottom: 18px;
+  bottom: 14px;
   background-color: rgb(212, 104, 68);
   border: 2px solid white;
   padding: 2px;
@@ -28,7 +32,7 @@
 }
 
 #searchBar {
-  width: 55em;
+  width: 40em;
   height: 4em;
   border-radius: 4em;
   border: .5px solid rgba(46, 43, 28, 0.5);
@@ -54,6 +58,8 @@ display: flex;
 .fa-cart-shopping {
   scale: 140%;
   cursor: pointer;
+  top: 5px;
+  position: relative;
 }
 
 .fa-store:hover {
@@ -76,6 +82,12 @@ display: flex;
   align-items: center;
   list-style-type: none;
   padding: 1em 2em 2em 2em;
+
+  width: 1000px;
+  margin: auto;
+}
+
+.navContents {
   border-bottom: .5px rgb(46, 43, 28) solid;
 }
 
