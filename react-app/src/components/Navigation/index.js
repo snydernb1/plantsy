@@ -44,16 +44,11 @@ function Navigation({ isLoaded }){
 			<i class="fa-solid fa-magnifying-glass"></i>
 			</div>
 
+			<div className='navButtons'>
+
 			{sessionUser !== null &&
 			<i onClick={toListings} class="fa-solid fa-store"></i>
-			}
-
-
-			{isLoaded && (
-				<div>
-					<ProfileButton user={sessionUser} />
-				</div>
-			)}
+		}
 
 			{sessionUser !== null &&
 			<div className='cartDiv'>
@@ -64,6 +59,18 @@ function Navigation({ isLoaded }){
 			}
 			</div>
 			}
+
+
+			{isLoaded && (
+				<div>
+					<ProfileButton user={sessionUser} />
+				</div>
+			)}
+
+			</div>
+
+
+
 			</div>
 		</div>
 	);
