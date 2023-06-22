@@ -46,26 +46,26 @@ function Navigation({ isLoaded }){
 
 			<div className='navButtons'>
 
-			{sessionUser !== null &&
-			<i onClick={toListings} class="fa-solid fa-store"></i>
-		}
+				{sessionUser !== null &&
+				<i onClick={toListings} class="fa-solid fa-store"></i>
+				}
 
-			{sessionUser !== null &&
-			<div className='cartDiv'>
-			<i onClick={toCart} class="fa-solid fa-cart-shopping"
-			id={cartKeys.length ? null : 'iFix'}></i>
-			{cartKeys.length > 0 &&
-				<p className='cartNum' >{cartKeys.length ? cartKeys.length : null}</p>
-			}
-			</div>
-			}
-
-
-			{isLoaded && (
-				<div>
-					<ProfileButton user={sessionUser} />
+				{sessionUser !== null &&
+				<div className='cartDiv'>
+				<i onClick={toCart} class="fa-solid fa-cart-shopping"
+				id={cartKeys.length ? null : 'iFix'}></i>
+				{cartKeys.length > 0 &&
+					<p className='cartNum' >{cartKeys.length ? cartKeys.length : null}</p>
+				}
 				</div>
-			)}
+				}
+
+
+				{isLoaded && (
+					<div>
+						<ProfileButton user={sessionUser} />
+					</div>
+				)}
 
 			</div>
 
