@@ -20,19 +20,38 @@ def seed_listings():
         owner_id=1,
         shop_id=1
     )
-    crochet_lily = Listing(
-        name='Crochet Lily Potted Plant',
-        description='The item will come with the entire pot. This is a finished product, not a crochet potted flower tool set. Handmade crochet flowers will never die, just as our love and spirit will lasts forever:). Due to the light and screen setting difference, the item\'s color may be slightly different from the pictures. Please allow slight dimension difference due to different manual measurement.',
-        price=17.99,
+    conc_plant_1 = Listing(
+        name='Large Temple Planter',
+        description='Each planter stands roughly 1\' tall and 6” wide. The plant bed itself consists of two joined compartments. The top is roughly 6” wide by 3” tall and the bottom is 4” wide x 2” tall. The planters are made out of Rockite (similar to concrete) and the pieces are joined together with an epoxy. Over time as you water your plant, the planter will begin to develop a slight patina. The plant bed has a drainage hole and water will drip from the top piece into the sunken basin at the base. From my experience in Boulder, water typically evaporates from the basin within a day or two (other climates will vary). Follow me on insta @notablyspecial for the latest updates. ',
+        price=79.99,
         free_shipping=False,
-        discount=.1,
+        discount=None,
+        owner_id=4,
+        shop_id=4
+    )
+    conc_plant_2 = Listing(
+        name='Small Temple Planter',
+        description='Each planter stands roughly 6 ¼” tall and 4 ¾” wide. The plant bed itself consists of two joined compartments. The top is roughly 3 ½” wide by 1 ¾” tall and the bottom is 2” wide x 1 ¼” tall. The planters are made out of Rockite (similar to concrete) and the pieces are joined together with an epoxy. Over time as you water your plant, the planter will begin to develop a slight patina. The plant bed has a drainage hole and water will drip from the top piece into the sunken basin at the base. From my experience in Boulder, water typically evaporates from the basin within a day or two (other climates will vary). Follow me on insta @notablyspecial for the latest updates. ',
+        price=39.99,
+        free_shipping=False,
+        discount=None,
+        owner_id=4,
+        shop_id=4
+    )
+    d_plant_1 = Listing(
+        name='3D Printed in Green Planter',
+        description="This modern and unique planter pot is expertly crafted using 3D printing technology and boasts a sleek and stylish green color. Its modern geometric design is sure to complement any contemporary space, and the durable 3D printed material ensures long-lasting use. Whether you're a plant enthusiast or just looking for a stylish decor piece, this planter pot is the perfect addition to any home or office. Add a touch of sophistication to your space with this stunning 3D printed green planter pot.",
+        price=18.99,
+        free_shipping=False,
+        discount=.2,
         owner_id=2,
         shop_id=2
     )
 
-    db.session.add(bulbasaur_planter)
-    db.session.add(gengar_planter)
-    db.session.add(crochet_lily)
+
+    all_listings = [bulbasaur_planter, gengar_planter, conc_plant_1, conc_plant_2, d_plant_1]
+    [db.session.add(listing) for listing in all_listings]
+
     db.session.commit()
 
 

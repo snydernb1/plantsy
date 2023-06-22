@@ -33,23 +33,74 @@ def seed_listing_imgs():
         preview=False,
         listing_id=2,
     )
-    crochet_lily_1 = ListingImages(
-        img_url='https://i.etsystatic.com/39446140/r/il/53d078/4882058728/il_1140xN.4882058728_npel.jpg',
+    temple_large_1 = ListingImages(
+        img_url='https://imgur.com/dt0zhXz',
         preview=True,
         listing_id=3,
     )
-    crochet_lily_2 = ListingImages(
-        img_url='https://i.etsystatic.com/39446140/r/il/4ec0fe/4457434526/il_1140xN.4457434526_aw2x.jpg',
+    temple_large_2 = ListingImages(
+        img_url='https://imgur.com/y9gGZrJ',
         preview=False,
         listing_id=3,
     )
-    crochet_lily_3 = ListingImages(
-        img_url='https://i.etsystatic.com/39446140/r/il/bfd81e/4504798329/il_1140xN.4504798329_ed8o.jpg',
+    temple_large_3 = ListingImages(
+        img_url='https://imgur.com/bosdFzF',
         preview=False,
         listing_id=3,
+    )
+    temple_large_4 = ListingImages(
+        img_url='https://imgur.com/YQRuPzu',
+        preview=False,
+        listing_id=3,
+    )
+    temple_large_5 = ListingImages(
+        img_url='https://imgur.com/fkEotKr',
+        preview=False,
+        listing_id=3,
+    )
+    temple_small_1 = ListingImages(
+        img_url='https://imgur.com/jQeQMHF',
+        preview=True,
+        listing_id=4,
+    )
+    temple_small_2 = ListingImages(
+        img_url='https://imgur.com/NrcwZOL',
+        preview=False,
+        listing_id=4,
+    )
+    temple_small_3 = ListingImages(
+        img_url='https://imgur.com/2l1ekcw',
+        preview=False,
+        listing_id=4,
+    )
+    temple_small_4 = ListingImages(
+        img_url='https://imgur.com/etNpyhJ',
+        preview=False,
+        listing_id=4,
+    )
+    temple_small_5 = ListingImages(
+        img_url='https://imgur.com/t9wbYjO',
+        preview=False,
+        listing_id=4,
+    )
+    d_green_1 = ListingImages(
+        img_url='https://i.etsystatic.com/33208167/r/il/0fac16/4531990590/il_1140xN.4531990590_1zox.jpg',
+        preview=True,
+        listing_id=5,
+    )
+    d_green_2 = ListingImages(
+        img_url='https://i.etsystatic.com/33208167/r/il/f56ee2/4531969698/il_1140xN.4531969698_hd66.jpg',
+        preview=False,
+        listing_id=5,
+    )
+    d_green_3 = ListingImages(
+        img_url='https://i.etsystatic.com/33208167/r/il/6e3354/4531972210/il_1140xN.4531972210_novb.jpg',
+        preview=False,
+        listing_id=5,
     )
 
-    all_imgs = [bulbasaur_planter_1, bulbasaur_planter_2, bulbasaur_planter_3, gengar_planter_1, gengar_planter_2, gengar_planter_3, crochet_lily_1, crochet_lily_2, crochet_lily_3]
+
+    all_imgs = [bulbasaur_planter_1, bulbasaur_planter_2, bulbasaur_planter_3, gengar_planter_1, gengar_planter_2, gengar_planter_3,]
 
     [db.session.add(img) for img in all_imgs]
     db.session.commit()
