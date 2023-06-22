@@ -44,6 +44,12 @@
     top: 5em;
 }
 
+.links {
+    display: flex;
+    gap: 1em;
+    margin: 1em;
+}
+
 .techLinks {
     color: white;
     text-decoration: underline;

@@ -4,6 +4,8 @@ import { useParams, useHistory } from "react-router-dom";
 
 import { addItemToCart } from "../../store/cart";
 
+import stockImg from '../imgs/p.jpg'
+
 import './ListingDetail.css'
 
 
@@ -99,14 +101,25 @@ export default function ListingDetails () {
                     <div className="imgContainerColumn">
                         {listing.imgs.map((img)=> (
                             <div key={img.id} className="imageTiles">
-                                <img onClick={setImg} src={img.img_url} data-user={img.img_url} className="img" id={img.img_url === mainImg ? 'imgSelect' : null}/>
+                                <img onClick={setImg}
+                                src={img.img_url}
+                                data-user={img.img_url}
+                                className="img"
+                                id={img.img_url === mainImg ? 'imgSelect' : null}
+                                onError={e => { e.currentTarget.src = stockImg; }}
+                                />
                             </div>
                         ))}
                     </div>
 
                     <div>
                         <div className="mainImgContainer">
-                            <img src={mainImg} className="img" id="mainImg"/>
+                            <img
+                            src={mainImg}
+                            className="img"
+                            id="mainImg"
+                            onError={e => { e.currentTarget.src = stockImg; }}
+                            />
                         </div>
                     </div>
                 </div>
@@ -114,7 +127,11 @@ export default function ListingDetails () {
 
             <div className="rightColumn">
 
+                {ranNum === 0 ?
+                null
+                :
                 <p id="inCarts">In {ranNum} {ranNum > 1 ? 'carts' : 'cart'}</p>
+                }
 
                 <div className="namePrice">
 
@@ -168,7 +185,9 @@ export default function ListingDetails () {
 
                 <section className="detailDesc">
                     <h4 id="descTitle">Description</h4>
-                    <p>{listing.description}</p>
+                    <div className="descTest">
+                    <pre id="descWrap">{listing.description}</pre>
+                    </div>
                 </section>
             </div>
 

@@ -13,26 +13,27 @@ img {
 }
 
 #deleteButton {
-    border-radius: none;
-    border: 1px solid black;
-    width: 65px;
-    background-color: rgb(88, 88, 88);
-    color: white;
+    background-color: rgb(249, 102, 69);
+    border: none;
+    padding: 4px 6px 4px 6px;
+    border-radius: 5em;
     display: flex;
-    justify-content: center;
     align-items: center;
-    box-shadow: 1px 1px 3px 1px grey;
+    justify-content: center;
+    cursor: pointer;
+    width: 5em;
+    height: 2em;
 }
 
 #updateButton {
-    border-radius: none;
-    height: 2em;
-    border: 1px solid black;
-    width: 65px;
-    background-color: rgb(88, 88, 88);
-    color: white;
-    box-shadow: 1px 1px 3px 1px grey;
+    background-color: rgb(144, 170, 135);
+    border: none;
+    padding: 1px 6px 1px 6px;
+    border-radius: 5em;
+    color: black;
     cursor: pointer;
+    width: 6em;
+    height: 2.4em;
 }
 
 #freeShipping {
@@ -51,8 +52,8 @@ img {
 }
 
 .imgDiv {
-    width: 18em;
-    height: 15em;
+    width: 12.5em;
+    height: 10em;
     padding-bottom: .25em;
 }
 
@@ -63,11 +64,15 @@ img {
 }
 
 .listCard {
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
-    width: 18em;
-    height: 20em;
+    width: 12.5em;
     color: black;
+}
+
+.listCardContainer {
+    display: flex;
+    flex-direction: column;
 }
 
 .img {
@@ -87,4 +92,5 @@ img {
     flex-direction: row;
     gap: 1em;
     padding-top: 1em;
+    margin-bottom: .7em;
 }

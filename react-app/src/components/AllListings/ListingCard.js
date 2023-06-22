@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import OpenModalMenuItem from '../OpenModalButton'
 import DeleteConfirm from '../DeleteConfirmModal';
+import stockImg from '../imgs/p.jpg'
 
 import './ListingCard.css'
 
@@ -29,7 +30,23 @@ export default function ListingCard ({listing, manage}) {
     const priceClass = listing.discount > 0 ? 'slash' : 'noslash'
 
     return (
-        <>
+        <section className='listCardContainer'>
+
+            {manage === "manage" &&
+                <div className='updateDelete'>
+
+                    <button onClick={handleUpdate} id='updateButton'>Update</button>
+
+                    <div id='deleteButton'>
+                        <OpenModalMenuItem
+                        buttonText="Delete"
+                        onItemClick={closeMenu}
+                        modalComponent={<DeleteConfirm id={listing.id} deleteType='listing'/>}
+                        />
+                    </div>
+                </div>
+            }
+
             <Link
 
                 className="listCard"
@@ -37,7 +54,11 @@ export default function ListingCard ({listing, manage}) {
                 >
 
                 <div className='imgDiv'>
-                    <img src={prevImage} className='img'/>
+                    <img
+                    src={prevImage}
+                    className='img'
+                    onError={e => { e.currentTarget.src = stockImg; }}
+                    />
                 </div>
 
                 {/* <div className='rating'>
@@ -78,18 +99,7 @@ export default function ListingCard ({listing, manage}) {
 
             </Link>
 
-            {manage === "manage" &&
-                <div className='updateDelete'>
-                    <button onClick={handleUpdate} id='updateButton'>Update</button>
-                    <div id='deleteButton'>
-                        <OpenModalMenuItem
-                        buttonText="Delete"
-                        onItemClick={closeMenu}
-                        modalComponent={<DeleteConfirm id={listing.id} deleteType='listing'/>}
-                        />
-                    </div>
-                </div>
-            }
-        </>
+
+        </ section>
     );
 };

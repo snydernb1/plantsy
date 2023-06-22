@@ -32,7 +32,11 @@ function Navigation({ isLoaded }){
 	}
 
 	return (
+	<div className='navContents'>
 		<div className='navbar'>
+
+
+
 
 			<div className='titleSearch'>
 			<NavLink exact to="/" id='plantsy'>Plantsy</NavLink>
@@ -53,12 +57,14 @@ function Navigation({ isLoaded }){
 
 			{sessionUser !== null &&
 			<div className='cartDiv'>
-			<i onClick={toCart} class="fa-solid fa-cart-shopping"></i>
+			<i onClick={toCart} class="fa-solid fa-cart-shopping"
+			id={cartKeys.length ? null : 'iFix'}></i>
 			{cartKeys.length > 0 &&
-				<p id='cartNum'>{cartKeys.length ? cartKeys.length : null}</p>
+				<p className='cartNum' >{cartKeys.length ? cartKeys.length : null}</p>
 			}
 			</div>
 			}
+			</div>
 		</div>
 	);
 }

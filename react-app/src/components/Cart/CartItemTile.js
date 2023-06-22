@@ -3,9 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeItemFromCart } from "../../store/cart";
 import { updateQuantity } from "../../store/cart";
 
+import stockImg from '../imgs/p.jpg'
+
 import './CartItemTile.css'
+import { useHistory } from "react-router-dom";
 
 export default function CartItemTile ({item, cartData, shipping}) {
+    const history = useHistory()
     const dispatch = useDispatch()
     const [ranNum, setRanNum] = useState(0)
     const [quantity, setQuantity] = useState(cartData?.quantity)
@@ -86,6 +90,10 @@ export default function CartItemTile ({item, cartData, shipping}) {
         await dispatch(removeItemFromCart(cartData.id, cartData.listing_id))
     }
 
+    const goDetail = () => {
+        history.push(`/listings/${item.id}`)
+    }
+
     const updateItem = async () => {
         cartData.quantity = quantity
         await dispatch(updateQuantity(cartData))
@@ -101,7 +109,7 @@ export default function CartItemTile ({item, cartData, shipping}) {
 
                     <div className="checkoutUpperLeft">
                         <div id="checkoutImgDiv">
-                            <img src={prevImage} id="checkoutImg"/>
+                            <img src={prevImage} id="checkoutImg"  onError={e => { e.currentTarget.src = stockImg; }} onClick={goDetail}/>
                         </div>
 
                         <div className="checkoutName">
@@ -148,8 +156,11 @@ export default function CartItemTile ({item, cartData, shipping}) {
                                 null
                             }
                         </div>
-
+                        {ranNum === 0 ?
+                        null
+                        :
                         <p id="checkoutRed">{ranNum} people have this item in their {ranNum > 1 ? 'carts' : 'cart'}</p>
+                        }
 
                     </div>
                 </section>

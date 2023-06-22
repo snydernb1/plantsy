@@ -1,0 +1,45 @@
+#emptyContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: min-content;
+}
+
+#storeImg {
+    rotate: 180deg;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+}
+
+#storeImgDiv {
+    height: 20em;
+}
+
+#storeeSellButton {
+
+    background-color: rgb(144, 170, 135);
+    border: none;
+    padding: .7em 5em .8em 5em;
+    border-radius: 5em;
+    color: white;
+    margin: 2em 0 1.5em 0;
+    cursor: pointer;
+}
+
+#storeTitle {
+    margin-top: 2em;
+}
+
+.emptyStore {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.storeContainer {
+    width: 1024px;
+    margin: auto;
+}

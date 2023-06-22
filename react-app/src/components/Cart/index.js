@@ -1,12 +1,16 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import CartItemTile from './CartItemTile';
 import OpenModalMenuItem from '../OpenModalButton'
 import Checkout from './ConfirmPurchaseModal';
 
+import img from '../ManageListings/imgs/empty.png'
+
 import './Cart.css'
 
 export default function Cart () {
+    const history = useHistory()
     const sessionUser = useSelector(state => state.session.user);
     const cartObj = useSelector(state => state.cart.cart);
     const listingsObj = useSelector(state => state.listings.listings)
@@ -16,8 +20,27 @@ export default function Cart () {
     const items = [];
     const shippingArr = [];
 
+    const viewListings = () => {
+        history.push('/')
+    }
 
-    if (!Object.keys(cartObj).length) return false
+
+    if (!Object.keys(cartObj).length) return (
+        <>
+        {items.length === 0 ?
+            <div id="emptyContent">
+                <h2 id="storeTitle">Hmmm, looks like your cart is empty...</h2>
+                <h2>Click the button below to view all items.</h2>
+                <div id="storeImgDiv">
+                    <img src={img} id='storeImg'/>
+                </div>
+                <button onClick={viewListings} id='viewListings'>View listings</button>
+            </div>
+            :
+            null
+        }
+        </>
+    )
     if (!Object.keys(listingsObj).length) return false
 
     cartKeys.forEach((itemId) => {
@@ -54,6 +77,8 @@ export default function Cart () {
 
     const closeMenu = () => setShowMenu(false);
 
+    console.log(items)
+
     return (
         <section className='cartContainer'>
 
@@ -78,16 +103,18 @@ export default function Cart () {
                 <section className='cartRight'>
                     <h4>How you'll pay</h4>
 
-                    <label>
-                        <input type='radio'/>
+                    <label className='paymentChecks'>
+                        <input type='checkbox' id="paymentOption"/>
                         Credit
                     </label>
-                    <label>
-                        <input type='radio'/>
+
+                    <label className='paymentChecks'>
+                    <input type='checkbox' id="paymentOption"/>
                         Debit
                     </label>
-                    <label>
-                        <input type='radio'/>
+
+                    <label className='paymentChecks'>
+                    <input type='checkbox' id="paymentOption"/>
                         Gift Card
                     </label>
 
@@ -109,7 +136,7 @@ export default function Cart () {
 
                     <div id='checkoutButton'>
                             <OpenModalMenuItem
-                            buttonText="Proceed to checkout"
+                            buttonText="Purchase"
                             onItemClick={closeMenu}
                             modalComponent={<Checkout/>}
                             />
