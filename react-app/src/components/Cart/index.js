@@ -77,8 +77,6 @@ export default function Cart () {
 
     const closeMenu = () => setShowMenu(false);
 
-    console.log(items)
-
     return (
         <section className='cartContainer'>
 

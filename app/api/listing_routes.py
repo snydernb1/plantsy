@@ -56,7 +56,6 @@ def create_listing():
 
         db.session.add(new_listing)
         db.session.commit()
-        print('===============> Listing submitted to db success')
         return new_listing.to_dict()
 
 
@@ -106,7 +105,6 @@ def create_listing_img():
     '''
     data = request.get_json()
 
-    print('=================> data from FE', data)
     form = NewListingImgForm()
     form['csrf_token'].data = request.cookies['csrf_token'] # Boilerplate code
 
@@ -120,9 +118,7 @@ def create_listing_img():
 
         db.session.add(new_listing_img)
         db.session.commit()
-        print('===============> Img submitted to db success')
         return new_listing_img.to_dict()
 
     if form.errors:
-        print('===============> Img errors', form.errors)
         return form.errors, 400

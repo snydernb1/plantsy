@@ -10,8 +10,6 @@ export default function DeleteConfirm({id, deleteType}) {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
 
-    console.log('id from the confirm menu', id)
-
     const handleDelete = (e) => {
         e.preventDefault();
 
