@@ -12,6 +12,8 @@ def seed_users():
         first_name='Bobbie', email='bobbie@aa.io', password='password')
     nick = User(
         first_name='Nick', email='nick@aa.io', password='password')
+    curt = User(
+        first_name='Curt', email='hammerly-ceramics@aa.io', password='password')
 
     db.session.add(bill)
     db.session.add(marnie)
