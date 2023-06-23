@@ -15,9 +15,30 @@ def seed_shops():
         img_url='https://imgur.com/iQFo4eL.jpg',
         owner_id=1
     )
+    bobbie_shop = Shop(
+        name='Coming Soon',
+        description='Coming Soon',
+        img_url='https://imgur.com/iQFo4eL.jpg',
+        owner_id=1
+    )
+    ns_shop = Shop(
+        name='Notably Special',
+        description='Coming soon',
+        img_url='https://imgur.com/iQFo4eL.jpg',
+        owner_id=1
+    )
+    hc_shop = Shop(
+        name='Hammerly Ceramics',
+        description='Coming soon',
+        img_url='https://imgur.com/iQFo4eL.jpg',
+        owner_id=1
+    )
 
     db.session.add(bill_shop)
     db.session.add(marnie_shop)
+    db.session.add(bobbie_shop)
+    db.session.add(ns_shop)
+    db.session.add(hc_shop)
     db.session.commit()
 
 def undo_shops():
