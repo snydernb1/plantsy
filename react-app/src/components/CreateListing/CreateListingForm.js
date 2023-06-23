@@ -34,10 +34,6 @@ export default function ListingForm ({listing, formType}) {
 
         if (shipping !== true && shipping !== false) errors.shipping = "Please select shipping preference"
 
-        console.log(Number(wholediscount) < 10 || Number(wholediscount) > 90)
-        console.log(Number(wholediscount))
-        console.log(wholediscount)
-
         if (Number(wholediscount) < 10 || Number(wholediscount) > 90) errors.discount = "Please select discount between 10 and 90"
 
         if (description.length < 30) errors.description = "Please add a description of at least 30 characters"
@@ -81,7 +77,6 @@ export default function ListingForm ({listing, formType}) {
         if (Object.values(errors).length === 0) {
             if (formType === 'create') {
                 const newListing = await dispatch(createNewListing(listingData))
-                console.log('this is the new listing', newListing)
 
                 const preview = {
                     listing_id: newListing.id,
@@ -91,7 +86,6 @@ export default function ListingForm ({listing, formType}) {
                 await dispatch(createNewListingImg(preview))
 
                 const images = Object.values(imgs)
-                console.log('Are these the valuse', images)
                 for (let img of images) {
                     if (img.url.length > 0) {
                         const newImg = {

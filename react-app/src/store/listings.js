@@ -151,8 +151,6 @@ const listingsReducer = (state = initialState, action) => {
 
             const id = action.listing
             listingState = {...state, listings: {...state.listings}}
-            console.log('did we get into the reducer?', listingState.listings)
-            console.log('did we get into the reducer?', listingState.listings[id])
 
             delete listingState.listings[id]
 

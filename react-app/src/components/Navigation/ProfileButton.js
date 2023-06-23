@@ -33,8 +33,6 @@ function ProfileButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  console.log(showMenu)
-
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   const closeMenu = () => setShowMenu(false);

@@ -13,6 +13,7 @@ import UpdateListing from "./components/UpdateListing";
 import Cart from "./components/Cart";
 import Footer from "./components/Footer";
 import PurchaseRedirect from "./components/PurchaseRedirect";
+import FourOhFour from "./components/FourOhFour";
 
 function App() {
   const dispatch = useDispatch();
@@ -55,12 +56,9 @@ function App() {
             <PurchaseRedirect />
           </Route>
 
-          {/* <Route path="/login" >
-            <LoginFormPage />
+          <Route>
+            <FourOhFour />
           </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route> */}
 
         </Switch>
       )}

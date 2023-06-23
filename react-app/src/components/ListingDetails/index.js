@@ -5,6 +5,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { addItemToCart } from "../../store/cart";
 
 import stockImg from '../imgs/p.jpg'
+import img from '../ManageListings/imgs/empty.png'
 
 import './ListingDetail.css'
 
@@ -35,14 +36,28 @@ export default function ListingDetails () {
     //====Checking for Errors=======================================
     useEffect(() => {
         const errors = {}
-        console.log('is this even a number?', cartObj[listId]?.quantity + quantity > 10)
-        console.log('math', Number(cartObj[listId]?.quantity) + Number(quantity))
-        console.log('quantity?', quantity)
         if (Number(cartObj[listId]?.quantity) + Number(quantity) > 10) errors.quantity = "The seller has limited the purchase quantity to 10. If you would like to purchase more, please place a second order after checkout."
         setErrors(errors)
         }, [quantity])
 
-    if (listing === undefined) return  false
+
+    const viewListings = () => {
+        history.push('/')
+    }
+
+
+    if (listing === undefined) return  (
+        <>
+           <div id="emptyContent">
+                <h2 id="storeTitle">Ooops, you're out of bounds...</h2>
+                <h2>Click the button below to return home.</h2>
+                <div id="storeImgDiv">
+                    <img src={img} id='storeImg'/>
+                </div>
+                <button onClick={viewListings} id='viewListings'>View listings</button>
+            </div>
+        </>
+    )
 
     const imgs = listing.imgs
 
@@ -72,9 +87,7 @@ export default function ListingDetails () {
         e.preventDefault()
         setSubmit(true);
         setRanNum(ranNum + 1)
-        console.log('what are errors', errors)
         if (Object.values(errors).length === 0) {
-            console.log('are we getting ehre?')
             const cartItem = {
                 quantity,
                 listing_id: listId,
