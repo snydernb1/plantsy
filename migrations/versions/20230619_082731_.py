@@ -41,7 +41,7 @@ def upgrade():
     )
     op.create_table('listings',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('name', sa.String(length=40), nullable=False),
+    sa.Column('name', sa.String(length=80), nullable=False),
     sa.Column('description', sa.String(), nullable=False),
     sa.Column('price', sa.Float(), nullable=False),
     sa.Column('free_shipping', sa.Boolean(), nullable=False),
