@@ -25,11 +25,13 @@ export default function ListingForm ({listing, formType}) {
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
 
+    console.log(price)
+
     //====Checking for Errors=======================================
     useEffect(() => {
         const errors = {}
         if (!name.length) errors.name = "Please provide a title for your item"
-        if (price.toString().length === 0) errors.price = "Please provide a price for your item"
+        if (Number(price) === 0 || price.length === 0) errors.price = "Please provide a price for your item"
 
         if (shipping !== true && shipping !== false) errors.shipping = "Please select shipping preference"
 
