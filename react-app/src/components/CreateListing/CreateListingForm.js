@@ -25,7 +25,6 @@ export default function ListingForm ({listing, formType}) {
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
 
-
     //====Checking for Errors=======================================
     useEffect(() => {
         const errors = {}
@@ -34,7 +33,9 @@ export default function ListingForm ({listing, formType}) {
 
         if (shipping !== true && shipping !== false) errors.shipping = "Please select shipping preference"
 
-        if (Number(wholediscount) < 10 || Number(wholediscount) > 90) errors.discount = "Please select discount between 10 and 90"
+        if (Number(wholediscount) !== 0) {
+            if (Number(wholediscount) < 10 || Number(wholediscount) > 90) errors.discount = "Please select discount between 10 and 90"
+        }
 
         if (description.length < 30) errors.description = "Please add a description of at least 30 characters"
         if (formType === "create") {
