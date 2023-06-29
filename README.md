@@ -6,6 +6,8 @@ Hi, thanks for checking out my project! This is my third fullstack web applicati
 
 Currently the app has functionality to authenticate users, view/create/delete/edit a listing and view/add/delete/delete all (purchase)/edit a shopping cart.
 
+The site is currently live here: https://plantsy-lm98.onrender.com/. You can also clone the repo and run locally by following the instructions below!
+
 ## Frontend screenshots
 The home page displays all listings, this is viewable both when logged in or out.
 
