@@ -29,4 +29,5 @@ class Review(db.Model):
             'rating': self.rating,
             'user_id': self.user_id,
             'listing_id': self.listing_id,
+            'user_name': self.user.first_name
         }

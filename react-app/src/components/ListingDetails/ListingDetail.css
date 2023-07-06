@@ -35,6 +35,18 @@
     object-fit: cover;
 }
 
+#rating {
+    display: flex;
+    align-items: center;
+}
+
+#reviewHeader {
+    margin: 3em 0 2em 0;
+    display: flex;
+    gap: 2em;
+    align-items: center;
+}
+
 .backToListings {
     display: flex;
     align-items: center;
@@ -150,6 +162,12 @@
     flex-direction: column;
     gap: .5em;
     padding-bottom: 2em;
+}
+
+.reviewCount {
+    font-weight: lighter;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 2em;
 }
 
 .rightColumn {

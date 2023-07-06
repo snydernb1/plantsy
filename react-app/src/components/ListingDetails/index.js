@@ -6,6 +6,7 @@ import { addItemToCart } from "../../store/cart";
 
 import stockImg from '../imgs/p.jpg'
 import img from '../ManageListings/imgs/empty.png'
+import ReviewCard from "./ReviewCard";
 
 import './ListingDetail.css'
 
@@ -15,6 +16,7 @@ export default function ListingDetails () {
     const history = useHistory()
     const listingsObj = useSelector(state => state.listings.listings)
     const cartObj = useSelector(state => state.cart.cart)
+    const reviewObj = useSelector(state => state.reviews.reviews)
     const sessionUser = useSelector(state => state.session.user);
     const [errors, setErrors] = useState({})
     const [mainImg, setMainImg] = useState('loading')
@@ -24,6 +26,23 @@ export default function ListingDetails () {
     const {listId} = useParams();
 
     const listing = listingsObj[Number(listId)]
+    let reviews = reviewObj[Number(listId)]
+
+    if (reviews !== undefined) reviews = Object.values(reviews)
+    else {reviews = []}
+
+
+    const rating = () => {
+        let sum = 0;
+
+        reviews.forEach(rev => {
+            sum += rev.rating
+        });
+
+        let avg = sum / reviews.length
+        return avg.toFixed(1)
+    }
+
 
     let prevImage;
 
@@ -135,6 +154,32 @@ export default function ListingDetails () {
                             />
                         </div>
                     </div>
+                </div>
+
+                <div className="reviewContainer">
+
+                    <div id="reviewHeader">
+                        <h3 className="reviewCount">{reviews.length > 0 ?
+                        reviews.length > 1 ? `${reviews.length} reviews` : `${reviews.length} review`
+                        :
+                        'Be the first to leave a review'}</h3>
+
+                        <div id="rating">
+                            {reviews.length > 0 && <i className="fas fa-leaf" />}
+                            <h3>{reviews.length > 0 ? `${rating()} /5.0`: null}</h3>
+                        </div>
+                    </div>
+
+                    <div>
+                        {reviews.map((rev) => (
+                            <ReviewCard
+                            key={rev.id}
+                            rev={rev}
+                            />
+                        ))}
+                    </div>
+
+
                 </div>
             </div>
 
