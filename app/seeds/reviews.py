@@ -6,14 +6,14 @@ def seed_reviews():
     review_1 = Review(
         review='Review text',
         rating=4,
-        user_id=1,
+        user_id=3,
         listing_id=1
     )
 
     db.session.add(review_1)
     db.session.commit()
 
-def undo_shops():
+def undo_reviews():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.reviews RESTART IDENTITY CASCADE;")
     else:
