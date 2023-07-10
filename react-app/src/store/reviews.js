@@ -1,5 +1,14 @@
 const ALL_REVIEWS = 'reviews/ALL_REVIEWS';
+const EDIT_REVIEW = 'reviews/EDIT_REVIEW';
+const CREATE_REVIEW = 'reviews/CREATE_REVIEW';
 
+
+const allReviews = (reviews) => {
+    return {
+        type: ALL_REVIEWS,
+        reviews
+    };
+};
 
 const allReviews = (reviews) => {
     return {

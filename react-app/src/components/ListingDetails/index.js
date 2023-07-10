@@ -5,8 +5,10 @@ import { useParams, useHistory } from "react-router-dom";
 import { addItemToCart } from "../../store/cart";
 
 import stockImg from '../imgs/p.jpg'
+import OpenModalMenuItem from '../OpenModalButton'
 import img from '../ManageListings/imgs/empty.png'
 import ReviewCard from "./ReviewCard";
+import CreateReview from "./CreateReviewModal";
 
 import './ListingDetail.css'
 
@@ -24,9 +26,11 @@ export default function ListingDetails () {
     const [ranNum, setRanNum] = useState(0)
     const [submit, setSubmit] = useState(false)
     const {listId} = useParams();
+    const [showMenu, setShowMenu] = useState(false);
 
     const listing = listingsObj[Number(listId)]
     let reviews = reviewObj[Number(listId)]
+
 
     if (reviews !== undefined) reviews = Object.values(reviews)
     else {reviews = []}
@@ -43,6 +47,7 @@ export default function ListingDetails () {
         return Math.floor(avg)
     }
 
+    const closeMenu = () => setShowMenu(false);
 
     let prevImage;
 
@@ -132,6 +137,8 @@ export default function ListingDetails () {
 
     const priceClass = listing.discount > 0 ? 'slash' : 'noslash'
 
+    const hasReview = reviews.find((review) => review.userId === sessionUser?.id)
+
     return (
         <section className="listingDetailContainer">
             <div className="leftColumn">
@@ -190,6 +197,22 @@ export default function ListingDetails () {
                     {reviews.length > 0 && <div id="reviewSubHeader">
                         <p id="reviewSubHeaderText">{reviews.length > 1 ? `Reviews for this item` : `Review for this item`}</p>
                     </div>}
+
+                    {/* =============================*/}
+
+                    {
+                        sessionUser && sessionUser.id !== listing.ownerId && !hasReview &&
+                        <div id='createReview'>
+                        <OpenModalMenuItem
+                        itemText="Post Your Review"
+                        onItemClick={closeMenu}
+                        modalComponent={<CreateReview listingId={listing.id} sessionUser={sessionUser}/>}
+                        />
+                        </div>
+                    }
+
+                    {/* =============================*/}
+
 
                     <div>
                         {reviews.map((rev) => (
