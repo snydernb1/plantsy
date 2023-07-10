@@ -89,7 +89,7 @@ def edit_listing(listing_id):
 @login_required
 def delete_listing(listing_id):
     '''
-    Adds a new listing to the db
+    Deletes listing from the db
     '''
     listing = Listing.query.get(listing_id)
 

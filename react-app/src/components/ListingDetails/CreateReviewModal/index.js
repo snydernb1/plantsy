@@ -7,18 +7,18 @@ import stockImg from '../../imgs/p.jpg'
 import './ReviewModal.css'
 
 
-export default function CreateReview({spotId, sessionUser, existReview, reviewType, spotName, listing, listingImage}) {
+export default function CreateReview({listingId, sessionUser, existReview, reviewType, listing, listingImage}) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
 
     const [review, setReview] = useState(existReview?.review || "");
-    const [rating, setRating] = useState(existReview?.stars || 0);
+    const [rating, setRating] = useState(existReview?.rating || 0);
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
         const errors = {}
-        if (review.length < 10) errors.review = "Review needs a minimum of 10 characters"
-        if (rating < 1) errors.rating = "Rating must have a minimum of 1 star"
+        if (review.length < 15) errors.review = "Review needs a minimum of 15 characters"
+        if (rating < 1) errors.rating = "Rating must have a minimum of 1 leaf"
 
         setErrors(errors)
     }, [rating, review]);
@@ -26,23 +26,24 @@ export default function CreateReview({spotId, sessionUser, existReview, reviewTy
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        const dateObj = new Date()
+        const dateStr = `${dateObj}`
+        const dateArr = dateStr.split(' ')
+
+        const year = dateArr[3]
+        const month = dateArr[1]
+        const day = dateArr[2]
+
         const reviewData = {
-            spotId: spotId,
+            listingId: listingId,
             reviewData: {
-                backend: {review, stars: rating},
-                frontend: {user: {
-                    id: sessionUser.id,
-                    firstName: sessionUser.firstName,
-                    lastName: sessionUser.lastName}
-                }
+                backend: {review, rating: rating, date: `${month} ${day}, ${year}`,   listing_id: listingId},
             }
         }
 
         if (existReview) {
-            reviewData.reviewData.frontend.spot =  existReview.Spot
             reviewData.revId = existReview.id
         }
-
 
         if (reviewType === "edit") {
             const editedReview = await dispatch(editReviewThunk(reviewData))
@@ -51,12 +52,6 @@ export default function CreateReview({spotId, sessionUser, existReview, reviewTy
             const newReview = await dispatch(createReviewThunk(reviewData))
             closeModal();
         }
-
-        // if (newReview.id) {
-        //     closeModal();
-        // } else {
-        //     setErrors(newReview.errors)
-        // }
     }
 
     function starRating (num) {
@@ -85,9 +80,7 @@ export default function CreateReview({spotId, sessionUser, existReview, reviewTy
     return (
     <section id="reviewModal">
 
-    <h1 id="reviewFormHeader">Leave a Review {existReview ? "at " + spotName : null}?</h1>
-
-
+    <h1 id="reviewFormHeader">Leave a Review</h1>
 
         <div id="reviewProductInfo">
 
@@ -103,10 +96,6 @@ export default function CreateReview({spotId, sessionUser, existReview, reviewTy
 
         </div>
 
-
-
-
-
     <form onSubmit={handleSubmit} id='reviewForm'>
 
         <h3>My review</h3>
@@ -121,7 +110,7 @@ export default function CreateReview({spotId, sessionUser, existReview, reviewTy
         <textarea
             type="text"
             value={review}
-            placeholder="At least 30 characters"
+            placeholder="At least 15 characters"
             id='reviewText'
             onChange={(e) => setReview(e.target.value)}
             />

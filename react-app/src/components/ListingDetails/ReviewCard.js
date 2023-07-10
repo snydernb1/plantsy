@@ -1,22 +1,18 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory } from "react-router-dom";
-import OpenModalMenuItem from '../OpenModalButton'
+import CreateReview from './CreateReviewModal';
+import OpenModalButton from '../OpenModalButton'
 import DeleteConfirm from '../DeleteConfirmModal';
 
 import './ReviewCard.css'
 
-export default function ReviewCard ({rev}) {
+export default function ReviewCard ({rev, listing, saveMainImg}) {
   const history = useHistory()
   const [showMenu, setShowMenu] = useState(false);
   const sessionUser = useSelector(state => state.session.user);
 
   const closeMenu = () => setShowMenu(false);
-
-  const handleUpdate = (e) => {
-      e.preventDefault();
-      // history.push(`/listings/${listing.id}/edit`)
-  }
 
   let hasReview = false;
 
@@ -41,20 +37,7 @@ export default function ReviewCard ({rev}) {
             <div className='reviewRating'>
                 {[1,2,3,4,5].map((num)=>starRating(num))}
 
-              {hasReview && <div className='updateDelete'>
 
-                <button onClick={handleUpdate} id='updateButton'>Update</button>
-
-                <div id='deleteButton'>
-                    <OpenModalMenuItem
-                    buttonText="Delete"
-                    modalType='buttonDelete'
-                    onItemClick={closeMenu}
-                    modalComponent={<DeleteConfirm id={rev.id} deleteType='review'/>}
-                    />
-                </div>
-
-              </div>}
             </div>
 
             <p className='reviewTextLarge'>{rev.review}</p>
@@ -62,6 +45,28 @@ export default function ReviewCard ({rev}) {
             <div className='nameDate'>
               <p className='nameDateSmaller'>{rev.user_name}</p>
               <p className='nameDateSmaller'>{rev.date}</p>
+
+              {hasReview && <div className='updateDelete'>
+
+                <div id='createReview'>
+                    <OpenModalButton
+                    buttonText="Update"
+                    modalType='buttonSmall'
+                    onItemClick={closeMenu}
+                    modalComponent={<CreateReview listingId={listing.id} sessionUser={sessionUser} listing={listing} reviewType='edit' listingImage={saveMainImg} existReview={rev}/>}
+                    />
+                </div>
+
+                <div id='deleteButton'>
+                    <OpenModalButton
+                    buttonText="Delete"
+                    modalType='buttonDelete'
+                    onItemClick={closeMenu}
+                    modalComponent={<DeleteConfirm id={rev.id} deleteType='review' listingId={rev.listing_id}/>}
+                    />
+                </div>
+
+              </div>}
             </div>
 
         </section>

@@ -224,6 +224,8 @@ export default function ListingDetails () {
                         {reviews.map((rev) => (
                             <ReviewCard
                             key={rev.id}
+                            listing={listing}
+                            saveMainImg={saveMainImg}
                             rev={rev}
                             />
                         ))}

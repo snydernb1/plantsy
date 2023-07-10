@@ -27,6 +27,10 @@ function OpenModalButton({
       <button onClick={onClick} className='modalButton' >{buttonText}</button>
     }
     {
+      modalType === 'buttonSmall' &&
+      <button onClick={onClick} className='modalButtonSmall' >{buttonText}</button>
+    }
+    {
       modalType === 'buttonDelete' &&
       <button onClick={onClick} className='modalButtonDelete' >{buttonText}</button>
     }

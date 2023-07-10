@@ -1,5 +1,22 @@
+.modalButtonSmall {
+    background-color: rgb(144, 170, 135);
+    border: none;
+    padding: 4px 6px 4px 6px;
+    border-radius: 5em;
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 6em;
+    height: 2.4em;
+    white-space: nowrap;
+
+}
+
 .nameDate {
     display: flex;
+    align-items: center;
     gap: 1em;
 }
 
@@ -23,4 +40,9 @@
     display: flex;
     align-items: center;
     gap: .5em;
+}
+
+.updateDelete {
+    position: relative;
+    bottom: 3px;
 }
