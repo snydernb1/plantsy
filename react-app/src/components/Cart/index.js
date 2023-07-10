@@ -132,13 +132,14 @@ export default function Cart () {
                     </div>
 
 
-                    <div id='checkoutButton'>
-                            <OpenModalMenuItem
-                            buttonText="Purchase"
-                            onItemClick={closeMenu}
-                            modalComponent={<Checkout/>}
-                            />
-                    </div>
+
+                    <OpenModalMenuItem
+                    buttonText="Purchase"
+                    modalType='buttonLarge'
+                    onItemClick={closeMenu}
+                    modalComponent={<Checkout/>}
+                    />
+
 
                     <div className='noteDiv'>
                     <p className="checkoutSmallText" id='noteColor'>* Additional duties and taxes may apply</p>

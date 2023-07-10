@@ -87,7 +87,7 @@ export default function CreateReview({spotId, sessionUser, existReview, reviewTy
 
     <h1 id="reviewFormHeader">Leave a Review {existReview ? "at " + spotName : null}?</h1>
 
-    <div>
+
 
         <div id="reviewProductInfo">
 
@@ -99,24 +99,24 @@ export default function CreateReview({spotId, sessionUser, existReview, reviewTy
                 />
             </div>
 
-            <h4>{listing.name}</h4>
+            <h4 id="reviewFormListingName">{listing.name}</h4>
 
         </div>
 
-    </div>
+
 
 
 
     <form onSubmit={handleSubmit} id='reviewForm'>
 
-        <h4>My review</h4>
+        <h3>My review</h3>
 
         <div id='starDiv'>
             {[1,2,3,4,5].map((num)=>starRating(num))}
         </div>
 
         <p id="reviewFormSubHeader">Help others by sharing your feedback</p>
-        <p id="reviewFormSubHeaderText">What do you like about this product? Did it ship on time? Describe your experience with this step.</p>
+        <p className="reviewFormSubHeaderText">What do you like about this product? Did it ship on time? Describe your experience with this step.</p>
 
         <textarea
             type="text"
@@ -126,16 +126,38 @@ export default function CreateReview({spotId, sessionUser, existReview, reviewTy
             onChange={(e) => setReview(e.target.value)}
             />
 
+        <div className="reviewFormBotHeader">
+            <h3>Add a photo</h3>
+            <p>(optional)</p>
+        </div>
+        <p className="reviewFormSubHeaderText">Show your appreciation and inspire the community!</p>
 
+        <div id="reviewDisclaimerContainer">
+            <i className="fas fa-user-circle" id="profileImg"/>
 
-        <button
-        type="submit"
-        disabled={Object.values(errors).length > 0} //add validations
-        className={makeDisabled === false ? "reviewButtonDisabled" : "reviewButton"}
-        >
-            Submit Your Review
-           {/* {formType === "Create" ? 'Create Spot' : 'Update Spot'} */}
-        </button>
+            <div id="reviewDisclaimer">
+                <div className="reviewFormBotHeader">
+                    <p>Reviewed by</p>
+                    <h4>{sessionUser.first_name}</h4>
+                </div>
+
+                <p className="reviewFormSubHeaderText">Your review and profile information will be publicly displayed.</p>
+            </div>
+        </div>
+
+        <div id="reviewButtons">
+
+            <button id='cancelReview' onClick={closeModal}>Cancel</button>
+
+            <button
+            type="submit"
+            disabled={Object.values(errors).length > 0} //add validations
+            className={makeDisabled === false ? "reviewButtonDisabled" : "reviewButton"}
+            >
+                Post Your Review
+
+            </button>
+        </div>
 
     </form>
     </section>);

@@ -48,6 +48,7 @@ export default function ReviewCard ({rev}) {
                 <div id='deleteButton'>
                     <OpenModalMenuItem
                     buttonText="Delete"
+                    modalType='buttonDelete'
                     onItemClick={closeMenu}
                     modalComponent={<DeleteConfirm id={rev.id} deleteType='review'/>}
                     />

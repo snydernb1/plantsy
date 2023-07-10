@@ -210,6 +210,7 @@ export default function ListingDetails () {
                         <div id='createReview'>
                             <OpenModalButton
                             buttonText="Post Your Review"
+                            modalType='button'
                             onItemClick={closeMenu}
                             modalComponent={<CreateReview listingId={listing.id} sessionUser={sessionUser} listing={listing} listingImage={saveMainImg}/>}
                             />

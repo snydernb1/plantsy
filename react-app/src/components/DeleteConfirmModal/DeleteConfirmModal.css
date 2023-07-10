@@ -9,6 +9,7 @@
     padding: 4px 6px 4px 6px;
     border-radius: 5em;
     cursor: pointer;
+    color: white;
     width: 10em;
     height: 3em;
     white-space: nowrap;
@@ -19,7 +20,7 @@
     border: none;
     padding: 4px 6px 4px 6px;
     border-radius: 5em;
-    color: black;
+    color: white;
     cursor: pointer;
     width: 10em;
     height: 3em;

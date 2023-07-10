@@ -1,5 +1,41 @@
+#cancelReview {
+    border: none;
+    padding: 4px 6px 4px 6px;
+    color: black;
+    cursor: pointer;
+    background-color: white;
+    font-weight: 600;
+
+    height: 3em;
+    white-space: nowrap;
+}
+
+#profileImg {
+    font-size: 1.5em;
+    position: relative;
+    left: 5px;
+}
+
 #reviewButton {
     margin-top: .6;
+}
+
+#reviewButtons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+#reviewDisclaimerContainer {
+    display: flex;
+    gap: 1.5em;
+    align-items: center;
+    padding: 0 0 1em 0;
+}
+
+#reviewDisclaimer {
 }
 
 #reviewForm {
@@ -13,7 +49,11 @@
 #reviewFormHeader {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     align-self: start;
-    margin: 0 0 1em 0;
+    margin: .5em 0 1em 0;
+}
+
+#reviewFormListingName {
+    font-size: large;
 }
 
 #reviewFormImg {
@@ -29,13 +69,17 @@
     margin: 0 0 1em 0;
 }
 
+#reviewFormSubHeader {
+    margin: 0 0 .5em 0;
+}
+
 #reviewModal {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     padding: .75em 1em 1.5em 1em;
-    width: 20em;
+    width: 32em;
     background-color: white;
     border-radius: 1em;
 }
@@ -43,13 +87,16 @@
 #reviewProductInfo {
     display: flex;
     gap: .7em;
+
 }
 
 #reviewText {
     width: 100%;
     resize: none;
     height: 10em;
-    padding-left: 4px;
+    padding: 4px 4px 0 4px ;
+    margin: 0 0 1em 0;
+    border-radius: 5px;
 }
 
 #starDiv {
@@ -57,6 +104,7 @@
    justify-content: center;
    gap: .2em;
    padding: .6em 0 .6em 0;
+   cursor: pointer;
 }
 
 .filled {
@@ -73,26 +121,37 @@
 
 
 .reviewButton {
-    margin-top: .5em;
-    width: 95%;
-    background-color: rgba(255, 56, 96, 1);
-    border: 1px solid black;
-    box-shadow: 2px 2px 4px 1px grey;
-    height: 3em;
-    font-family: 'Urbanist', sans-serif;
-    align-self: center;
-    color: white;
+    background-color: rgb(144, 170, 135);
+    border: none;
+    padding: 4px 6px 4px 6px;
+    border-radius: 5em;
+    color: black;
     cursor: pointer;
+    width: 10em;
+    height: 3em;
+    white-space: nowrap;
 }
 
 .reviewButtonDisabled {
-    margin-top: .5em;
-    width: 95%;
-    background-color: rgba(187, 187, 187, 0.541);
-    border: 1px solid black;
-    box-shadow: 2px 2px 4px 1px grey;
+    background-color: rgb(187, 187, 187, 0.541);
+    border: none;
+    padding: 4px 6px 4px 6px;
+    border-radius: 5em;
+    color: black;
+    cursor: not-allowed !important;
+    width: 10em;
     height: 3em;
-    font-family: 'Urbanist', sans-serif;
-    align-self: center;
-    color: white;
+    white-space: nowrap;
+}
+
+.reviewFormBotHeader {
+    display: flex;
+    gap: .3em;
+    align-items: center;
+    margin: 0 0 .4em 0;
+}
+
+.reviewFormSubHeaderText {
+    margin: 0 0 1em 0;
+    font-size: small;
 }
