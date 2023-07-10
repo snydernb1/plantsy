@@ -1,21 +1,19 @@
 import { useDispatch } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import { useEffect, useState } from "react";
+import { createReviewThunk, editReviewThunk } from "../../../store/reviews";
 
-// import { fetchNewReview, fetchEditReview } from "../../../../store/reviews";
-
+import stockImg from '../../imgs/p.jpg'
 import './ReviewModal.css'
 
 
-export default function CreateReview({spotId, sessionUser, existReview, reviewType, spotName}) {
+export default function CreateReview({spotId, sessionUser, existReview, reviewType, spotName, listing, listingImage}) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
 
     const [review, setReview] = useState(existReview?.review || "");
     const [rating, setRating] = useState(existReview?.stars || 0);
     const [errors, setErrors] = useState({});
-
-
 
     useEffect(() => {
         const errors = {}
@@ -47,10 +45,10 @@ export default function CreateReview({spotId, sessionUser, existReview, reviewTy
 
 
         if (reviewType === "edit") {
-            const editedReview = await dispatch(fetchEditReview(reviewData))
+            const editedReview = await dispatch(editReviewThunk(reviewData))
             closeModal();
         } else {
-            const newReview = await dispatch(fetchNewReview(reviewData))
+            const newReview = await dispatch(createReviewThunk(reviewData))
             closeModal();
         }
 
@@ -71,7 +69,7 @@ export default function CreateReview({spotId, sessionUser, existReview, reviewTy
           <div key={num} className={`${rating >= num ? "filled" : "empty"}`}
             {...props}
             >
-              <i id="1" className="fa fa-star"></i>
+              <i id="1" className="fas fa-leaf"></i>
             </div>
         )
       }
@@ -84,23 +82,50 @@ export default function CreateReview({spotId, sessionUser, existReview, reviewTy
       }
 
 
-    return (<section id="reviewModal">
-    <h1 id="reviewHeader">How was your stay {existReview ? "at " + spotName : null}?</h1>
+    return (
+    <section id="reviewModal">
+
+    <h1 id="reviewFormHeader">Leave a Review {existReview ? "at " + spotName : null}?</h1>
+
+    <div>
+
+        <div id="reviewProductInfo">
+
+            <div id="reviewFormImgContainer">
+                <img
+                src={listingImage}
+                id="reviewFormImg"
+                onError={e => { e.currentTarget.src = stockImg; }}
+                />
+            </div>
+
+            <h4>{listing.name}</h4>
+
+        </div>
+
+    </div>
+
+
 
     <form onSubmit={handleSubmit} id='reviewForm'>
+
+        <h4>My review</h4>
+
+        <div id='starDiv'>
+            {[1,2,3,4,5].map((num)=>starRating(num))}
+        </div>
+
+        <p id="reviewFormSubHeader">Help others by sharing your feedback</p>
+        <p id="reviewFormSubHeaderText">What do you like about this product? Did it ship on time? Describe your experience with this step.</p>
 
         <textarea
             type="text"
             value={review}
-            placeholder="Leave your review here..."
+            placeholder="At least 30 characters"
             id='reviewText'
             onChange={(e) => setReview(e.target.value)}
             />
 
-        <div id='starDiv'>
-            {[1,2,3,4,5].map((num)=>starRating(num))}
-            <h4>Stars</h4>
-        </div>
 
 
         <button

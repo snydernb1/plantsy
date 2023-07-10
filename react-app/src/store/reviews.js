@@ -10,10 +10,17 @@ const allReviews = (reviews) => {
     };
 };
 
-const allReviews = (reviews) => {
+const editReview = (review) => {
     return {
-        type: ALL_REVIEWS,
-        reviews
+        type: EDIT_REVIEW,
+        review
+    };
+};
+
+const createReview = (review) => {
+    return {
+        type: CREATE_REVIEW,
+        review
     };
 };
 
@@ -24,6 +31,38 @@ export const fetchAllReviews = () => async (dispatch) => {
     if (response.ok) {
 		const reviews = await response.json();
 		dispatch(allReviews(reviews));
+		return null;
+	} else {
+		return ["An error occurred. Please try again."];
+	};
+};
+
+export const createReviewThunk = (data) => async (dispatch) => {
+    const response = await fetch('/api/reviews/', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    })
+
+    if (response.ok) {
+		const review = await response.json();
+		dispatch(createReview(review));
+		return null;
+	} else {
+		return ["An error occurred. Please try again."];
+	};
+};
+
+export const editReviewThunk = (data) => async (dispatch) => {
+    const response = await fetch(`/api/reviews/${data.id}`, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    })
+
+    if (response.ok) {
+		const review = await response.json();
+		dispatch(editReview(review));
 		return null;
 	} else {
 		return ["An error occurred. Please try again."];

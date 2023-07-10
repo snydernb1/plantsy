@@ -19,7 +19,7 @@ export default function ReviewCard ({rev}) {
   }
 
   let hasReview = false;
-  console.log(rev)
+
 
   if (rev.user_id === sessionUser?.id) hasReview = true
 

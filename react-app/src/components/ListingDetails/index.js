@@ -5,7 +5,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { addItemToCart } from "../../store/cart";
 
 import stockImg from '../imgs/p.jpg'
-import OpenModalMenuItem from '../OpenModalButton'
+import OpenModalButton from '../OpenModalButton'
 import img from '../ManageListings/imgs/empty.png'
 import ReviewCard from "./ReviewCard";
 import CreateReview from "./CreateReviewModal";
@@ -22,6 +22,7 @@ export default function ListingDetails () {
     const sessionUser = useSelector(state => state.session.user);
     const [errors, setErrors] = useState({})
     const [mainImg, setMainImg] = useState('loading')
+    const [saveMainImg, setSaveMainImg] = useState('loading')
     const [quantity, setQuantity] = useState(1)
     const [ranNum, setRanNum] = useState(0)
     const [submit, setSubmit] = useState(false)
@@ -53,6 +54,7 @@ export default function ListingDetails () {
 
     useEffect(()=> {
         setMainImg(prevImage)
+        setSaveMainImg(prevImage)
         setRanNum(Math.floor(Math.random() * 21))
         setSubmit(false)
     }, [])
@@ -137,7 +139,8 @@ export default function ListingDetails () {
 
     const priceClass = listing.discount > 0 ? 'slash' : 'noslash'
 
-    const hasReview = reviews.find((review) => review.userId === sessionUser?.id)
+
+    const hasReview = reviews.find((review) => review.user_id === sessionUser?.id)
 
     return (
         <section className="listingDetailContainer">
@@ -181,16 +184,18 @@ export default function ListingDetails () {
                         <h3 className="reviewCount">{reviews.length > 0 ?
                         reviews.length > 1 ? `${reviews.length} reviews` : `${reviews.length} review`
                         :
-                        'Be the first to leave a review'}</h3>
+                        'Be the first to leave a review!'}</h3>
 
                         {/* <div id="rating">
                             {reviews.length > 0 && <i className="fas fa-leaf" />}
                             <h3>{reviews.length > 0 ? `${rating()} /5.0`: null}</h3>
                         </div> */}
 
+                        { reviews.length > 0 &&
                         <div id='starDiv'>
                             {[1,2,3,4,5].map((num)=>starRating(num))}
                         </div>
+                        }
 
                     </div>
 
@@ -201,13 +206,13 @@ export default function ListingDetails () {
                     {/* =============================*/}
 
                     {
-                        sessionUser && sessionUser.id !== listing.ownerId && !hasReview &&
+                        sessionUser && sessionUser.id !== listing.owner_id && !hasReview &&
                         <div id='createReview'>
-                        <OpenModalMenuItem
-                        itemText="Post Your Review"
-                        onItemClick={closeMenu}
-                        modalComponent={<CreateReview listingId={listing.id} sessionUser={sessionUser}/>}
-                        />
+                            <OpenModalButton
+                            buttonText="Post Your Review"
+                            onItemClick={closeMenu}
+                            modalComponent={<CreateReview listingId={listing.id} sessionUser={sessionUser} listing={listing} listingImage={saveMainImg}/>}
+                            />
                         </div>
                     }
 
