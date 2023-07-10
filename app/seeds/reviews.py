@@ -4,25 +4,29 @@ from sqlalchemy.sql import text
 
 def seed_reviews():
     review_1 = Review(
-        review='Review text',
+        review='I absolutely love this kit!!! This is so cute and adorable!!! My succulent was pretty dry upon delivery (it was a very warm week) but with some TLC, it’s thriving!!! I can’t wait to order more!!!',
+        date='May 27, 2023',
         rating=4,
         user_id=3,
         listing_id=1
     )
     review_2 = Review(
-        review='Review text',
+        review='Perfection! Purchased for a gift and they were so happy with it! The kit and succulent sent were awesome. Instructions were curated so well. Love it!!',
+        date='Apr 3, 2023',
         rating=3,
         user_id=4,
         listing_id=1
     )
     review_3 = Review(
-        review='Review text',
+        review='Exactly as advertised and super cute. It has a hole in the bottom for water drainage. It came early.',
+        date='Mar 30, 2023',
         rating=2,
         user_id=5,
         listing_id=1
     )
     review_4 = Review(
-        review='Review text',
+        review='Love this pot so much!! Way more space than I imagined too (:',
+        date='Mar 2, 2023',
         rating=5,
         user_id=1,
         listing_id=3

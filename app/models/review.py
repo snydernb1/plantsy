@@ -11,6 +11,7 @@ class Review(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     review = db.Column(db.String, nullable=False)
+    date = db.Column(db.String, nullable=False)
     rating = db.Column(db.Float, nullable=False)
     # Foreign Keys
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
@@ -26,6 +27,7 @@ class Review(db.Model):
         return {
             'id': self.id,
             'review': self.review,
+            'date': self.date,
             'rating': self.rating,
             'user_id': self.user_id,
             'listing_id': self.listing_id,

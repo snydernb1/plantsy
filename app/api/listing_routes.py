@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
+from random import sample
 from app.models import Listing, db, ListingImages
 from app.forms.new_listing_form import NewListingForm
 from app.forms.new_listing_img_form import NewListingImgForm

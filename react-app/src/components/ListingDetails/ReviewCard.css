@@ -1,0 +1,25 @@
+.nameDate {
+    display: flex;
+    gap: 1em;
+}
+
+.nameDateSmaller {
+    font-size: medium;
+}
+
+.reviewCardContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-bottom: 2em;
+}
+
+.reviewTextLarge {
+    font-size: large;
+    width: 530px;
+}
+
+.reviewRating {
+    display: flex;
+    gap: .5em;
+}

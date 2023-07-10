@@ -43,9 +43,26 @@
 #reviewHeader {
     margin: 3em 0 2em 0;
     display: flex;
-    gap: 2em;
+    gap: 1.5em;
     align-items: center;
 }
+
+#reviewSubHeader {
+    margin-bottom: 3em;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(121, 121, 121, 0.411);
+}
+
+#reviewSubHeaderText {
+    font-size: large;
+}
+
+#starDiv {
+    display: flex;
+    justify-content: center;
+    gap: .5em;
+    padding: .6em 0 .6em 0;
+ }
 
 .backToListings {
     display: flex;
@@ -117,6 +134,21 @@
     flex-direction: column;
     gap: .5em;
 }
+
+.empty {
+    color: rgba(167, 167, 167, 0.541);
+    width: min-content;
+    height: min-content;
+    font-size: larger;
+}
+
+.filled {
+    color: rgb(99, 106, 72);
+    width: min-content;
+    height: min-content;
+    font-size: larger;
+}
+
 
 .imgContainer {
     display: flex;

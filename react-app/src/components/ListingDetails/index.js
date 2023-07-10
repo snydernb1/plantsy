@@ -40,7 +40,7 @@ export default function ListingDetails () {
         });
 
         let avg = sum / reviews.length
-        return avg.toFixed(1)
+        return Math.floor(avg)
     }
 
 
@@ -117,6 +117,18 @@ export default function ListingDetails () {
         };
     };
 
+    function starRating (num) {
+        const props = {};
+
+        return (
+          <div key={num} className={`${rating() >= num ? "filled" : "empty"}`}
+            {...props}
+            >
+              <i id="1" className="fas fa-leaf"></i>
+            </div>
+        )
+      }
+
 
     const priceClass = listing.discount > 0 ? 'slash' : 'noslash'
 
@@ -164,11 +176,20 @@ export default function ListingDetails () {
                         :
                         'Be the first to leave a review'}</h3>
 
-                        <div id="rating">
+                        {/* <div id="rating">
                             {reviews.length > 0 && <i className="fas fa-leaf" />}
                             <h3>{reviews.length > 0 ? `${rating()} /5.0`: null}</h3>
+                        </div> */}
+
+                        <div id='starDiv'>
+                            {[1,2,3,4,5].map((num)=>starRating(num))}
                         </div>
+
                     </div>
+
+                    {reviews.length > 0 && <div id="reviewSubHeader">
+                        <p id="reviewSubHeaderText">{reviews.length > 1 ? `Reviews for this item` : `Review for this item`}</p>
+                    </div>}
 
                     <div>
                         {reviews.map((rev) => (
