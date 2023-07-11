@@ -17,7 +17,10 @@ export default function ListingForm ({listing, formType}) {
     const [shipping, setShipping] = useState(listing?.free_shipping)
     const [wholediscount, setWholeDiscount] = useState(Number(listing?.discount) * 100)
     const [prevImg, setPrevImg] = useState("")
-    const [imgs, setImgs] = useState({})
+    const [imgs, setImgs] = useState([])
+
+    const [mainPreview, setMainPreview] = useState()
+    const [imgPreviews, setImgPreviews] = useState([])
 
     const [submit, setSubmit] = useState(false)
 
@@ -25,8 +28,36 @@ export default function ListingForm ({listing, formType}) {
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
 
-    console.log('this is what prev looks like', prevImg)
-    console.log('this is what imgs looks like', imgs)
+    console.log('this should be a url', mainPreview)
+
+
+    useEffect(() => {
+        if (!prevImg) {
+            setMainPreview(undefined)
+            return
+        }
+
+        const mainUrl = URL.createObjectURL(prevImg)
+        setMainPreview(mainUrl)
+
+        return () => URL.revokeObjectURL(mainUrl)
+    }, [prevImg])
+
+    useEffect(() => {
+        if (imgs.length === 0) {
+            setImgPreviews([])
+            return
+        }
+
+        imgs.forEach((img) => {
+            const imgUrl = URL.createObjectURL(img)
+            setImgPreviews([...imgPreviews, imgUrl])
+        })
+
+        return () => imgPreviews.forEach((img) => URL.revokeObjectURL(img))
+    }, [imgs])
+
+
 
     //====Checking for Errors=======================================
     useEffect(() => {
@@ -102,23 +133,24 @@ export default function ListingForm ({listing, formType}) {
                 await dispatch(createNewListingImg(formDataPrev))
 
                 // const images = Object.values(imgs)
-                // for (let img of images) {
-                //     if (img.url.length > 0) {
-                //         // const newImg = {
-                //         //     listing_id: newListing.id,
-                //         //     image_url: img.url,
-                //         //     preview: false
-                //         // } ==> No longer needed due to AWS
-                //         const formDataImg = new FormData()
+                for (let img of imgs) {
+                    console.log('this is img in the loop',img)
+                    if (img.name.length > 0) {
+                        // const newImg = {
+                        //     listing_id: newListing.id,
+                        //     image_url: img.url,
+                        //     preview: false
+                        // } ==> No longer needed due to AWS
+                        const formDataImg = new FormData()
 
-                //         formDataImg.append('listing_id', newListing.id)
-                //         formDataImg.append('image', image) // Might need to change how we are saving imgs in state
-                //         formDataImg.append('preview', false)
+                        formDataImg.append('listing_id', newListing.id)
+                        formDataImg.append('image', img) // Might need to change how we are saving imgs in state
+                        formDataImg.append('preview', false)
 
 
-                //         await dispatch(createNewListingImg(formDataImg))
-                //     }
-                // }
+                        await dispatch(createNewListingImg(formDataImg))
+                    }
+                }
 
                 history.push(`/listings/${newListing.id}`)
 
@@ -300,6 +332,7 @@ export default function ListingForm ({listing, formType}) {
                     className='listingFormInput'
                     onChange={(e) => setPrevImg(e.target.files[0])}
                     />
+                    {prevImg && <img src={mainPreview}/>}
 
                     <input
                     type="file"
@@ -307,8 +340,10 @@ export default function ListingForm ({listing, formType}) {
                     // value={imgs[2]?.url} ==> No longer needed due to AWS
 
                     className='listingFormInput'
-                    onChange={(e) => setImgs({...imgs, 2: {url: e.target.files[1]}})}
+                    // onChange={(e) => setImgs({...imgs, 2: {url: e.target.files[0]}})}
+                    onChange={(e) => setImgs([...imgs, e.target.files[0]])}
                     />
+                    {imgPreviews.length > 0 && <img src={imgPreviews[0]}/>}
 
                     <input
                     type="file"
@@ -316,8 +351,9 @@ export default function ListingForm ({listing, formType}) {
                     // value={imgs[3]?.url} ==> No longer needed due to AWS
 
                     className='listingFormInput'
-                    onChange={(e) => setImgs({...imgs, 3: {url: e.target.files[2]}})}
+                    onChange={(e) => setImgs([...imgs, e.target.files[0]])}
                     />
+                    {imgPreviews.length > 0 && <img src={imgPreviews[1]}/>}
 
                     <input
                     type="file"
@@ -325,8 +361,9 @@ export default function ListingForm ({listing, formType}) {
                     // value={imgs[4]?.url} ==> No longer needed due to AWS
 
                     className='listingFormInput'
-                    onChange={(e) => setImgs({...imgs, 4: {url: e.target.files[3]}})}
+                    onChange={(e) => setImgs([...imgs, e.target.files[0]])}
                     />
+                    {imgPreviews.length > 0 && <img src={imgPreviews[2]}/>}
 
                     <input
                     type="file"
@@ -335,8 +372,9 @@ export default function ListingForm ({listing, formType}) {
 
                     className='listingFormInput'
                     id='lasturlInput'
-                    onChange={(e) => setImgs({...imgs, 5: {url: e.target.files[4]}})}
+                    onChange={(e) => setImgs([...imgs, e.target.files[0]])}
                     />
+                    {imgPreviews.length > 0 && <img src={imgPreviews[3]}/>}
 
                     {submit && errors.prevImg && (
                         <div className="createListingErrors">* {errors.prevImg}</div>
