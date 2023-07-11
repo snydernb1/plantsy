@@ -25,7 +25,8 @@ export default function ListingForm ({listing, formType}) {
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
 
-    console.log(price)
+    console.log('this is what prev looks like', prevImg)
+    console.log('this is what imgs looks like', imgs)
 
     //====Checking for Errors=======================================
     useEffect(() => {
@@ -41,14 +42,14 @@ export default function ListingForm ({listing, formType}) {
 
         if (description.length < 30) errors.description = "Please add a description of at least 30 characters"
         if (formType === "create") {
-            if (!prevImg.length ) errors.prevImg = "Please provide a preview image"
+            // if (!prevImg.length ) errors.prevImg = "Please provide a preview image"
 
-        if (prevImg.length === 0 || prevImg.endsWith('.png') || prevImg.endsWith('.jpg') ||prevImg.endsWith('.jpeg') || prevImg.startsWith('http://') || prevImg.startsWith('https://')) {} else{errors.image = 'Image URL must end in .png, .jpg, or .jpeg and start with "http://" or "https://"'}
+        // if (prevImg.length === 0 || prevImg.endsWith('.png') || prevImg.endsWith('.jpg') ||prevImg.endsWith('.jpeg') || prevImg.startsWith('http://') || prevImg.startsWith('https://')) {} else{errors.image = 'Image URL must end in .png, .jpg, or .jpeg and start with "http://" or "https://"'}
 
-            const images = Object.values(imgs) // this might mess up img order, can revisit later
-            for (let image of images) {
-                if (image.url.length === 0 || image.url.endsWith('.png') || image.url.endsWith('.jpg') || image.url.endsWith('.jpeg') || prevImg.startsWith('http://') || prevImg.startsWith('https://')) {} else{errors.image = 'Image URL must end in .png, .jpg, or .jpeg and start with "http://" or "https://"'}
-            }
+            // const images = Object.values(imgs) // this might mess up img order, can revisit later
+            // for (let image of images) {
+            //     if (image.url.length === 0 || image.url.endsWith('.png') || image.url.endsWith('.jpg') || image.url.endsWith('.jpeg') || prevImg.startsWith('http://') || prevImg.startsWith('https://')) {} else{errors.image = 'Image URL must end in .png, .jpg, or .jpeg and start with "http://" or "https://"'}
+            // }
         }
         setErrors(errors)
       }, [description, name, price, prevImg, imgs, shipping, wholediscount])
@@ -81,26 +82,48 @@ export default function ListingForm ({listing, formType}) {
             if (formType === 'create') {
                 const newListing = await dispatch(createNewListing(listingData))
 
-                const preview = {
-                    listing_id: newListing.id,
-                    image_url: prevImg,
-                    preview: true
-                }
-                await dispatch(createNewListingImg(preview))
 
-                const images = Object.values(imgs)
-                for (let img of images) {
-                    if (img.url.length > 0) {
-                        const newImg = {
-                            listing_id: newListing.id,
-                            image_url: img.url,
-                            preview: false
-                        }
-                        await dispatch(createNewListingImg(newImg))
-                    }
-                }
+                // AWS Section
+
+                const formDataPrev = new FormData()
+
+                formDataPrev.append('listing_id', newListing.id)
+                formDataPrev.append('image', prevImg)
+                formDataPrev.append('preview', true)
+
+                // AWS Section End
+
+                // const preview = {
+                //     listing_id: newListing.id,
+                //     image_url: prevImg,
+                //     preview: true
+                // } ==> No longer needed due to AWS
+
+                await dispatch(createNewListingImg(formDataPrev))
+
+                // const images = Object.values(imgs)
+                // for (let img of images) {
+                //     if (img.url.length > 0) {
+                //         // const newImg = {
+                //         //     listing_id: newListing.id,
+                //         //     image_url: img.url,
+                //         //     preview: false
+                //         // } ==> No longer needed due to AWS
+                //         const formDataImg = new FormData()
+
+                //         formDataImg.append('listing_id', newListing.id)
+                //         formDataImg.append('image', image) // Might need to change how we are saving imgs in state
+                //         formDataImg.append('preview', false)
+
+
+                //         await dispatch(createNewListingImg(formDataImg))
+                //     }
+                // }
 
                 history.push(`/listings/${newListing.id}`)
+
+
+
 
             } else if (formType === 'update') {
                 const editedListing = await dispatch(putListing(listingData))
@@ -134,7 +157,7 @@ export default function ListingForm ({listing, formType}) {
             }
             <p>Tell the world all about your item and why they'll love it.</p>
 
-            <form onSubmit={handleSubmit} className="listingFormBody">
+            <form onSubmit={handleSubmit} className="listingFormBody" encType='multipart/form-data'>
 
                 <section className="formSection">
                     <div className="inputTitle">
@@ -270,44 +293,49 @@ export default function ListingForm ({listing, formType}) {
 
                     <div className='listingInputDiv'></div>
                     <input
-                    type="text"
-                    value={prevImg}
+                    type="file"
+                    accept='image/*'
+                    // value={prevImg} ==> No longer needed due to AWS
                     placeholder="Example: https://a0.muscache.com/737b978b2b6a.jpg"
                     className='listingFormInput'
-                    onChange={(e) => setPrevImg(e.target.value)}
+                    onChange={(e) => setPrevImg(e.target.files[0])}
                     />
 
                     <input
-                    type="text"
-                    value={imgs[2]?.url}
+                    type="file"
+                    accept='image/*'
+                    // value={imgs[2]?.url} ==> No longer needed due to AWS
 
                     className='listingFormInput'
-                    onChange={(e) => setImgs({...imgs, 2: {url: e.target.value}})}
+                    onChange={(e) => setImgs({...imgs, 2: {url: e.target.files[1]}})}
                     />
 
                     <input
-                    type="text"
-                    value={imgs[3]?.url}
+                    type="file"
+                    accept='image/*'
+                    // value={imgs[3]?.url} ==> No longer needed due to AWS
 
                     className='listingFormInput'
-                    onChange={(e) => setImgs({...imgs, 3: {url: e.target.value}})}
+                    onChange={(e) => setImgs({...imgs, 3: {url: e.target.files[2]}})}
                     />
 
                     <input
-                    type="text"
-                    value={imgs[4]?.url}
+                    type="file"
+                    accept='image/*'
+                    // value={imgs[4]?.url} ==> No longer needed due to AWS
 
                     className='listingFormInput'
-                    onChange={(e) => setImgs({...imgs, 4: {url: e.target.value}})}
+                    onChange={(e) => setImgs({...imgs, 4: {url: e.target.files[3]}})}
                     />
 
                     <input
-                    type="text"
-                    value={imgs[5]?.url}
+                    type="file"
+                    accept='image/*'
+                    // value={imgs[5]?.url} ==> No longer needed due to AWS
 
                     className='listingFormInput'
                     id='lasturlInput'
-                    onChange={(e) => setImgs({...imgs, 5: {url: e.target.value}})}
+                    onChange={(e) => setImgs({...imgs, 5: {url: e.target.files[4]}})}
                     />
 
                     {submit && errors.prevImg && (

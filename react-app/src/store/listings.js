@@ -99,8 +99,8 @@ export const delListing = (id) => async (dispatch) => {
 export const createNewListingImg = (data) => async (dispatch) => {
     const response = await fetch('/api/listings/imgs', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(data)
+        // headers: {'Content-Type': 'application/json'}, ==> No longer needed due to AWS
+        body: data
     });
 
     if (response.ok) {

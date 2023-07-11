@@ -105,7 +105,8 @@ def create_listing_img():
     '''
     Adds a new listing image to the db
     '''
-    data = request.get_json()
+
+    # data = request.get_json() ==> This was messing things up
 
     form = NewListingImgForm()
     form['csrf_token'].data = request.cookies['csrf_token'] # Boilerplate code
@@ -133,3 +134,19 @@ def create_listing_img():
 
     if form.errors:
         return form.errors, 400
+
+
+@listing_routes.route('/imgs/<int:id>')
+@login_required
+def delete_listing_img(id):
+    img = ListingImages.query.get(id)
+
+    file_delete = remove_file_from_s3(img.image_url) #.image_url could be wrong?
+
+    if file_delete:
+        db.session.delete(img)
+        db.session.commit()
+        return {"Message": "Successfully Deleted"}
+
+    else:
+        return "img delete error" #Fix later with react
