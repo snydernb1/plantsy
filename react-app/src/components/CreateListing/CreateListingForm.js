@@ -34,14 +34,25 @@ export default function ListingForm ({listing, formType}) {
 
     const [submit, setSubmit] = useState(false)
 
+
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
 
-    console.log('this should be a url', mainPreview)
-
     const handlePrevImg = () => {
         setPrevImg(null)
+    }
+    const handleImgTwo = () => {
+        setImgTwo(null)
+    }
+    const handleImgThree = () => {
+        setImgThree(null)
+    }
+    const handleImgFour = () => {
+        setImgFour(null)
+    }
+    const handleImgFive = () => {
+        setImgFive(null)
     }
 
 
@@ -166,11 +177,56 @@ export default function ListingForm ({listing, formType}) {
 
                 // AWS Section
 
-                const formDataPrev = new FormData()
+                if (prevImg) {
+                    const formDataPrev = new FormData()
 
-                formDataPrev.append('listing_id', newListing.id)
-                formDataPrev.append('image', prevImg)
-                formDataPrev.append('preview', true)
+                    formDataPrev.append('listing_id', newListing.id)
+                    formDataPrev.append('image', prevImg)
+                    formDataPrev.append('preview', true)
+
+                    await dispatch(createNewListingImg(formDataPrev))
+                }
+
+                if (imgTwo) {
+                    const formDataPrev = new FormData()
+
+                    formDataPrev.append('listing_id', newListing.id)
+                    formDataPrev.append('image', imgTwo)
+                    formDataPrev.append('preview', false)
+
+                    await dispatch(createNewListingImg(formDataPrev))
+                }
+
+                if (imgThree) {
+                    const formDataPrev = new FormData()
+
+                    formDataPrev.append('listing_id', newListing.id)
+                    formDataPrev.append('image', imgThree)
+                    formDataPrev.append('preview', false)
+
+                    await dispatch(createNewListingImg(formDataPrev))
+                }
+
+                if (imgFour) {
+                    const formDataPrev = new FormData()
+
+                    formDataPrev.append('listing_id', newListing.id)
+                    formDataPrev.append('image', imgFour)
+                    formDataPrev.append('preview', false)
+
+                    await dispatch(createNewListingImg(formDataPrev))
+                }
+
+                if (imgFive) {
+                    const formDataPrev = new FormData()
+
+                    formDataPrev.append('listing_id', newListing.id)
+                    formDataPrev.append('image', imgFive)
+                    formDataPrev.append('preview', false)
+
+                    await dispatch(createNewListingImg(formDataPrev))
+                }
+
 
                 // AWS Section End
 
@@ -180,7 +236,6 @@ export default function ListingForm ({listing, formType}) {
                 //     preview: true
                 // } ==> No longer needed due to AWS
 
-                await dispatch(createNewListingImg(formDataPrev))
 
                 // const images = Object.values(imgs)
                 // for (let img of imgs) {
@@ -214,11 +269,6 @@ export default function ListingForm ({listing, formType}) {
         }
 
     }
-
-    useEffect(()=> {
-        setSubmit(false)
-      }, [])
-
 
     let makeDisabled = false;
 
@@ -366,7 +416,7 @@ export default function ListingForm ({listing, formType}) {
 
             {formType === 'create' &&
             <section className="formSection">
-                        <div className="inputTitle">
+                        <div className="inputTitle" id="photoHeader">
                             <h4>Photos*</h4>
                             <p>Add at least one photo. Use all five photos to show off your item's finest features.</p>
                         </div>
@@ -378,7 +428,10 @@ export default function ListingForm ({listing, formType}) {
                     { !prevImg ?
                     <div id='inputMainContainer'>
 
-                        <p className="inputMainImgText">Drag & Drop to Upload File</p>
+                        <div className="textDiv">
+                            <p className="inputMainImgText">Drag & Drop to Upload File</p>
+                            <p className="browse">Browse</p>
+                        </div>
                         <input
                         type="file"
                         accept='image/*'
@@ -400,55 +453,99 @@ export default function ListingForm ({listing, formType}) {
 
                     <div className="inputRightContainer">
 
-                        <div className="inputSubContainer">
-                            <input
-                            type="file"
-                            accept='image/*'
-                            // value={imgs[2]?.url} ==> No longer needed due to AWS
+                        { !imgTwo ?
+                            <div className="inputSubContainer">
+                                <div className="textSubDiv">
+                                    <p className="inputSubImgText">Drag & Drop to Upload File</p>
+                                    <p className="browse">Browse</p>
+                                </div>
+                                <input
+                                type="file"
+                                accept='image/*'
+                                // value={imgs[2]?.url} ==> No longer needed due to AWS
 
-                            className='inputSubImg'
-                            // onChange={(e) => setImgs({...imgs, 2: {url: e.target.files[0]}})} ==> From url img handling, for reference
-                            onChange={(e) => setImgTwo(e.target.files[0])}
-                            />
-                            {imgTwo && <img src={imgTwoPreview}/>}
-                        </div>
+                                className='inputSubImg'
+                                // onChange={(e) => setImgs({...imgs, 2: {url: e.target.files[0]}})} ==> From url img handling, for reference
+                                onChange={(e) => setImgTwo(e.target.files[0])}
+                                />
+                            </div>
+                        :
+                            <div className="inputSubContainerPost">
+                                <button className='removeImgButton' onClick={handleImgTwo}>X</button>
+                                <img src={imgTwoPreview}/>
+                            </div>
+                        }
 
-                        <div className="inputSubContainer">
-                            <input
-                            type="file"
-                            accept='image/*'
-                            // value={imgs[3]?.url} ==> No longer needed due to AWS
+                        { !imgThree ?
+                            <div className="inputSubContainer">
+                                <div className="textSubDiv">
+                                    <p className="inputSubImgText">Drag & Drop to Upload File</p>
+                                    <p className="browse">Browse</p>
+                                </div>
+                                <input
+                                type="file"
+                                accept='image/*'
+                                // value={imgs[2]?.url} ==> No longer needed due to AWS
 
-                            className='inputSubImg'
-                            onChange={(e) => setImgThree(e.target.files[0])}
-                            />
-                            {imgThree && <img src={imgThreePreview}/>}
-                        </div>
+                                className='inputSubImg'
+                                // onChange={(e) => setImgs({...imgs, 2: {url: e.target.files[0]}})} ==> From url img handling, for reference
+                                onChange={(e) => setImgThree(e.target.files[0])}
+                                />
+                            </div>
+                        :
+                            <div className="inputSubContainerPost">
+                                <button className='removeImgButton' onClick={handleImgThree}>X</button>
+                                <img src={imgThreePreview}/>
+                            </div>
+                        }
 
-                        <div className="inputSubContainer">
-                            <input
-                            type="file"
-                            accept='image/*'
-                            // value={imgs[4]?.url} ==> No longer needed due to AWS
+                        { !imgFour ?
+                            <div className="inputSubContainer">
+                                <div className="textSubDiv">
+                                    <p className="inputSubImgText">Drag & Drop to Upload File</p>
+                                    <p className="browse">Browse</p>
+                                </div>
+                                <input
+                                type="file"
+                                accept='image/*'
+                                // value={imgs[2]?.url} ==> No longer needed due to AWS
 
-                            className='inputSubImg'
-                            onChange={(e) => setImgFour(e.target.files[0])}
-                            />
-                            {imgFour && <img src={imgFourPreview}/>}
-                        </div>
+                                className='inputSubImg'
+                                // onChange={(e) => setImgs({...imgs, 2: {url: e.target.files[0]}})} ==> From url img handling, for reference
+                                onChange={(e) => setImgFour(e.target.files[0])}
+                                />
+                            </div>
+                        :
+                            <div className="inputSubContainerPost">
+                                <button className='removeImgButton' onClick={handleImgFour}>X</button>
+                                <img src={imgFourPreview}/>
+                            </div>
+                        }
 
-                        <div className="inputSubContainer">
-                            <input
-                            type="file"
-                            accept='image/*'
-                            // value={imgs[5]?.url} ==> No longer needed due to AWS
+                        { !imgFive ?
+                            <div className="inputSubContainer">
+                                <div className="textSubDiv">
+                                    <p className="inputSubImgText">Drag & Drop to Upload File</p>
+                                    <p className="browse">Browse</p>
+                                </div>
+                                <input
+                                type="file"
+                                accept='image/*'
+                                // value={imgs[2]?.url} ==> No longer needed due to AWS
 
-                            className='inputSubImg'
-                            id='lasturlInput'
-                            onChange={(e) => setImgFive(e.target.files[0])}
-                            />
-                            {imgFive && <img src={imgFivePreview}/>}
-                        </div>
+                                className='inputSubImg'
+                                // onChange={(e) => setImgs({...imgs, 2: {url: e.target.files[0]}})} ==> From url img handling, for reference
+                                onChange={(e) => setImgFive(e.target.files[0])}
+                                />
+                            </div>
+                        :
+                            <div className="inputSubContainerPost">
+                                <button className='removeImgButton' onClick={handleImgFive}>X</button>
+                                <img src={imgFivePreview}/>
+                            </div>
+                        }
+
+
 
                     </div>
 
@@ -477,6 +574,15 @@ export default function ListingForm ({listing, formType}) {
             </div>
 
             </form>
+
+            {submit &&
+            <div className="loadingContainer">
+                <h2>Thanks for making a post!</h2>
+                <p>You will be redirected to your listing in a moment.</p>
+                <i class="fa-solid fa-circle-notch"></i>
+            </div>
+            }
+
         </section>
     );
 };

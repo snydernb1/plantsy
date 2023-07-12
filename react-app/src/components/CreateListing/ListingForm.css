@@ -8,6 +8,10 @@ input::-webkit-inner-spin-button {
     justify-content: center;
 }
 
+#photoHeader {
+    /* margin-right: em; */
+}
+
 #listingFormTextArea {
     height: 19em;
     resize: none;
@@ -18,9 +22,38 @@ input::-webkit-inner-spin-button {
     margin-bottom: 1em;
 }
 
+.browse {
+    /* border: 1px solid grey; */
+    background-color: rgb(144, 170, 135);
+    color: white;
+    border-radius: 3em;
+    padding: 3px 15px 3px 15px;
+    cursor: pointer;
+}
+
 .createListingErrors {
     color: rgb(249, 102, 69);
 }
+
+.fa-circle-notch {
+    font-size: xx-large;
+    animation-name: rotate;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-duration: 1500ms;
+    color: rgb(144, 170, 135);
+}
+
+@keyframes rotate {
+    from {
+       transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 
 .formSection {
     display: flex;
@@ -49,9 +82,8 @@ input::-webkit-inner-spin-button {
 }
 
 .inputMainImg {
-    opacity: 0;
     cursor: pointer;
-    background-color: blue;
+    opacity: 0;
     position: relative;
     z-index: 2;
     height: 27em;
@@ -60,28 +92,56 @@ input::-webkit-inner-spin-button {
 }
 
 .inputMainImgText {
-    position: absolute;
-    /* z-index: 3; */
-    /* bottom: 10px; */
-    /* top: 5px; */
+    /* position: absolute; */
+    font-size: small;
+    color: rgba(128, 128, 128, 0.863);
+    font-weight: 600;
 }
 
 .inputSubContainer {
-    border: 3px solid red;
+    border: 1.5px dashed gray;
+    border-radius: 5px;
     width: 10.5em;
-    height: 10.5em;
+    height: 10.7em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputSubContainerPost {
+    border: 1.5px dashed gray;
+    border-radius: 5px;
+    width: 10.5em;
+    height: 10.7em;
+    display: flex;
+    justify-content: end;
+    align-items: start;
+}
+
+.inputSubImg {
+    opacity: 0;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    height: 12.9em;
+    width: 12.9em;
+    border-radius: 5px;
+}
+
+.inputSubImgText {
+    font-size: small;
+    color: rgba(128, 128, 128, 0.863);
+    font-weight: 600;
+    width: 7em;
+    text-align: center;
 }
 
 .inputRightContainer {
-    border: 2px blue solid;
+    /* border: 2px blue solid; */
     width: 22.3em;
     gap: 1em;
     display: flex;
     flex-wrap: wrap;
-}
-
-.inputSubImg {
-
 }
 
 .inputTitle {
@@ -141,6 +201,23 @@ input::-webkit-inner-spin-button {
     width: 100%;
 }
 
+.loadingContainer {
+    width: 30em;
+    height: 20em;
+    top: 15em;
+    background-color: white;
+    box-shadow: 0px 0px 10px 5px rgba(46, 43, 28, 0.2);
+    border-radius: 5px;
+    position: fixed;
+    z-index: 15;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+
 .removeImgButton {
     position: absolute;
     z-index: 2;
@@ -149,9 +226,15 @@ input::-webkit-inner-spin-button {
     width: 2em;
     padding: 5px;
     background-color: white;
-    border: none;
+    border: .2px solid grey;
     border-radius: 8em;
     cursor: pointer;
+    font-weight: 700;
+}
+
+.removeImgButton:hover {
+    background-color: rgb(212, 104, 68);
+    border: none;
 }
 
 .submitListing {
@@ -172,4 +255,22 @@ input::-webkit-inner-spin-button {
     color: white;
     margin: .5em 0 1.5em 0;
     cursor: not-allowed;
+}
+
+.textDiv {
+    height: 10em;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.textSubDiv {
+    height: 6.5em;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
