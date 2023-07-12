@@ -10,6 +10,9 @@ import './ListingForm.css'
 
 export default function ListingForm ({listing, formType}) {
     const [errors, setErrors] = useState({})
+    console.log('formType', formType)
+    console.log('listing', listing)
+
 
     const [name, setName] = useState(listing?.name)
     const [description, setDescription] = useState(listing?.description)
@@ -23,11 +26,18 @@ export default function ListingForm ({listing, formType}) {
     const [imgFour, setImgFour] = useState()
     const [imgFive, setImgFive] = useState()
 
-    const [mainPreview, setMainPreview] = useState(undefined)
-    const [imgTwoPreview, setImgTwoPreview] = useState(undefined)
-    const [imgThreePreview, setImgThreePreview] = useState(undefined)
-    const [imgFourPreview, setImgFourPreview] = useState(undefined)
-    const [imgFivePreview, setImgFivePreview] = useState(undefined)
+    const [mainPreview, setMainPreview] = useState(formType === 'update' ? listing?.imgs[0]?.img_url : undefined)
+    const [imgTwoPreview, setImgTwoPreview] = useState(formType === 'update' ? listing?.imgs[1]?.img_url : undefined)
+    const [imgThreePreview, setImgThreePreview] = useState(formType === 'update' ? listing?.imgs[2]?.img_url : undefined)
+    const [imgFourPreview, setImgFourPreview] = useState(formType === 'update' ? listing?.imgs[3]?.img_url : undefined)
+    const [imgFivePreview, setImgFivePreview] = useState(formType === 'update' ? listing?.imgs[4]?.img_url : undefined)
+
+    // These are to store the incoming post to be updated urls. They will be compared below to determine if url should be deleted from db or just removed from the preview above
+    const [existingMainPreview, setExistingMainPreview] = useState(formType === 'update' ? listing?.imgs[0]?.img_url : undefined)
+    const [existingImgTwoPreview, setExistingImgTwoPreview] = useState(formType === 'update' ? listing?.imgs[1]?.img_url : undefined)
+    const [existingImgThreePreview, setExistingImgThreePreview] = useState(formType === 'update' ? listing?.imgs[2]?.img_url : undefined)
+    const [existingImgFourPreview, setExistingImgFourPreview] = useState(formType === 'update' ? listing?.imgs[3]?.img_url : undefined)
+    const [existingImgFivePreview, setExistingImgFivePreview] = useState(formType === 'update' ? listing?.imgs[4]?.img_url : undefined)
 
 
     // const [imgPreviews, setImgPreviews] = useState([]) ==> From url img handling
@@ -39,20 +49,21 @@ export default function ListingForm ({listing, formType}) {
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
 
-    const handlePrevImg = () => {
-        setPrevImg(null)
+    const handlePrevImg = async () => {
+        if (existingMainPreview !== mainPreview) setPrevImg(null)
+        // Store update img urls, if old url doesn't match new url delete else set null
     }
-    const handleImgTwo = () => {
-        setImgTwo(null)
+    const handleImgTwo = async () => {
+        if (existingMainPreview !== mainPreview) setImgTwo(null)
     }
-    const handleImgThree = () => {
-        setImgThree(null)
+    const handleImgThree = async () => {
+        if (existingMainPreview !== mainPreview) setImgThree(null)
     }
-    const handleImgFour = () => {
-        setImgFour(null)
+    const handleImgFour = async () => {
+        if (existingMainPreview !== mainPreview) setImgFour(null)
     }
-    const handleImgFive = () => {
-        setImgFive(null)
+    const handleImgFive = async () => {
+        if (existingMainPreview !== mainPreview) setImgFive(null)
     }
 
 
@@ -64,35 +75,35 @@ export default function ListingForm ({listing, formType}) {
         let imgFiveUrl;
 
         if (!prevImg) {
-            setMainPreview(undefined)
+            if (formType !== 'update') setMainPreview(undefined)
         } else {
             mainUrl = URL.createObjectURL(prevImg)
             setMainPreview(mainUrl)
         }
 
         if (!imgTwo) {
-            setImgTwoPreview(undefined)
+            if (formType !== 'update') setImgTwoPreview(undefined)
         } else {
             imgTwoUrl = URL.createObjectURL(imgTwo)
             setImgTwoPreview(imgTwoUrl)
         }
 
         if (!imgThree) {
-            setImgThreePreview(undefined)
+            if (formType !== 'update') setImgThreePreview(undefined)
         } else {
             imgThreeUrl = URL.createObjectURL(imgThree)
             setImgThreePreview(imgThreeUrl)
         }
 
         if (!imgFour) {
-            setImgFourPreview(undefined)
+            if (formType !== 'update') setImgFourPreview(undefined)
         } else {
             imgFourUrl = URL.createObjectURL(imgFour)
             setImgFourPreview(imgFourUrl)
         }
 
         if (!imgFive) {
-            setImgFivePreview(undefined)
+            if (formType !== 'update') setImgFivePreview(undefined)
         } else {
             imgFiveUrl = URL.createObjectURL(imgFive)
             setImgFivePreview(imgFiveUrl)
@@ -414,7 +425,7 @@ export default function ListingForm ({listing, formType}) {
 
             </section>
 
-            {formType === 'create' &&
+
             <section className="formSection">
                         <div className="inputTitle" id="photoHeader">
                             <h4>Photos*</h4>
@@ -425,7 +436,7 @@ export default function ListingForm ({listing, formType}) {
                 <div className="listingFormUrls">
 
 
-                    { !prevImg ?
+                    { !prevImg && mainPreview === undefined ?
                     <div id='inputMainContainer'>
 
                         <div className="textDiv">
@@ -444,7 +455,7 @@ export default function ListingForm ({listing, formType}) {
                     </div>
                     :
                     <div id='inputMainContainerPost'>
-                        <button className='removeImgButton' onClick={handlePrevImg}>X</button>
+                        <button className='removeImgButton' onClick={handlePrevImg} type='button'>X</button>
                         <img src={mainPreview}/>
                     </div>
 
@@ -453,7 +464,7 @@ export default function ListingForm ({listing, formType}) {
 
                     <div className="inputRightContainer">
 
-                        { !imgTwo ?
+                        { !imgTwo && imgTwoPreview === undefined ?
                             <div className="inputSubContainer">
                                 <div className="textSubDiv">
                                     <p className="inputSubImgText">Drag & Drop to Upload File</p>
@@ -471,12 +482,12 @@ export default function ListingForm ({listing, formType}) {
                             </div>
                         :
                             <div className="inputSubContainerPost">
-                                <button className='removeImgButton' onClick={handleImgTwo}>X</button>
+                                <button className='removeImgButton' onClick={handleImgTwo} type='button'>X</button>
                                 <img src={imgTwoPreview}/>
                             </div>
                         }
 
-                        { !imgThree ?
+                        { !imgThree && imgThreePreview === undefined ?
                             <div className="inputSubContainer">
                                 <div className="textSubDiv">
                                     <p className="inputSubImgText">Drag & Drop to Upload File</p>
@@ -494,12 +505,12 @@ export default function ListingForm ({listing, formType}) {
                             </div>
                         :
                             <div className="inputSubContainerPost">
-                                <button className='removeImgButton' onClick={handleImgThree}>X</button>
+                                <button className='removeImgButton' onClick={handleImgThree} type='button'>X</button>
                                 <img src={imgThreePreview}/>
                             </div>
                         }
 
-                        { !imgFour ?
+                        { !imgFour && imgFourPreview === undefined ?
                             <div className="inputSubContainer">
                                 <div className="textSubDiv">
                                     <p className="inputSubImgText">Drag & Drop to Upload File</p>
@@ -517,12 +528,12 @@ export default function ListingForm ({listing, formType}) {
                             </div>
                         :
                             <div className="inputSubContainerPost">
-                                <button className='removeImgButton' onClick={handleImgFour}>X</button>
+                                <button className='removeImgButton' onClick={handleImgFour} type='button'>X</button>
                                 <img src={imgFourPreview}/>
                             </div>
                         }
 
-                        { !imgFive ?
+                        { !imgFive && imgFivePreview === undefined ?
                             <div className="inputSubContainer">
                                 <div className="textSubDiv">
                                     <p className="inputSubImgText">Drag & Drop to Upload File</p>
@@ -540,7 +551,7 @@ export default function ListingForm ({listing, formType}) {
                             </div>
                         :
                             <div className="inputSubContainerPost">
-                                <button className='removeImgButton' onClick={handleImgFive}>X</button>
+                                <button className='removeImgButton' onClick={handleImgFive} type='button'>X</button>
                                 <img src={imgFivePreview}/>
                             </div>
                         }
@@ -560,7 +571,7 @@ export default function ListingForm ({listing, formType}) {
                 </div>
 
             </section>
-            }
+
 
             <div  id='createButtonDiv'>
                 <button

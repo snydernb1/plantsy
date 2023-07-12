@@ -84,6 +84,7 @@ input::-webkit-inner-spin-button {
 .inputMainImg {
     cursor: pointer;
     opacity: 0;
+    background-color: blue;
     position: relative;
     z-index: 2;
     height: 27em;
