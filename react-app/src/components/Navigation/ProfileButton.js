@@ -66,6 +66,7 @@ function ProfileButton({ user }) {
               <i class="fas fa-tree"></i>
             <OpenModalButton
               buttonText="Sign in"
+              modalType='text'
               modalComponent={<LoginFormModal form={true}/>}
               />
             </div>
@@ -74,6 +75,7 @@ function ProfileButton({ user }) {
             <i className="fas fa-seedling" />
             <OpenModalButton
               buttonText="Sign up"
+              modalType='text'
               modalComponent={<LoginFormModal form={false}/>}
               />
               </div>

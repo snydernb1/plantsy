@@ -33,7 +33,7 @@
     cursor: pointer;
 }
 
-.modalButtonBlack {
+.modalText {
     border: none;
     background-color: rgba(255, 255, 255, 0);
     color: black;
@@ -74,6 +74,18 @@
 .itemTotal {
     display: flex;
     justify-content: space-between;
+}
+
+.modalButtonLarge {
+    background-color: rgb(144, 170, 135);
+    border: none;
+    padding: 4px 6px 4px 6px;
+    border-radius: 5em;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    height: 3em;
+    white-space: nowrap;
 }
 
 .noteDiv {

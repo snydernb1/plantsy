@@ -1,0 +1,157 @@
+#cancelReview {
+    border: none;
+    padding: 4px 6px 4px 6px;
+    color: black;
+    cursor: pointer;
+    background-color: white;
+    font-weight: 600;
+
+    height: 3em;
+    white-space: nowrap;
+}
+
+#profileImg {
+    font-size: 1.5em;
+    position: relative;
+    left: 5px;
+}
+
+#reviewButton {
+    margin-top: .6;
+}
+
+#reviewButtons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+#reviewDisclaimerContainer {
+    display: flex;
+    gap: 1.5em;
+    align-items: center;
+    padding: 0 0 1em 0;
+}
+
+#reviewDisclaimer {
+}
+
+#reviewForm {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+
+#reviewFormHeader {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    align-self: start;
+    margin: .5em 0 1em 0;
+}
+
+#reviewFormListingName {
+    font-size: large;
+}
+
+#reviewFormImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+#reviewFormImgContainer {
+    width: 6em;
+    height: 6em;
+    margin: 0 0 1em 0;
+}
+
+#reviewFormSubHeader {
+    margin: 0 0 .5em 0;
+}
+
+#reviewModal {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    padding: .75em 1em 1.5em 1em;
+    width: 32em;
+    background-color: white;
+    border-radius: 1em;
+}
+
+#reviewProductInfo {
+    display: flex;
+    gap: .7em;
+
+}
+
+#reviewText {
+    width: 100%;
+    resize: none;
+    height: 10em;
+    padding: 4px 4px 0 4px ;
+    margin: 0 0 1em 0;
+    border-radius: 5px;
+}
+
+#starDiv {
+   display: flex;
+   justify-content: center;
+   gap: .2em;
+   padding: .6em 0 .6em 0;
+   cursor: pointer;
+}
+
+.filled {
+    color: black;
+    width: min-content;
+    height: min-content;
+}
+
+.empty {
+    color: rgba(211, 211, 211, 0.541);
+    width: min-content;
+    height: min-content;
+}
+
+
+.reviewButton {
+    background-color: rgb(144, 170, 135);
+    border: none;
+    padding: 4px 6px 4px 6px;
+    border-radius: 5em;
+    color: white;
+    cursor: pointer;
+    width: 10em;
+    height: 3em;
+    white-space: nowrap;
+}
+
+.reviewButtonDisabled {
+    background-color: rgb(187, 187, 187, 0.541);
+    border: none;
+    padding: 4px 6px 4px 6px;
+    border-radius: 5em;
+    color: white;
+    cursor: not-allowed !important;
+    width: 10em;
+    height: 3em;
+    white-space: nowrap;
+}
+
+.reviewFormBotHeader {
+    display: flex;
+    gap: .3em;
+    align-items: center;
+    margin: 0 0 .4em 0;
+}
+
+.reviewFormSubHeaderText {
+    margin: 0 0 1em 0;
+    font-size: small;
+}

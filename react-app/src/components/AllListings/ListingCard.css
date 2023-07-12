@@ -12,17 +12,18 @@ img {
     object-fit: cover;
 }
 
-#deleteButton {
+.modalButtonDelete {
     background-color: rgb(249, 102, 69);
     border: none;
     padding: 4px 6px 4px 6px;
     border-radius: 5em;
     display: flex;
+    color: white;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    width: 5em;
-    height: 2em;
+    width: 6em;
+    height: 2.4em;
 }
 
 #updateButton {
@@ -30,7 +31,7 @@ img {
     border: none;
     padding: 1px 6px 1px 6px;
     border-radius: 5em;
-    color: black;
+    color: white;
     cursor: pointer;
     width: 6em;
     height: 2.4em;

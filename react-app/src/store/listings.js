@@ -124,9 +124,11 @@ const listingsReducer = (state = initialState, action) => {
             const allListings = action.listings
             listingState = {...state, listings: {...state.listings}}
 
+
             allListings.forEach(listing => {
                 listingState.listings[listing.id] = listing
             });
+
             return listingState
 
         case NEW_LISTING:

@@ -1,0 +1,50 @@
+.modalButtonSmall {
+    background-color: rgb(144, 170, 135);
+    border: none;
+    padding: 4px 6px 4px 6px;
+    border-radius: 5em;
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 6em;
+    height: 2.4em;
+    white-space: nowrap;
+
+}
+
+.nameDate {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.nameDateSmaller {
+    font-size: medium;
+}
+
+.reviewCardContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-bottom: 2em;
+}
+
+.reviewTextLarge {
+    font-size: large;
+    width: 530px;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+
+.reviewRating {
+    display: flex;
+    align-items: center;
+    gap: .5em;
+}
+
+.updateDelete {
+    position: relative;
+    bottom: 3px;
+}

@@ -25,6 +25,7 @@ class Listing(db.Model):
     user = db.relationship('User', back_populates='listings')
     shop = db.relationship('Shop', back_populates='listings')
     cart = db.relationship('Cart', back_populates='items')
+    reviews = db.relationship('Review', back_populates='listing')
 
     # Join Table
     # user = db.relationship(
