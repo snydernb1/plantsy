@@ -16,11 +16,21 @@ export default function ListingForm ({listing, formType}) {
     const [price, setPrice] = useState(listing?.price)
     const [shipping, setShipping] = useState(listing?.free_shipping)
     const [wholediscount, setWholeDiscount] = useState(Number(listing?.discount) * 100)
-    const [prevImg, setPrevImg] = useState("")
-    const [imgs, setImgs] = useState([])
+    const [prevImg, setPrevImg] = useState()
+    // const [imgs, setImgs] = useState([]) ==> From url img handling
+    const [imgTwo, setImgTwo] = useState()
+    const [imgThree, setImgThree] = useState()
+    const [imgFour, setImgFour] = useState()
+    const [imgFive, setImgFive] = useState()
 
-    const [mainPreview, setMainPreview] = useState()
-    const [imgPreviews, setImgPreviews] = useState([])
+    const [mainPreview, setMainPreview] = useState(undefined)
+    const [imgTwoPreview, setImgTwoPreview] = useState(undefined)
+    const [imgThreePreview, setImgThreePreview] = useState(undefined)
+    const [imgFourPreview, setImgFourPreview] = useState(undefined)
+    const [imgFivePreview, setImgFivePreview] = useState(undefined)
+
+
+    // const [imgPreviews, setImgPreviews] = useState([]) ==> From url img handling
 
     const [submit, setSubmit] = useState(false)
 
@@ -30,32 +40,72 @@ export default function ListingForm ({listing, formType}) {
 
     console.log('this should be a url', mainPreview)
 
+    const handlePrevImg = () => {
+        setPrevImg(null)
+    }
+
 
     useEffect(() => {
+        let mainUrl;
+        let imgTwoUrl;
+        let imgThreeUrl;
+        let imgFourUrl;
+        let imgFiveUrl;
+
         if (!prevImg) {
             setMainPreview(undefined)
-            return
+        } else {
+            mainUrl = URL.createObjectURL(prevImg)
+            setMainPreview(mainUrl)
         }
 
-        const mainUrl = URL.createObjectURL(prevImg)
-        setMainPreview(mainUrl)
-
-        return () => URL.revokeObjectURL(mainUrl)
-    }, [prevImg])
-
-    useEffect(() => {
-        if (imgs.length === 0) {
-            setImgPreviews([])
-            return
+        if (!imgTwo) {
+            setImgTwoPreview(undefined)
+        } else {
+            imgTwoUrl = URL.createObjectURL(imgTwo)
+            setImgTwoPreview(imgTwoUrl)
         }
 
-        imgs.forEach((img) => {
-            const imgUrl = URL.createObjectURL(img)
-            setImgPreviews([...imgPreviews, imgUrl])
-        })
+        if (!imgThree) {
+            setImgThreePreview(undefined)
+        } else {
+            imgThreeUrl = URL.createObjectURL(imgThree)
+            setImgThreePreview(imgThreeUrl)
+        }
 
-        return () => imgPreviews.forEach((img) => URL.revokeObjectURL(img))
-    }, [imgs])
+        if (!imgFour) {
+            setImgFourPreview(undefined)
+        } else {
+            imgFourUrl = URL.createObjectURL(imgFour)
+            setImgFourPreview(imgFourUrl)
+        }
+
+        if (!imgFive) {
+            setImgFivePreview(undefined)
+        } else {
+            imgFiveUrl = URL.createObjectURL(imgFive)
+            setImgFivePreview(imgFiveUrl)
+        }
+
+
+        return () => URL.revokeObjectURL(mainUrl, imgTwoUrl, imgThreeUrl, imgFourUrl, imgFiveUrl)
+    }, [prevImg, imgTwo, imgThree, imgFour, imgFive])
+
+
+
+    // useEffect(() => {
+    //     if (imgs.length === 0) {
+    //         setImgPreviews([])
+    //         return
+    //     }
+
+    //     imgs.forEach((img) => {
+    //         const imgUrl = URL.createObjectURL(img)
+    //         setImgPreviews([...imgPreviews, imgUrl])
+    //     })
+
+    //     return () => imgPreviews.forEach((img) => URL.revokeObjectURL(img))
+    // }, [imgs])
 
 
 
@@ -83,7 +133,7 @@ export default function ListingForm ({listing, formType}) {
             // }
         }
         setErrors(errors)
-      }, [description, name, price, prevImg, imgs, shipping, wholediscount])
+      }, [description, name, price, shipping, wholediscount])
 
       useEffect(()=> {
         setSubmit(false)
@@ -133,24 +183,24 @@ export default function ListingForm ({listing, formType}) {
                 await dispatch(createNewListingImg(formDataPrev))
 
                 // const images = Object.values(imgs)
-                for (let img of imgs) {
-                    console.log('this is img in the loop',img)
-                    if (img.name.length > 0) {
-                        // const newImg = {
-                        //     listing_id: newListing.id,
-                        //     image_url: img.url,
-                        //     preview: false
-                        // } ==> No longer needed due to AWS
-                        const formDataImg = new FormData()
+                // for (let img of imgs) {
+                //     console.log('this is img in the loop',img)
+                //     if (img.name.length > 0) {
+                //         // const newImg = {
+                //         //     listing_id: newListing.id,
+                //         //     image_url: img.url,
+                //         //     preview: false
+                //         // } ==> No longer needed due to AWS
+                //         const formDataImg = new FormData()
 
-                        formDataImg.append('listing_id', newListing.id)
-                        formDataImg.append('image', img) // Might need to change how we are saving imgs in state
-                        formDataImg.append('preview', false)
+                //         formDataImg.append('listing_id', newListing.id)
+                //         formDataImg.append('image', img) // Might need to change how we are saving imgs in state
+                //         formDataImg.append('preview', false)
 
 
-                        await dispatch(createNewListingImg(formDataImg))
-                    }
-                }
+                //         await dispatch(createNewListingImg(formDataImg))
+                //     }
+                // }
 
                 history.push(`/listings/${newListing.id}`)
 
@@ -320,61 +370,87 @@ export default function ListingForm ({listing, formType}) {
                             <h4>Photos*</h4>
                             <p>Add at least one photo. Use all five photos to show off your item's finest features.</p>
                         </div>
-                    <div className="listingFormUrls">
 
 
-                    <div className='listingInputDiv'></div>
-                    <input
-                    type="file"
-                    accept='image/*'
-                    // value={prevImg} ==> No longer needed due to AWS
-                    placeholder="Example: https://a0.muscache.com/737b978b2b6a.jpg"
-                    className='listingFormInput'
-                    onChange={(e) => setPrevImg(e.target.files[0])}
-                    />
-                    {prevImg && <img src={mainPreview}/>}
+                <div className="listingFormUrls">
 
-                    <input
-                    type="file"
-                    accept='image/*'
-                    // value={imgs[2]?.url} ==> No longer needed due to AWS
 
-                    className='listingFormInput'
-                    // onChange={(e) => setImgs({...imgs, 2: {url: e.target.files[0]}})}
-                    onChange={(e) => setImgs([...imgs, e.target.files[0]])}
-                    />
-                    {imgPreviews.length > 0 && <img src={imgPreviews[0]}/>}
+                    { !prevImg ?
+                    <div id='inputMainContainer'>
 
-                    <input
-                    type="file"
-                    accept='image/*'
-                    // value={imgs[3]?.url} ==> No longer needed due to AWS
+                        <p className="inputMainImgText">Drag & Drop to Upload File</p>
+                        <input
+                        type="file"
+                        accept='image/*'
+                        // value={prevImg} ==> No longer needed due to AWS
+                        className='inputMainImg'
+                        id="uploadMain"
+                        onChange={(e) => setPrevImg(e.target.files[0])}
+                        />
 
-                    className='listingFormInput'
-                    onChange={(e) => setImgs([...imgs, e.target.files[0]])}
-                    />
-                    {imgPreviews.length > 0 && <img src={imgPreviews[1]}/>}
+                    </div>
+                    :
+                    <div id='inputMainContainerPost'>
+                        <button className='removeImgButton' onClick={handlePrevImg}>X</button>
+                        <img src={mainPreview}/>
+                    </div>
 
-                    <input
-                    type="file"
-                    accept='image/*'
-                    // value={imgs[4]?.url} ==> No longer needed due to AWS
+                    }
 
-                    className='listingFormInput'
-                    onChange={(e) => setImgs([...imgs, e.target.files[0]])}
-                    />
-                    {imgPreviews.length > 0 && <img src={imgPreviews[2]}/>}
 
-                    <input
-                    type="file"
-                    accept='image/*'
-                    // value={imgs[5]?.url} ==> No longer needed due to AWS
+                    <div className="inputRightContainer">
 
-                    className='listingFormInput'
-                    id='lasturlInput'
-                    onChange={(e) => setImgs([...imgs, e.target.files[0]])}
-                    />
-                    {imgPreviews.length > 0 && <img src={imgPreviews[3]}/>}
+                        <div className="inputSubContainer">
+                            <input
+                            type="file"
+                            accept='image/*'
+                            // value={imgs[2]?.url} ==> No longer needed due to AWS
+
+                            className='inputSubImg'
+                            // onChange={(e) => setImgs({...imgs, 2: {url: e.target.files[0]}})} ==> From url img handling, for reference
+                            onChange={(e) => setImgTwo(e.target.files[0])}
+                            />
+                            {imgTwo && <img src={imgTwoPreview}/>}
+                        </div>
+
+                        <div className="inputSubContainer">
+                            <input
+                            type="file"
+                            accept='image/*'
+                            // value={imgs[3]?.url} ==> No longer needed due to AWS
+
+                            className='inputSubImg'
+                            onChange={(e) => setImgThree(e.target.files[0])}
+                            />
+                            {imgThree && <img src={imgThreePreview}/>}
+                        </div>
+
+                        <div className="inputSubContainer">
+                            <input
+                            type="file"
+                            accept='image/*'
+                            // value={imgs[4]?.url} ==> No longer needed due to AWS
+
+                            className='inputSubImg'
+                            onChange={(e) => setImgFour(e.target.files[0])}
+                            />
+                            {imgFour && <img src={imgFourPreview}/>}
+                        </div>
+
+                        <div className="inputSubContainer">
+                            <input
+                            type="file"
+                            accept='image/*'
+                            // value={imgs[5]?.url} ==> No longer needed due to AWS
+
+                            className='inputSubImg'
+                            id='lasturlInput'
+                            onChange={(e) => setImgFive(e.target.files[0])}
+                            />
+                            {imgFive && <img src={imgFivePreview}/>}
+                        </div>
+
+                    </div>
 
                     {submit && errors.prevImg && (
                         <div className="createListingErrors">* {errors.prevImg}</div>
@@ -383,7 +459,8 @@ export default function ListingForm ({listing, formType}) {
                     {submit && errors.image && (
                         <div className="createListingErrors">* {errors.image}</div>
                         )}
-                    </div>
+
+                </div>
 
             </section>
             }
