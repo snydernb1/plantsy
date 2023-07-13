@@ -24,10 +24,11 @@ const newListingImg = (listingImg, objNum) => {
         objNum
     };
 };
-const editListing = (listing) => {
+const editListing = (listing, imgsObj) => {
     return {
         type: EDIT_LISTING,
-        listing
+        listing,
+        imgsObj
     };
 };
 const deleteListing = (listing) => {
@@ -73,7 +74,7 @@ export const createNewListing = (data) => async (dispatch) => {
 	};
 };
 
-export const putListing = (data) => async (dispatch) => {
+export const putListing = (data, imgsObj) => async (dispatch) => {
     const response = await fetch(`/api/listings/${data.id}`, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
@@ -81,7 +82,7 @@ export const putListing = (data) => async (dispatch) => {
     })
     if (response.ok) {
 		const listing = await response.json();
-		dispatch(editListing(listing));
+		dispatch(editListing(listing, imgsObj));
 		return listing;
 	} else {
 		return ["An error occurred. Please try again."];
@@ -178,7 +179,12 @@ const listingsReducer = (state = initialState, action) => {
         case EDIT_LISTING:
 
             const editListing = action.listing
+            const imgsObj = action.imgsObj
             listingState = {...state, listings: {...state.listings}}
+
+            console.log('Does the edited listing come returned with an arr?',editListing)
+
+            editListing.imgs = imgsObj
 
             listingState.listings[editListing.id] = editListing
 

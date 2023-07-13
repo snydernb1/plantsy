@@ -50,8 +50,6 @@ export default function ListingForm ({listing, formType}) {
         e.preventDefault();
         if (existingMainPreview !== mainPreview) setPrevImg(null)
         // Store update img urls, if old url doesn't match new url delete else set null
-        console.log('This should be the id',listing.imgs[0].id)
-        console.log('This should be the listing', listing)
 
         const data = {
             listingId: listing.id,
@@ -229,8 +227,6 @@ export default function ListingForm ({listing, formType}) {
         if (Object.values(errors).length === 0) {
             if (formType === 'create') {
                 const newListing = await dispatch(createNewListing(listingData))
-
-
                 // AWS Section
 
                 if (prevImg) {
@@ -319,7 +315,58 @@ export default function ListingForm ({listing, formType}) {
 
 
             } else if (formType === 'update') {
-                const editedListing = await dispatch(putListing(listingData))
+                const editedListing = await dispatch(putListing(listingData, listing.imgs))
+
+                if (prevImg) {
+                    const formDataPrev = new FormData()
+
+                    formDataPrev.append('listing_id', listing.id)
+                    formDataPrev.append('image', prevImg)
+                    formDataPrev.append('preview', true)
+
+                    await dispatch(createNewListingImg(formDataPrev, 1))
+                }
+
+                if (imgTwo) {
+                    const formDataPrev = new FormData()
+
+                    formDataPrev.append('listing_id', listing.id)
+                    formDataPrev.append('image', imgTwo)
+                    formDataPrev.append('preview', false)
+
+                    await dispatch(createNewListingImg(formDataPrev, 2))
+                }
+
+                if (imgThree) {
+                    const formDataPrev = new FormData()
+
+                    formDataPrev.append('listing_id', listing.id)
+                    formDataPrev.append('image', imgThree)
+                    formDataPrev.append('preview', false)
+
+                    await dispatch(createNewListingImg(formDataPrev, 3))
+                }
+
+                if (imgFour) {
+                    const formDataPrev = new FormData()
+
+                    formDataPrev.append('listing_id', listing.id)
+                    formDataPrev.append('image', imgFour)
+                    formDataPrev.append('preview', false)
+
+                    await dispatch(createNewListingImg(formDataPrev, 4))
+                }
+
+                if (imgFive) {
+                    const formDataPrev = new FormData()
+
+                    formDataPrev.append('listing_id', listing.id)
+                    formDataPrev.append('image', imgFive)
+                    formDataPrev.append('preview', false)
+
+                    await dispatch(createNewListingImg(formDataPrev, 5))
+                }
+
                 history.push(`/listings/${editedListing.id}`)
             }
         }

@@ -139,10 +139,9 @@ def create_listing_img():
 @listing_routes.route('/imgs/<int:id>', methods = ['DELETE'])
 @login_required
 def delete_listing_img(id):
-    print('=============================>> Are we getting into the delete img route?')
 
     img = ListingImages.query.get(id)
-    print('=============================>> Are we getting into the delete img route?', img.to_dict())
+
 
     file_delete = remove_file_from_s3(img.img_url) #.image_url could be wrong?
 
