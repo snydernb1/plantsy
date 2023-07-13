@@ -50,7 +50,7 @@ export default function ListingDetails () {
 
     const closeMenu = () => setShowMenu(false);
 
-    let prevImage;
+    let prevImage = listing.imgs[1].img_url;
 
     useEffect(()=> {
         setMainImg(prevImage)
@@ -85,13 +85,13 @@ export default function ListingDetails () {
         </>
     )
 
-    const imgs = listing.imgs
+    // const imgs = Object.values(listing.imgs)
 
-    for (let img of imgs) {
-        if (img.preview === true) {
-            prevImage = img.img_url
-        }
-    }
+    // for (let img of imgs) {
+    //     if (img.preview === true) {
+    //         prevImage = img.img_url
+    //     }
+    // }
 
     const setImg = (e) => {
         let img = e.target.dataset.user
@@ -141,6 +141,7 @@ export default function ListingDetails () {
 
 
     const hasReview = reviews.find((review) => review.user_id === sessionUser?.id)
+    const imgArr = Object.values(listing.imgs)
 
     return (
         <section className="listingDetailContainer">
@@ -153,7 +154,7 @@ export default function ListingDetails () {
 
                 <div className="imgContainer">
                     <div className="imgContainerColumn">
-                        {listing.imgs.map((img)=> (
+                        {imgArr.map((img)=> (
                             <div key={img.id} className="imageTiles">
                                 <img onClick={setImg}
                                 src={img.img_url}

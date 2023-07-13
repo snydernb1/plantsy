@@ -11,14 +11,15 @@ export default function ListingCard ({listing, manage}) {
     const history = useHistory()
     const [showMenu, setShowMenu] = useState(false);
 
-    let prevImage;
-    const imgs = listing.imgs
-    // Grabs img preview
-    for (let img of imgs) {
-        if (img.preview === true) {
-            prevImage = img.img_url
-        }
-    }
+    let prevImage = listing.imgs[1].img_url;
+
+    // const imgs = listing.imgs
+    // // Grabs img preview
+    // for (let img of imgs) {
+    //     if (img.preview === true) {
+    //         prevImage = img.img_url
+    //     }
+    // }
 
     const closeMenu = () => setShowMenu(false);
 

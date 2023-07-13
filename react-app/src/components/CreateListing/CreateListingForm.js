@@ -23,18 +23,18 @@ export default function ListingForm ({listing, formType}) {
     const [imgFour, setImgFour] = useState()
     const [imgFive, setImgFive] = useState()
 
-    const [mainPreview, setMainPreview] = useState(formType === 'update' ? listing?.imgs[0]?.img_url : undefined)
-    const [imgTwoPreview, setImgTwoPreview] = useState(formType === 'update' ? listing?.imgs[1]?.img_url : undefined)
-    const [imgThreePreview, setImgThreePreview] = useState(formType === 'update' ? listing?.imgs[2]?.img_url : undefined)
-    const [imgFourPreview, setImgFourPreview] = useState(formType === 'update' ? listing?.imgs[3]?.img_url : undefined)
-    const [imgFivePreview, setImgFivePreview] = useState(formType === 'update' ? listing?.imgs[4]?.img_url : undefined)
+    const [mainPreview, setMainPreview] = useState(formType === 'update' ? listing?.imgs[1]?.img_url : undefined)
+    const [imgTwoPreview, setImgTwoPreview] = useState(formType === 'update' ? listing?.imgs[2]?.img_url : undefined)
+    const [imgThreePreview, setImgThreePreview] = useState(formType === 'update' ? listing?.imgs[3]?.img_url : undefined)
+    const [imgFourPreview, setImgFourPreview] = useState(formType === 'update' ? listing?.imgs[4]?.img_url : undefined)
+    const [imgFivePreview, setImgFivePreview] = useState(formType === 'update' ? listing?.imgs[5]?.img_url : undefined)
 
     // These are to store the incoming post to be updated urls. They will be compared below to determine if url should be deleted from db or just removed from the preview above
-    const [existingMainPreview, setExistingMainPreview] = useState(formType === 'update' ? listing?.imgs[0]?.img_url : undefined)
-    const [existingImgTwoPreview, setExistingImgTwoPreview] = useState(formType === 'update' ? listing?.imgs[1]?.img_url : undefined)
-    const [existingImgThreePreview, setExistingImgThreePreview] = useState(formType === 'update' ? listing?.imgs[2]?.img_url : undefined)
-    const [existingImgFourPreview, setExistingImgFourPreview] = useState(formType === 'update' ? listing?.imgs[3]?.img_url : undefined)
-    const [existingImgFivePreview, setExistingImgFivePreview] = useState(formType === 'update' ? listing?.imgs[4]?.img_url : undefined)
+    const [existingMainPreview, setExistingMainPreview] = useState(formType === 'update' ? listing?.imgs[1]?.img_url : undefined)
+    const [existingImgTwoPreview, setExistingImgTwoPreview] = useState(formType === 'update' ? listing?.imgs[2]?.img_url : undefined)
+    const [existingImgThreePreview, setExistingImgThreePreview] = useState(formType === 'update' ? listing?.imgs[3]?.img_url : undefined)
+    const [existingImgFourPreview, setExistingImgFourPreview] = useState(formType === 'update' ? listing?.imgs[4]?.img_url : undefined)
+    const [existingImgFivePreview, setExistingImgFivePreview] = useState(formType === 'update' ? listing?.imgs[5]?.img_url : undefined)
 
 
     // const [imgPreviews, setImgPreviews] = useState([]) ==> From url img handling
@@ -55,10 +55,10 @@ export default function ListingForm ({listing, formType}) {
 
         const data = {
             listingId: listing.id,
-            listingImgId: listing.imgs[0].id
+            listingImgId: listing.imgs[1].id
         }
 
-        await dispatch(deleteListingImgThunk(data))
+        await dispatch(deleteListingImgThunk(data, 1))
         setMainPreview(undefined)
 
     }
@@ -68,10 +68,10 @@ export default function ListingForm ({listing, formType}) {
 
         const data = {
             listingId: listing.id,
-            listingImgId: listing.imgs[1].id
+            listingImgId: listing.imgs[2].id
         }
 
-        await dispatch(deleteListingImgThunk(data))
+        await dispatch(deleteListingImgThunk(data, 2))
         setImgTwoPreview(undefined)
     }
     const handleImgThree = async (e) => {
@@ -80,10 +80,10 @@ export default function ListingForm ({listing, formType}) {
 
         const data = {
             listingId: listing.id,
-            listingImgId: listing.imgs[2].id
+            listingImgId: listing.imgs[3].id
         }
 
-        await dispatch(deleteListingImgThunk(data))
+        await dispatch(deleteListingImgThunk(data, 3))
         setImgThreePreview(undefined)
     }
     const handleImgFour = async (e) => {
@@ -92,10 +92,10 @@ export default function ListingForm ({listing, formType}) {
 
         const data = {
             listingId: listing.id,
-            listingImgId: listing.imgs[3].id
+            listingImgId: listing.imgs[4].id
         }
 
-        await dispatch(deleteListingImgThunk(data))
+        await dispatch(deleteListingImgThunk(data, 4))
         setImgFourPreview(undefined)
     }
     const handleImgFive = async (e) => {
@@ -104,10 +104,10 @@ export default function ListingForm ({listing, formType}) {
 
         const data = {
             listingId: listing.id,
-            listingImgId: listing.imgs[4].id
+            listingImgId: listing.imgs[5].id
         }
 
-        await dispatch(deleteListingImgThunk(data))
+        await dispatch(deleteListingImgThunk(data, 5))
         setImgFivePreview(undefined)
     }
 
@@ -240,7 +240,7 @@ export default function ListingForm ({listing, formType}) {
                     formDataPrev.append('image', prevImg)
                     formDataPrev.append('preview', true)
 
-                    await dispatch(createNewListingImg(formDataPrev))
+                    await dispatch(createNewListingImg(formDataPrev, 1))
                 }
 
                 if (imgTwo) {
@@ -250,7 +250,7 @@ export default function ListingForm ({listing, formType}) {
                     formDataPrev.append('image', imgTwo)
                     formDataPrev.append('preview', false)
 
-                    await dispatch(createNewListingImg(formDataPrev))
+                    await dispatch(createNewListingImg(formDataPrev, 2))
                 }
 
                 if (imgThree) {
@@ -260,7 +260,7 @@ export default function ListingForm ({listing, formType}) {
                     formDataPrev.append('image', imgThree)
                     formDataPrev.append('preview', false)
 
-                    await dispatch(createNewListingImg(formDataPrev))
+                    await dispatch(createNewListingImg(formDataPrev, 3))
                 }
 
                 if (imgFour) {
@@ -270,7 +270,7 @@ export default function ListingForm ({listing, formType}) {
                     formDataPrev.append('image', imgFour)
                     formDataPrev.append('preview', false)
 
-                    await dispatch(createNewListingImg(formDataPrev))
+                    await dispatch(createNewListingImg(formDataPrev, 4))
                 }
 
                 if (imgFive) {
@@ -280,7 +280,7 @@ export default function ListingForm ({listing, formType}) {
                     formDataPrev.append('image', imgFive)
                     formDataPrev.append('preview', false)
 
-                    await dispatch(createNewListingImg(formDataPrev))
+                    await dispatch(createNewListingImg(formDataPrev, 5))
                 }
 
 

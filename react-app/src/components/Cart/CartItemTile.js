@@ -75,16 +75,16 @@ export default function CartItemTile ({item, cartData, shipping}) {
         setMaxDate(`${maxTempMonth} ${maxTempDays}`)
     }, [item])
 
-    let prevImage;
     if (!item) return
+    let prevImage = item.imgs[1].img_url;
 
-    const imgs = item.imgs
+    // const imgs = item.imgs
 
-    for (let img of imgs) {
-        if (img.preview === true) {
-            prevImage = img.img_url
-        }
-    }
+    // for (let img of imgs) {
+    //     if (img.preview === true) {
+    //         prevImage = img.img_url
+    //     }
+    // }
 
     const removeItem = async () => {
         await dispatch(removeItemFromCart(cartData.id, cartData.listing_id))

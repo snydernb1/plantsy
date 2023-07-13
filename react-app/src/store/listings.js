@@ -17,10 +17,11 @@ const newListing = (listing) => {
         listing
     };
 };
-const newListingImg = (listingImg) => {
+const newListingImg = (listingImg, objNum) => {
     return {
         type: NEW_LISTING_IMG,
-        listingImg
+        listingImg,
+        objNum
     };
 };
 const editListing = (listing) => {
@@ -35,11 +36,11 @@ const deleteListing = (listing) => {
         listing
     };
 };
-const deleteListingImg = (listingImgData) => {
-    console.log('are we getting into the action?')
+const deleteListingImg = (listingImgData, objNum) => {
     return {
         type: DELETE_LISTING_IMG,
-        listingImgData
+        listingImgData,
+        objNum
     };
 };
 
@@ -103,7 +104,7 @@ export const delListing = (id) => async (dispatch) => {
 	};
 };
 
-export const deleteListingImgThunk = (data) => async (dispatch) => {
+export const deleteListingImgThunk = (data, objNum) => async (dispatch) => {
     const response = await fetch(`/api/listings/imgs/${data.listingImgId}`, {
         method: 'DELETE',
         headers: {'Content-Type': 'application/json'}
@@ -111,7 +112,7 @@ export const deleteListingImgThunk = (data) => async (dispatch) => {
 
     if (response.ok) {
 		const msg = await response.json();
-		dispatch(deleteListingImg(data));
+		dispatch(deleteListingImg(data, objNum));
         console.log('msg from backend', msg)
 		return null;
 	} else {
@@ -119,7 +120,7 @@ export const deleteListingImgThunk = (data) => async (dispatch) => {
 	};
 };
 
-export const createNewListingImg = (data) => async (dispatch) => {
+export const createNewListingImg = (data, objNum) => async (dispatch) => {
     const response = await fetch('/api/listings/imgs', {
         method: 'POST',
         // headers: {'Content-Type': 'application/json'}, ==> No longer needed due to AWS
@@ -128,7 +129,7 @@ export const createNewListingImg = (data) => async (dispatch) => {
 
     if (response.ok) {
 		const img = await response.json();
-		dispatch(newListingImg(img));
+		dispatch(newListingImg(img, objNum));
 		return null;
 	} else {
 		return ["An error occurred. Please try again."];
@@ -149,6 +150,15 @@ const listingsReducer = (state = initialState, action) => {
 
 
             allListings.forEach(listing => {
+                const imgs = listing.imgs
+                delete listing.imgs
+
+                listing.imgs = {}
+
+                imgs.forEach((img, i) => {
+                    listing.imgs[i + 1] = img
+                })
+
                 listingState.listings[listing.id] = listing
             });
 
@@ -158,6 +168,8 @@ const listingsReducer = (state = initialState, action) => {
 
             const newListing = action.listing
             listingState = {...state, listings: {...state.listings}}
+
+            newListing.imgs = {}
 
             listingState.listings[newListing.id] = newListing
 
@@ -185,26 +197,28 @@ const listingsReducer = (state = initialState, action) => {
 
             const imgId = action.listingImgData.listingImgId
             const listingId = action.listingImgData.listingId
+            const objNum = action.objNum
 
-            console.log('imgid', imgId)
-            console.log('listingid', listingId)
             listingState = {...state, listings: {...state.listings}}
 
-            listingState.listings[listingId].imgs.forEach((img, i) => {
-                if (img.id === imgId) {
-                    listingState.listings[listingId].imgs.splice(i, i)
-                    console.log('am i getting into the loop if statement?')
-                }
-            });
+            // listingState.listings[listingId].imgs.forEach((img, i) => {
+            //     if (img.id === imgId) {
+            //         listingState.listings[listingId].imgs.splice(i, i)
+
+            //     }
+            // });
+
+            delete listingState.listings[listingId].imgs[objNum]
 
             return listingState
 
         case NEW_LISTING_IMG:
 
             const newListingImg = action.listingImg
+            const num = action.objNum
             listingState = {...state, listings: {...state.listings}}
 
-            listingState.listings[newListingImg.listing_id].imgs = [...listingState.listings[newListingImg.listing_id].imgs, newListingImg]
+            listingState.listings[newListingImg.listing_id].imgs[num] = newListingImg
 
             return state
 
