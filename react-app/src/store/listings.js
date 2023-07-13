@@ -3,6 +3,7 @@ const NEW_LISTING = 'listings/NEW_LISTING';
 const NEW_LISTING_IMG = 'listings/NEW_LISTING_IMG';
 const EDIT_LISTING = 'listings/EDIT_LISTING';
 const DELETE_LISTING = 'listings/DELETE_LISTING';
+const DELETE_LISTING_IMG = 'listings/DELETE_LISTING_IMG';
 
 const allListings = (listings) => {
     return {
@@ -32,6 +33,13 @@ const deleteListing = (listing) => {
     return {
         type: DELETE_LISTING,
         listing
+    };
+};
+const deleteListingImg = (listingImgData) => {
+    console.log('are we getting into the action?')
+    return {
+        type: DELETE_LISTING_IMG,
+        listingImgData
     };
 };
 
@@ -95,6 +103,21 @@ export const delListing = (id) => async (dispatch) => {
 	};
 };
 
+export const deleteListingImgThunk = (data) => async (dispatch) => {
+    const response = await fetch(`/api/listings/imgs/${data.listingImgId}`, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'}
+    })
+
+    if (response.ok) {
+		const msg = await response.json();
+		dispatch(deleteListingImg(data));
+        console.log('msg from backend', msg)
+		return null;
+	} else {
+		return ["An error occurred. Please try again."];
+	};
+};
 
 export const createNewListingImg = (data) => async (dispatch) => {
     const response = await fetch('/api/listings/imgs', {
@@ -155,6 +178,24 @@ const listingsReducer = (state = initialState, action) => {
             listingState = {...state, listings: {...state.listings}}
 
             delete listingState.listings[id]
+
+            return listingState
+
+        case DELETE_LISTING_IMG:
+
+            const imgId = action.listingImgData.listingImgId
+            const listingId = action.listingImgData.listingId
+
+            console.log('imgid', imgId)
+            console.log('listingid', listingId)
+            listingState = {...state, listings: {...state.listings}}
+
+            listingState.listings[listingId].imgs.forEach((img, i) => {
+                if (img.id === imgId) {
+                    listingState.listings[listingId].imgs.splice(i, i)
+                    console.log('am i getting into the loop if statement?')
+                }
+            });
 
             return listingState
 

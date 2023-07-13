@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 
-import { createNewListing } from '../../store/listings'
+import { createNewListing, deleteListingImgThunk } from '../../store/listings'
 import { createNewListingImg } from '../../store/listings'
 import { putListing } from "../../store/listings";
 
@@ -10,9 +10,6 @@ import './ListingForm.css'
 
 export default function ListingForm ({listing, formType}) {
     const [errors, setErrors] = useState({})
-    console.log('formType', formType)
-    console.log('listing', listing)
-
 
     const [name, setName] = useState(listing?.name)
     const [description, setDescription] = useState(listing?.description)
@@ -49,21 +46,69 @@ export default function ListingForm ({listing, formType}) {
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
 
-    const handlePrevImg = async () => {
+    const handlePrevImg = async (e) => {
+        e.preventDefault();
         if (existingMainPreview !== mainPreview) setPrevImg(null)
         // Store update img urls, if old url doesn't match new url delete else set null
+        console.log('This should be the id',listing.imgs[0].id)
+        console.log('This should be the listing', listing)
+
+        const data = {
+            listingId: listing.id,
+            listingImgId: listing.imgs[0].id
+        }
+
+        await dispatch(deleteListingImgThunk(data))
+        setMainPreview(undefined)
+
     }
-    const handleImgTwo = async () => {
-        if (existingMainPreview !== mainPreview) setImgTwo(null)
+    const handleImgTwo = async (e) => {
+        e.preventDefault();
+        if (existingImgTwoPreview !== imgTwoPreview) setImgTwo(null)
+
+        const data = {
+            listingId: listing.id,
+            listingImgId: listing.imgs[1].id
+        }
+
+        await dispatch(deleteListingImgThunk(data))
+        setImgTwoPreview(undefined)
     }
-    const handleImgThree = async () => {
-        if (existingMainPreview !== mainPreview) setImgThree(null)
+    const handleImgThree = async (e) => {
+        e.preventDefault();
+        if (existingImgThreePreview !== imgThreePreview) setImgThree(null)
+
+        const data = {
+            listingId: listing.id,
+            listingImgId: listing.imgs[2].id
+        }
+
+        await dispatch(deleteListingImgThunk(data))
+        setImgThreePreview(undefined)
     }
-    const handleImgFour = async () => {
-        if (existingMainPreview !== mainPreview) setImgFour(null)
+    const handleImgFour = async (e) => {
+        e.preventDefault();
+        if (existingImgFourPreview !== imgFourPreview) setImgFour(null)
+
+        const data = {
+            listingId: listing.id,
+            listingImgId: listing.imgs[3].id
+        }
+
+        await dispatch(deleteListingImgThunk(data))
+        setImgFourPreview(undefined)
     }
-    const handleImgFive = async () => {
-        if (existingMainPreview !== mainPreview) setImgFive(null)
+    const handleImgFive = async (e) => {
+        e.preventDefault();
+        if (existingImgFivePreview !== imgFivePreview) setImgFive(null)
+
+        const data = {
+            listingId: listing.id,
+            listingImgId: listing.imgs[4].id
+        }
+
+        await dispatch(deleteListingImgThunk(data))
+        setImgFivePreview(undefined)
     }
 
 

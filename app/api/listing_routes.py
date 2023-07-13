@@ -136,12 +136,15 @@ def create_listing_img():
         return form.errors, 400
 
 
-@listing_routes.route('/imgs/<int:id>')
+@listing_routes.route('/imgs/<int:id>', methods = ['DELETE'])
 @login_required
 def delete_listing_img(id):
-    img = ListingImages.query.get(id)
+    print('=============================>> Are we getting into the delete img route?')
 
-    file_delete = remove_file_from_s3(img.image_url) #.image_url could be wrong?
+    img = ListingImages.query.get(id)
+    print('=============================>> Are we getting into the delete img route?', img.to_dict())
+
+    file_delete = remove_file_from_s3(img.img_url) #.image_url could be wrong?
 
     if file_delete:
         db.session.delete(img)
