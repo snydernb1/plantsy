@@ -93,6 +93,11 @@ def delete_listing(listing_id):
     Deletes listing from the db
     '''
     listing = Listing.query.get(listing_id)
+    imgs = ListingImages.query.filter(ListingImages.listing_id == listing_id).all()
+
+    for img in imgs:
+        remove_file_from_s3(img.img_url)
+
 
     db.session.delete(listing)
     db.session.commit()
