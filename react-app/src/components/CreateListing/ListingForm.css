@@ -218,7 +218,11 @@ input::-webkit-inner-spin-button {
     align-items: center;
     gap: 2em;
 }
-
+.previewImageRequired {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
 .removeImgButton {
     position: absolute;
     z-index: 2;

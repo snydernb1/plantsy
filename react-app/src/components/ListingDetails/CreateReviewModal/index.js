@@ -115,11 +115,11 @@ export default function CreateReview({listingId, sessionUser, existReview, revie
             onChange={(e) => setReview(e.target.value)}
             />
 
-        <div className="reviewFormBotHeader">
+        {/* <div className="reviewFormBotHeader">
             <h3>Add a photo</h3>
             <p>(optional)</p>
         </div>
-        <p className="reviewFormSubHeaderText">Show your appreciation and inspire the community!</p>
+        <p className="reviewFormSubHeaderText">Show your appreciation and inspire the community!</p> */}
 
         <div id="reviewDisclaimerContainer">
             <i className="fas fa-user-circle" id="profileImg"/>

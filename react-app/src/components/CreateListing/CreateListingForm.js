@@ -40,6 +40,7 @@ export default function ListingForm ({listing, formType}) {
     // const [imgPreviews, setImgPreviews] = useState([]) ==> From url img handling
 
     const [submit, setSubmit] = useState(false)
+    const [loadingScreen, setLoadingScreen] = useState(false)
 
 
     const dispatch = useDispatch();
@@ -48,65 +49,81 @@ export default function ListingForm ({listing, formType}) {
 
     const handlePrevImg = async (e) => {
         e.preventDefault();
-        if (existingMainPreview !== mainPreview) setPrevImg(null)
+        if (existingMainPreview !== mainPreview) {
+            setPrevImg(null)
+            setMainPreview(undefined)
+        } else {
+            const data = {
+                listingId: listing.id,
+                listingImgId: listing.imgs[1].id
+            }
+
+            await dispatch(deleteListingImgThunk(data, 1))
+            setMainPreview(undefined)
+        }
         // Store update img urls, if old url doesn't match new url delete else set null
 
-        const data = {
-            listingId: listing.id,
-            listingImgId: listing.imgs[1].id
-        }
-
-        await dispatch(deleteListingImgThunk(data, 1))
-        setMainPreview(undefined)
 
     }
     const handleImgTwo = async (e) => {
         e.preventDefault();
-        if (existingImgTwoPreview !== imgTwoPreview) setImgTwo(null)
+        if (existingImgTwoPreview !== imgTwoPreview) {
+            setImgTwo(null)
+            setImgTwoPreview(undefined)
+        } else {
+            const data = {
+                listingId: listing.id,
+                listingImgId: listing.imgs[2].id
+            }
 
-        const data = {
-            listingId: listing.id,
-            listingImgId: listing.imgs[2].id
+            await dispatch(deleteListingImgThunk(data, 2))
+            setImgTwoPreview(undefined)
         }
-
-        await dispatch(deleteListingImgThunk(data, 2))
-        setImgTwoPreview(undefined)
     }
     const handleImgThree = async (e) => {
         e.preventDefault();
-        if (existingImgThreePreview !== imgThreePreview) setImgThree(null)
+        if (existingImgThreePreview !== imgThreePreview) {
+            setImgThree(null)
+            setImgThreePreview(undefined)
+        } else {
+            const data = {
+                listingId: listing.id,
+                listingImgId: listing.imgs[3].id
+            }
 
-        const data = {
-            listingId: listing.id,
-            listingImgId: listing.imgs[3].id
+            await dispatch(deleteListingImgThunk(data, 3))
+            setImgThreePreview(undefined)
         }
-
-        await dispatch(deleteListingImgThunk(data, 3))
-        setImgThreePreview(undefined)
     }
     const handleImgFour = async (e) => {
         e.preventDefault();
-        if (existingImgFourPreview !== imgFourPreview) setImgFour(null)
+        if (existingImgFourPreview !== imgFourPreview) {
+            setImgFour(null)
+            setImgFourPreview(undefined)
+        } else {
+            const data = {
+                listingId: listing.id,
+                listingImgId: listing.imgs[4].id
+            }
 
-        const data = {
-            listingId: listing.id,
-            listingImgId: listing.imgs[4].id
+            await dispatch(deleteListingImgThunk(data, 4))
+            setImgFourPreview(undefined)
         }
-
-        await dispatch(deleteListingImgThunk(data, 4))
-        setImgFourPreview(undefined)
     }
     const handleImgFive = async (e) => {
         e.preventDefault();
-        if (existingImgFivePreview !== imgFivePreview) setImgFive(null)
+        if (existingImgFivePreview !== imgFivePreview) {
+            setImgFive(null)
+            setImgFivePreview(undefined)
+        } else {
+            const data = {
+                listingId: listing.id,
+                listingImgId: listing.imgs[5].id
+            }
 
-        const data = {
-            listingId: listing.id,
-            listingImgId: listing.imgs[5].id
+            await dispatch(deleteListingImgThunk(data, 5))
+            setImgFivePreview(undefined)
         }
-
-        await dispatch(deleteListingImgThunk(data, 5))
-        setImgFivePreview(undefined)
     }
 
 
@@ -187,6 +204,40 @@ export default function ListingForm ({listing, formType}) {
         }
 
         if (description.length < 30) errors.description = "Please add a description of at least 30 characters"
+
+        if (!prevImg && mainPreview === undefined) errors.prevImg = "Please provide a preview image"
+
+        if (prevImg) {
+            if (prevImg.name.endsWith('.png') || prevImg.name.endsWith('.jpg') ||prevImg.name.endsWith('.jpeg')) {}
+            else {
+                errors.image = 'Image URL must end in .png, .jpg, or .jpeg'
+            }
+        }
+        if (imgTwo) {
+            if (imgTwo.name.endsWith('.png') || imgTwo.name.endsWith('.jpg') ||imgTwo.name.endsWith('.jpeg')) {}
+            else {
+                errors.image = 'Image URL must end in .png, .jpg, or .jpeg'
+            }
+        }
+        if (imgThree) {
+            if (imgThree.name.endsWith('.png') || imgThree.name.endsWith('.jpg') ||imgThree.name.endsWith('.jpeg')) {}
+            else {
+                errors.image = 'Image URL must end in .png, .jpg, or .jpeg'
+            }
+        }
+        if (imgFour) {
+            if (imgFour.name.endsWith('.png') || imgFour.name.endsWith('.jpg') ||imgFour.name.endsWith('.jpeg')) {}
+            else {
+                errors.image = 'Image URL must end in .png, .jpg, or .jpeg'
+            }
+        }
+        if (imgFive) {
+            if (imgFive.name.endsWith('.png') || imgFive.name.endsWith('.jpg') ||imgFive.name.endsWith('.jpeg')) {}
+            else {
+                errors.image = 'Image URL must end in .png, .jpg, or .jpeg'
+            }
+        }
+
         if (formType === "create") {
             // if (!prevImg.length ) errors.prevImg = "Please provide a preview image"
 
@@ -197,8 +248,9 @@ export default function ListingForm ({listing, formType}) {
             //     if (image.url.length === 0 || image.url.endsWith('.png') || image.url.endsWith('.jpg') || image.url.endsWith('.jpeg') || prevImg.startsWith('http://') || prevImg.startsWith('https://')) {} else{errors.image = 'Image URL must end in .png, .jpg, or .jpeg and start with "http://" or "https://"'}
             // }
         }
+
         setErrors(errors)
-      }, [description, name, price, shipping, wholediscount])
+      }, [description, name, price, shipping, prevImg, mainPreview, wholediscount, imgTwo, imgThree, imgFour, imgFive])
 
       useEffect(()=> {
         setSubmit(false)
@@ -225,6 +277,7 @@ export default function ListingForm ({listing, formType}) {
         }
 
         if (Object.values(errors).length === 0) {
+            setLoadingScreen(true)
             if (formType === 'create') {
                 const newListing = await dispatch(createNewListing(listingData))
                 // AWS Section
@@ -524,7 +577,7 @@ export default function ListingForm ({listing, formType}) {
                             <p>Add at least one photo. Use all five photos to show off your item's finest features.</p>
                         </div>
 
-
+                <div>
                 <div className="listingFormUrls">
 
 
@@ -532,7 +585,10 @@ export default function ListingForm ({listing, formType}) {
                     <div id='inputMainContainer'>
 
                         <div className="textDiv">
-                            <p className="inputMainImgText">Drag & Drop to Upload File</p>
+                            <div className="previewImageRequired">
+                                <p className="inputMainImgText">Drag & drop to upload file</p>
+                                <p className="inputMainImgText">*Preview image is required</p>
+                            </div>
                             <p className="browse">Browse</p>
                         </div>
                         <input
@@ -559,7 +615,7 @@ export default function ListingForm ({listing, formType}) {
                         { !imgTwo && imgTwoPreview === undefined ?
                             <div className="inputSubContainer">
                                 <div className="textSubDiv">
-                                    <p className="inputSubImgText">Drag & Drop to Upload File</p>
+                                    <p className="inputSubImgText">Drag & drop to upload file</p>
                                     <p className="browse">Browse</p>
                                 </div>
                                 <input
@@ -582,7 +638,7 @@ export default function ListingForm ({listing, formType}) {
                         { !imgThree && imgThreePreview === undefined ?
                             <div className="inputSubContainer">
                                 <div className="textSubDiv">
-                                    <p className="inputSubImgText">Drag & Drop to Upload File</p>
+                                    <p className="inputSubImgText">Drag & drop to upload file</p>
                                     <p className="browse">Browse</p>
                                 </div>
                                 <input
@@ -605,7 +661,7 @@ export default function ListingForm ({listing, formType}) {
                         { !imgFour && imgFourPreview === undefined ?
                             <div className="inputSubContainer">
                                 <div className="textSubDiv">
-                                    <p className="inputSubImgText">Drag & Drop to Upload File</p>
+                                    <p className="inputSubImgText">Drag & drop to upload file</p>
                                     <p className="browse">Browse</p>
                                 </div>
                                 <input
@@ -628,7 +684,7 @@ export default function ListingForm ({listing, formType}) {
                         { !imgFive && imgFivePreview === undefined ?
                             <div className="inputSubContainer">
                                 <div className="textSubDiv">
-                                    <p className="inputSubImgText">Drag & Drop to Upload File</p>
+                                    <p className="inputSubImgText">Drag & drop to upload file</p>
                                     <p className="browse">Browse</p>
                                 </div>
                                 <input
@@ -652,6 +708,8 @@ export default function ListingForm ({listing, formType}) {
 
                     </div>
 
+
+                </div>
                     {submit && errors.prevImg && (
                         <div className="createListingErrors">* {errors.prevImg}</div>
                         )}
@@ -659,7 +717,6 @@ export default function ListingForm ({listing, formType}) {
                     {submit && errors.image && (
                         <div className="createListingErrors">* {errors.image}</div>
                         )}
-
                 </div>
 
             </section>
@@ -678,7 +735,7 @@ export default function ListingForm ({listing, formType}) {
 
             </form>
 
-            {submit &&
+            {loadingScreen &&
             <div className="loadingContainer">
                 <h2>Thanks for making a post!</h2>
                 <p>You will be redirected to your listing in a moment.</p>
