@@ -22,14 +22,14 @@ def seed_users():
         first_name='Steph', email='steph@aa.io', password='password')
 
 
-    db.session.add(bill)
-    db.session.add(marnie)
-    db.session.add(sam) #This is the demo shopper
-    db.session.add(nick)
-    db.session.add(curt)
-    db.session.add(harry) #This is the demo seller
-    db.session.add(tom)
-    db.session.add(steph)
+    db.session.add(bill) #1
+    db.session.add(marnie) #2
+    db.session.add(sam) #3 This is the demo shopper
+    db.session.add(nick) #4
+    db.session.add(curt) #5
+    db.session.add(harry) #6 This is the demo seller
+    db.session.add(tom) #7
+    db.session.add(steph) #8
     db.session.commit()
 
 
