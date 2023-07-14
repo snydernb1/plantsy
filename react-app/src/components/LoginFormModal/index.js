@@ -66,11 +66,11 @@ function LoginFormModal({form}) {
 
 
   const demoSeller = () => {
-    dispatch(login('demo@aa.io', 'password'))
+    dispatch(login('harry@aa.io', 'password'))
     closeModal()
   }
   const demoShopper = () => {
-    dispatch(login('bobbie@aa.io', 'password'))
+    dispatch(login('sam@aa.io', 'password'))
     closeModal()
   }
 

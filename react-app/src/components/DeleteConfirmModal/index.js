@@ -2,11 +2,12 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 
 import { delListing } from "../../store/listings";
+import { deleteReviewThunk } from "../../store/reviews";
 
 import './DeleteConfirmModal.css'
 
 
-export default function DeleteConfirm({id, deleteType}) {
+export default function DeleteConfirm({id, deleteType, listingId}) {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
 
@@ -15,6 +16,13 @@ export default function DeleteConfirm({id, deleteType}) {
 
         if (deleteType === 'listing') {
             dispatch(delListing(id));
+            closeModal();
+        } else {
+            const data = {
+                listingId: listingId,
+                reviewId: id
+            }
+            dispatch(deleteReviewThunk(data));
             closeModal();
         }
     };

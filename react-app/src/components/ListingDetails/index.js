@@ -5,7 +5,10 @@ import { useParams, useHistory } from "react-router-dom";
 import { addItemToCart } from "../../store/cart";
 
 import stockImg from '../imgs/p.jpg'
+import OpenModalButton from '../OpenModalButton'
 import img from '../ManageListings/imgs/empty.png'
+import ReviewCard from "./ReviewCard";
+import CreateReview from "./CreateReviewModal";
 
 import './ListingDetail.css'
 
@@ -15,20 +18,44 @@ export default function ListingDetails () {
     const history = useHistory()
     const listingsObj = useSelector(state => state.listings.listings)
     const cartObj = useSelector(state => state.cart.cart)
+    const reviewObj = useSelector(state => state.reviews.reviews)
     const sessionUser = useSelector(state => state.session.user);
     const [errors, setErrors] = useState({})
     const [mainImg, setMainImg] = useState('loading')
+    const [saveMainImg, setSaveMainImg] = useState('loading')
     const [quantity, setQuantity] = useState(1)
     const [ranNum, setRanNum] = useState(0)
     const [submit, setSubmit] = useState(false)
     const {listId} = useParams();
+    const [showMenu, setShowMenu] = useState(false);
 
     const listing = listingsObj[Number(listId)]
+    let reviews = reviewObj[Number(listId)]
 
-    let prevImage;
+
+    if (reviews !== undefined) reviews = Object.values(reviews)
+    else {reviews = []}
+
+    reviews = reviews.reverse()
+
+    const rating = () => {
+        let sum = 0;
+
+        reviews.forEach(rev => {
+            sum += rev.rating
+        });
+
+        let avg = sum / reviews.length
+        return Math.floor(avg)
+    }
+
+    const closeMenu = () => setShowMenu(false);
+
+    let prevImage = listing.imgs[1].img_url;
 
     useEffect(()=> {
         setMainImg(prevImage)
+        setSaveMainImg(prevImage)
         setRanNum(Math.floor(Math.random() * 21))
         setSubmit(false)
     }, [])
@@ -59,13 +86,13 @@ export default function ListingDetails () {
         </>
     )
 
-    const imgs = listing.imgs
+    // const imgs = Object.values(listing.imgs)
 
-    for (let img of imgs) {
-        if (img.preview === true) {
-            prevImage = img.img_url
-        }
-    }
+    // for (let img of imgs) {
+    //     if (img.preview === true) {
+    //         prevImage = img.img_url
+    //     }
+    // }
 
     const setImg = (e) => {
         let img = e.target.dataset.user
@@ -98,8 +125,24 @@ export default function ListingDetails () {
         };
     };
 
+    function starRating (num) {
+        const props = {};
+
+        return (
+          <div key={num} className={`${rating() >= num ? "filled" : "empty"}`}
+            {...props}
+            >
+              <i id="1" className="fas fa-leaf"></i>
+            </div>
+        )
+      }
+
 
     const priceClass = listing.discount > 0 ? 'slash' : 'noslash'
+
+
+    const hasReview = reviews.find((review) => review.user_id === sessionUser?.id)
+    const imgArr = Object.values(listing.imgs)
 
     return (
         <section className="listingDetailContainer">
@@ -112,7 +155,7 @@ export default function ListingDetails () {
 
                 <div className="imgContainer">
                     <div className="imgContainerColumn">
-                        {listing.imgs.map((img)=> (
+                        {imgArr.map((img)=> (
                             <div key={img.id} className="imageTiles">
                                 <img onClick={setImg}
                                 src={img.img_url}
@@ -135,6 +178,62 @@ export default function ListingDetails () {
                             />
                         </div>
                     </div>
+                </div>
+
+                <div className="reviewContainer">
+
+                    <div id="reviewHeader">
+                        <h3 className="reviewCount">{reviews.length > 0 ?
+                        reviews.length > 1 ? `${reviews.length} reviews` : `${reviews.length} review`
+                        :
+                        'Be the first to leave a review!'}</h3>
+
+                        {/* <div id="rating">
+                            {reviews.length > 0 && <i className="fas fa-leaf" />}
+                            <h3>{reviews.length > 0 ? `${rating()} /5.0`: null}</h3>
+                        </div> */}
+
+                        { reviews.length > 0 &&
+                        <div id='starDiv'>
+                            {[1,2,3,4,5].map((num)=>starRating(num))}
+                        </div>
+                        }
+
+                    </div>
+
+                    {reviews.length > 0 && <div id="reviewSubHeader">
+                        <p id="reviewSubHeaderText">{reviews.length > 1 ? `Reviews for this item` : `Review for this item`}</p>
+                    </div>}
+
+                    {/* =============================*/}
+
+                    {
+                        sessionUser && sessionUser.id !== listing.owner_id && !hasReview &&
+                        <div id='createReview'>
+                            <OpenModalButton
+                            buttonText="Post Your Review"
+                            modalType='button'
+                            onItemClick={closeMenu}
+                            modalComponent={<CreateReview listingId={listing.id} sessionUser={sessionUser} listing={listing} listingImage={saveMainImg}/>}
+                            />
+                        </div>
+                    }
+
+                    {/* =============================*/}
+
+
+                    <div>
+                        {reviews.map((rev) => (
+                            <ReviewCard
+                            key={rev.id}
+                            listing={listing}
+                            saveMainImg={saveMainImg}
+                            rev={rev}
+                            />
+                        ))}
+                    </div>
+
+
                 </div>
             </div>
 

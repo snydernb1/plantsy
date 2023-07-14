@@ -1,8 +1,10 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
+from random import sample
 from app.models import Listing, db, ListingImages
 from app.forms.new_listing_form import NewListingForm
 from app.forms.new_listing_img_form import NewListingImgForm
+from .AWS_helpers import upload_file_to_s3, get_unique_filename, remove_file_from_s3
 
 listing_routes = Blueprint('listings', __name__)
 
@@ -31,6 +33,23 @@ def all_listings():
     [listing_data.append(listing.to_dict()) for listing in listings]
 
     return listing_data
+
+
+@listing_routes.route('/search', methods = ['POST'])
+def search_listings():
+    '''
+    Search for listings
+    '''
+
+    data = request.get_json()
+    search = data['searchData']
+    search_data = []
+
+    search_res = Listing.query.filter(Listing.name.like('%' + search + '%')).all()
+
+    [search_data.append(listing.to_dict()) for listing in search_res]
+
+    return search_data
 
 
 @listing_routes.route('/', methods = ['POST'])
@@ -67,7 +86,7 @@ def create_listing():
 @login_required
 def edit_listing(listing_id):
     '''
-    Adds a new listing to the db
+    Edits a listing in the db
     '''
     listing = Listing.query.get(listing_id)
     data = request.get_json()
@@ -88,9 +107,14 @@ def edit_listing(listing_id):
 @login_required
 def delete_listing(listing_id):
     '''
-    Adds a new listing to the db
+    Deletes listing from the db
     '''
     listing = Listing.query.get(listing_id)
+    imgs = ListingImages.query.filter(ListingImages.listing_id == listing_id).all()
+
+    for img in imgs:
+        remove_file_from_s3(img.img_url)
+
 
     db.session.delete(listing)
     db.session.commit()
@@ -103,16 +127,26 @@ def create_listing_img():
     '''
     Adds a new listing image to the db
     '''
-    data = request.get_json()
+
+    # data = request.get_json() ==> This was messing things up
 
     form = NewListingImgForm()
     form['csrf_token'].data = request.cookies['csrf_token'] # Boilerplate code
 
 
     if form.validate_on_submit():
+
+        image_url = form.data['image']
+        image_url.filename = get_unique_filename(image_url.filename)
+        upload = upload_file_to_s3(image_url)
+
+        if 'url' not in upload:
+            return 'error' #Fix this later for react
+
+
         new_listing_img = ListingImages(
             listing_id = form.data["listing_id"],
-            img_url = form.data["image_url"],
+            img_url = upload['url'],
             preview = form.data["preview"],
         )
 
@@ -122,3 +156,21 @@ def create_listing_img():
 
     if form.errors:
         return form.errors, 400
+
+
+@listing_routes.route('/imgs/<int:id>', methods = ['DELETE'])
+@login_required
+def delete_listing_img(id):
+
+    img = ListingImages.query.get(id)
+
+
+    file_delete = remove_file_from_s3(img.img_url) #.image_url could be wrong?
+
+    if file_delete:
+        db.session.delete(img)
+        db.session.commit()
+        return {"Message": "Successfully Deleted"}
+
+    else:
+        return "img delete error" #Fix later with react

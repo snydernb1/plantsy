@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import ListingCard from "../AllListings/ListingCard";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom";
 
 import './ManageListings.css'
 import img from './imgs/empty.png'

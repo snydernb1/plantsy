@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 
-import { createNewListing } from '../../store/listings'
+import { createNewListing, deleteListingImgThunk } from '../../store/listings'
 import { createNewListingImg } from '../../store/listings'
 import { putListing } from "../../store/listings";
 
@@ -16,16 +16,180 @@ export default function ListingForm ({listing, formType}) {
     const [price, setPrice] = useState(listing?.price)
     const [shipping, setShipping] = useState(listing?.free_shipping)
     const [wholediscount, setWholeDiscount] = useState(Number(listing?.discount) * 100)
-    const [prevImg, setPrevImg] = useState("")
-    const [imgs, setImgs] = useState({})
+    const [prevImg, setPrevImg] = useState()
+    // const [imgs, setImgs] = useState([]) ==> From url img handling
+    const [imgTwo, setImgTwo] = useState()
+    const [imgThree, setImgThree] = useState()
+    const [imgFour, setImgFour] = useState()
+    const [imgFive, setImgFive] = useState()
+
+    const [mainPreview, setMainPreview] = useState(formType === 'update' ? listing?.imgs[1]?.img_url : undefined)
+    const [imgTwoPreview, setImgTwoPreview] = useState(formType === 'update' ? listing?.imgs[2]?.img_url : undefined)
+    const [imgThreePreview, setImgThreePreview] = useState(formType === 'update' ? listing?.imgs[3]?.img_url : undefined)
+    const [imgFourPreview, setImgFourPreview] = useState(formType === 'update' ? listing?.imgs[4]?.img_url : undefined)
+    const [imgFivePreview, setImgFivePreview] = useState(formType === 'update' ? listing?.imgs[5]?.img_url : undefined)
+
+    // These are to store the incoming post to be updated urls. They will be compared below to determine if url should be deleted from db or just removed from the preview above
+    const [existingMainPreview, setExistingMainPreview] = useState(formType === 'update' ? listing?.imgs[1]?.img_url : undefined)
+    const [existingImgTwoPreview, setExistingImgTwoPreview] = useState(formType === 'update' ? listing?.imgs[2]?.img_url : undefined)
+    const [existingImgThreePreview, setExistingImgThreePreview] = useState(formType === 'update' ? listing?.imgs[3]?.img_url : undefined)
+    const [existingImgFourPreview, setExistingImgFourPreview] = useState(formType === 'update' ? listing?.imgs[4]?.img_url : undefined)
+    const [existingImgFivePreview, setExistingImgFivePreview] = useState(formType === 'update' ? listing?.imgs[5]?.img_url : undefined)
+
+
+    // const [imgPreviews, setImgPreviews] = useState([]) ==> From url img handling
 
     const [submit, setSubmit] = useState(false)
+    const [loadingScreen, setLoadingScreen] = useState(false)
+
 
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
 
-    console.log(price)
+    const handlePrevImg = async (e) => {
+        e.preventDefault();
+        if (existingMainPreview !== mainPreview) {
+            setPrevImg(null)
+            setMainPreview(undefined)
+        } else {
+            const data = {
+                listingId: listing.id,
+                listingImgId: listing.imgs[1].id
+            }
+
+            await dispatch(deleteListingImgThunk(data, 1))
+            setMainPreview(undefined)
+        }
+        // Store update img urls, if old url doesn't match new url delete else set null
+
+
+    }
+    const handleImgTwo = async (e) => {
+        e.preventDefault();
+        if (existingImgTwoPreview !== imgTwoPreview) {
+            setImgTwo(null)
+            setImgTwoPreview(undefined)
+        } else {
+            const data = {
+                listingId: listing.id,
+                listingImgId: listing.imgs[2].id
+            }
+
+            await dispatch(deleteListingImgThunk(data, 2))
+            setImgTwoPreview(undefined)
+        }
+    }
+    const handleImgThree = async (e) => {
+        e.preventDefault();
+        if (existingImgThreePreview !== imgThreePreview) {
+            setImgThree(null)
+            setImgThreePreview(undefined)
+        } else {
+            const data = {
+                listingId: listing.id,
+                listingImgId: listing.imgs[3].id
+            }
+
+            await dispatch(deleteListingImgThunk(data, 3))
+            setImgThreePreview(undefined)
+        }
+    }
+    const handleImgFour = async (e) => {
+        e.preventDefault();
+        if (existingImgFourPreview !== imgFourPreview) {
+            setImgFour(null)
+            setImgFourPreview(undefined)
+        } else {
+            const data = {
+                listingId: listing.id,
+                listingImgId: listing.imgs[4].id
+            }
+
+            await dispatch(deleteListingImgThunk(data, 4))
+            setImgFourPreview(undefined)
+        }
+    }
+    const handleImgFive = async (e) => {
+        e.preventDefault();
+        if (existingImgFivePreview !== imgFivePreview) {
+            setImgFive(null)
+            setImgFivePreview(undefined)
+        } else {
+            const data = {
+                listingId: listing.id,
+                listingImgId: listing.imgs[5].id
+            }
+
+            await dispatch(deleteListingImgThunk(data, 5))
+            setImgFivePreview(undefined)
+        }
+    }
+
+
+    useEffect(() => {
+        let mainUrl;
+        let imgTwoUrl;
+        let imgThreeUrl;
+        let imgFourUrl;
+        let imgFiveUrl;
+
+        if (!prevImg) {
+            if (formType !== 'update') setMainPreview(undefined)
+        } else {
+            mainUrl = URL.createObjectURL(prevImg)
+            setMainPreview(mainUrl)
+        }
+
+        if (!imgTwo) {
+            if (formType !== 'update') setImgTwoPreview(undefined)
+        } else {
+            imgTwoUrl = URL.createObjectURL(imgTwo)
+            setImgTwoPreview(imgTwoUrl)
+        }
+
+        if (!imgThree) {
+            if (formType !== 'update') setImgThreePreview(undefined)
+        } else {
+            imgThreeUrl = URL.createObjectURL(imgThree)
+            setImgThreePreview(imgThreeUrl)
+        }
+
+        if (!imgFour) {
+            if (formType !== 'update') setImgFourPreview(undefined)
+        } else {
+            imgFourUrl = URL.createObjectURL(imgFour)
+            setImgFourPreview(imgFourUrl)
+        }
+
+        if (!imgFive) {
+            if (formType !== 'update') setImgFivePreview(undefined)
+        } else {
+            imgFiveUrl = URL.createObjectURL(imgFive)
+            setImgFivePreview(imgFiveUrl)
+        }
+
+
+        return () => URL.revokeObjectURL(mainUrl, imgTwoUrl, imgThreeUrl, imgFourUrl, imgFiveUrl)
+    }, [prevImg, imgTwo, imgThree, imgFour, imgFive])
+
+
+
+    // useEffect(() => {
+    //     if (imgs.length === 0) {
+    //         setImgPreviews([])
+    //         return
+    //     }
+
+    //     imgs.forEach((img) => {
+    //         const imgUrl = URL.createObjectURL(img)
+    //         setImgPreviews([...imgPreviews, imgUrl])
+    //     })
+
+    //     return () => imgPreviews.forEach((img) => URL.revokeObjectURL(img))
+    // }, [imgs])
+
+
 
     //====Checking for Errors=======================================
     useEffect(() => {
@@ -40,18 +204,53 @@ export default function ListingForm ({listing, formType}) {
         }
 
         if (description.length < 30) errors.description = "Please add a description of at least 30 characters"
-        if (formType === "create") {
-            if (!prevImg.length ) errors.prevImg = "Please provide a preview image"
 
-        if (prevImg.length === 0 || prevImg.endsWith('.png') || prevImg.endsWith('.jpg') ||prevImg.endsWith('.jpeg') || prevImg.startsWith('http://') || prevImg.startsWith('https://')) {} else{errors.image = 'Image URL must end in .png, .jpg, or .jpeg and start with "http://" or "https://"'}
+        if (!prevImg && mainPreview === undefined) errors.prevImg = "Please provide a preview image"
 
-            const images = Object.values(imgs) // this might mess up img order, can revisit later
-            for (let image of images) {
-                if (image.url.length === 0 || image.url.endsWith('.png') || image.url.endsWith('.jpg') || image.url.endsWith('.jpeg') || prevImg.startsWith('http://') || prevImg.startsWith('https://')) {} else{errors.image = 'Image URL must end in .png, .jpg, or .jpeg and start with "http://" or "https://"'}
+        if (prevImg) {
+            if (prevImg.name.endsWith('.png') || prevImg.name.endsWith('.jpg') ||prevImg.name.endsWith('.jpeg')) {}
+            else {
+                errors.image = 'Image URL must end in .png, .jpg, or .jpeg'
             }
         }
+        if (imgTwo) {
+            if (imgTwo.name.endsWith('.png') || imgTwo.name.endsWith('.jpg') ||imgTwo.name.endsWith('.jpeg')) {}
+            else {
+                errors.image = 'Image URL must end in .png, .jpg, or .jpeg'
+            }
+        }
+        if (imgThree) {
+            if (imgThree.name.endsWith('.png') || imgThree.name.endsWith('.jpg') ||imgThree.name.endsWith('.jpeg')) {}
+            else {
+                errors.image = 'Image URL must end in .png, .jpg, or .jpeg'
+            }
+        }
+        if (imgFour) {
+            if (imgFour.name.endsWith('.png') || imgFour.name.endsWith('.jpg') ||imgFour.name.endsWith('.jpeg')) {}
+            else {
+                errors.image = 'Image URL must end in .png, .jpg, or .jpeg'
+            }
+        }
+        if (imgFive) {
+            if (imgFive.name.endsWith('.png') || imgFive.name.endsWith('.jpg') ||imgFive.name.endsWith('.jpeg')) {}
+            else {
+                errors.image = 'Image URL must end in .png, .jpg, or .jpeg'
+            }
+        }
+
+        if (formType === "create") {
+            // if (!prevImg.length ) errors.prevImg = "Please provide a preview image"
+
+        // if (prevImg.length === 0 || prevImg.endsWith('.png') || prevImg.endsWith('.jpg') ||prevImg.endsWith('.jpeg') || prevImg.startsWith('http://') || prevImg.startsWith('https://')) {} else{errors.image = 'Image URL must end in .png, .jpg, or .jpeg and start with "http://" or "https://"'}
+
+            // const images = Object.values(imgs) // this might mess up img order, can revisit later
+            // for (let image of images) {
+            //     if (image.url.length === 0 || image.url.endsWith('.png') || image.url.endsWith('.jpg') || image.url.endsWith('.jpeg') || prevImg.startsWith('http://') || prevImg.startsWith('https://')) {} else{errors.image = 'Image URL must end in .png, .jpg, or .jpeg and start with "http://" or "https://"'}
+            // }
+        }
+
         setErrors(errors)
-      }, [description, name, price, prevImg, imgs, shipping, wholediscount])
+      }, [description, name, price, shipping, prevImg, mainPreview, wholediscount, imgTwo, imgThree, imgFour, imgFive])
 
       useEffect(()=> {
         setSubmit(false)
@@ -78,42 +277,154 @@ export default function ListingForm ({listing, formType}) {
         }
 
         if (Object.values(errors).length === 0) {
+            setLoadingScreen(true)
             if (formType === 'create') {
                 const newListing = await dispatch(createNewListing(listingData))
+                // AWS Section
 
-                const preview = {
-                    listing_id: newListing.id,
-                    image_url: prevImg,
-                    preview: true
-                }
-                await dispatch(createNewListingImg(preview))
+                if (prevImg) {
+                    const formDataPrev = new FormData()
 
-                const images = Object.values(imgs)
-                for (let img of images) {
-                    if (img.url.length > 0) {
-                        const newImg = {
-                            listing_id: newListing.id,
-                            image_url: img.url,
-                            preview: false
-                        }
-                        await dispatch(createNewListingImg(newImg))
-                    }
+                    formDataPrev.append('listing_id', newListing.id)
+                    formDataPrev.append('image', prevImg)
+                    formDataPrev.append('preview', true)
+
+                    await dispatch(createNewListingImg(formDataPrev, 1))
                 }
+
+                if (imgTwo) {
+                    const formDataPrev = new FormData()
+
+                    formDataPrev.append('listing_id', newListing.id)
+                    formDataPrev.append('image', imgTwo)
+                    formDataPrev.append('preview', false)
+
+                    await dispatch(createNewListingImg(formDataPrev, 2))
+                }
+
+                if (imgThree) {
+                    const formDataPrev = new FormData()
+
+                    formDataPrev.append('listing_id', newListing.id)
+                    formDataPrev.append('image', imgThree)
+                    formDataPrev.append('preview', false)
+
+                    await dispatch(createNewListingImg(formDataPrev, 3))
+                }
+
+                if (imgFour) {
+                    const formDataPrev = new FormData()
+
+                    formDataPrev.append('listing_id', newListing.id)
+                    formDataPrev.append('image', imgFour)
+                    formDataPrev.append('preview', false)
+
+                    await dispatch(createNewListingImg(formDataPrev, 4))
+                }
+
+                if (imgFive) {
+                    const formDataPrev = new FormData()
+
+                    formDataPrev.append('listing_id', newListing.id)
+                    formDataPrev.append('image', imgFive)
+                    formDataPrev.append('preview', false)
+
+                    await dispatch(createNewListingImg(formDataPrev, 5))
+                }
+
+
+                // AWS Section End
+
+                // const preview = {
+                //     listing_id: newListing.id,
+                //     image_url: prevImg,
+                //     preview: true
+                // } ==> No longer needed due to AWS
+
+
+                // const images = Object.values(imgs)
+                // for (let img of imgs) {
+                //     console.log('this is img in the loop',img)
+                //     if (img.name.length > 0) {
+                //         // const newImg = {
+                //         //     listing_id: newListing.id,
+                //         //     image_url: img.url,
+                //         //     preview: false
+                //         // } ==> No longer needed due to AWS
+                //         const formDataImg = new FormData()
+
+                //         formDataImg.append('listing_id', newListing.id)
+                //         formDataImg.append('image', img) // Might need to change how we are saving imgs in state
+                //         formDataImg.append('preview', false)
+
+
+                //         await dispatch(createNewListingImg(formDataImg))
+                //     }
+                // }
 
                 history.push(`/listings/${newListing.id}`)
 
+
+
+
             } else if (formType === 'update') {
-                const editedListing = await dispatch(putListing(listingData))
+                const editedListing = await dispatch(putListing(listingData, listing.imgs))
+
+                if (prevImg) {
+                    const formDataPrev = new FormData()
+
+                    formDataPrev.append('listing_id', listing.id)
+                    formDataPrev.append('image', prevImg)
+                    formDataPrev.append('preview', true)
+
+                    await dispatch(createNewListingImg(formDataPrev, 1))
+                }
+
+                if (imgTwo) {
+                    const formDataPrev = new FormData()
+
+                    formDataPrev.append('listing_id', listing.id)
+                    formDataPrev.append('image', imgTwo)
+                    formDataPrev.append('preview', false)
+
+                    await dispatch(createNewListingImg(formDataPrev, 2))
+                }
+
+                if (imgThree) {
+                    const formDataPrev = new FormData()
+
+                    formDataPrev.append('listing_id', listing.id)
+                    formDataPrev.append('image', imgThree)
+                    formDataPrev.append('preview', false)
+
+                    await dispatch(createNewListingImg(formDataPrev, 3))
+                }
+
+                if (imgFour) {
+                    const formDataPrev = new FormData()
+
+                    formDataPrev.append('listing_id', listing.id)
+                    formDataPrev.append('image', imgFour)
+                    formDataPrev.append('preview', false)
+
+                    await dispatch(createNewListingImg(formDataPrev, 4))
+                }
+
+                if (imgFive) {
+                    const formDataPrev = new FormData()
+
+                    formDataPrev.append('listing_id', listing.id)
+                    formDataPrev.append('image', imgFive)
+                    formDataPrev.append('preview', false)
+
+                    await dispatch(createNewListingImg(formDataPrev, 5))
+                }
+
                 history.push(`/listings/${editedListing.id}`)
             }
         }
 
     }
-
-    useEffect(()=> {
-        setSubmit(false)
-      }, [])
-
 
     let makeDisabled = false;
 
@@ -134,7 +445,7 @@ export default function ListingForm ({listing, formType}) {
             }
             <p>Tell the world all about your item and why they'll love it.</p>
 
-            <form onSubmit={handleSubmit} className="listingFormBody">
+            <form onSubmit={handleSubmit} className="listingFormBody" encType='multipart/form-data'>
 
                 <section className="formSection">
                     <div className="inputTitle">
@@ -259,57 +570,146 @@ export default function ListingForm ({listing, formType}) {
 
             </section>
 
-            {formType === 'create' &&
+
             <section className="formSection">
-                        <div className="inputTitle">
+                        <div className="inputTitle" id="photoHeader">
                             <h4>Photos*</h4>
                             <p>Add at least one photo. Use all five photos to show off your item's finest features.</p>
                         </div>
-                    <div className="listingFormUrls">
+
+                <div>
+                <div className="listingFormUrls">
 
 
-                    <div className='listingInputDiv'></div>
-                    <input
-                    type="text"
-                    value={prevImg}
-                    placeholder="Example: https://a0.muscache.com/737b978b2b6a.jpg"
-                    className='listingFormInput'
-                    onChange={(e) => setPrevImg(e.target.value)}
-                    />
+                    { !prevImg && mainPreview === undefined ?
+                    <div id='inputMainContainer'>
 
-                    <input
-                    type="text"
-                    value={imgs[2]?.url}
+                        <div className="textDiv">
+                            <div className="previewImageRequired">
+                                <p className="inputMainImgText">Drag & drop to upload file</p>
+                                <p className="inputMainImgText">*Preview image is required</p>
+                            </div>
+                            <p className="browse">Browse</p>
+                        </div>
+                        <input
+                        type="file"
+                        accept='image/*'
+                        // value={prevImg} ==> No longer needed due to AWS
+                        className='inputMainImg'
+                        id="uploadMain"
+                        onChange={(e) => setPrevImg(e.target.files[0])}
+                        />
 
-                    className='listingFormInput'
-                    onChange={(e) => setImgs({...imgs, 2: {url: e.target.value}})}
-                    />
+                    </div>
+                    :
+                    <div id='inputMainContainerPost'>
+                        <button className='removeImgButton' onClick={handlePrevImg} type='button'>X</button>
+                        <img src={mainPreview}/>
+                    </div>
 
-                    <input
-                    type="text"
-                    value={imgs[3]?.url}
+                    }
 
-                    className='listingFormInput'
-                    onChange={(e) => setImgs({...imgs, 3: {url: e.target.value}})}
-                    />
 
-                    <input
-                    type="text"
-                    value={imgs[4]?.url}
+                    <div className="inputRightContainer">
 
-                    className='listingFormInput'
-                    onChange={(e) => setImgs({...imgs, 4: {url: e.target.value}})}
-                    />
+                        { !imgTwo && imgTwoPreview === undefined ?
+                            <div className="inputSubContainer">
+                                <div className="textSubDiv">
+                                    <p className="inputSubImgText">Drag & drop to upload file</p>
+                                    <p className="browse">Browse</p>
+                                </div>
+                                <input
+                                type="file"
+                                accept='image/*'
+                                // value={imgs[2]?.url} ==> No longer needed due to AWS
 
-                    <input
-                    type="text"
-                    value={imgs[5]?.url}
+                                className='inputSubImg'
+                                // onChange={(e) => setImgs({...imgs, 2: {url: e.target.files[0]}})} ==> From url img handling, for reference
+                                onChange={(e) => setImgTwo(e.target.files[0])}
+                                />
+                            </div>
+                        :
+                            <div className="inputSubContainerPost">
+                                <button className='removeImgButton' onClick={handleImgTwo} type='button'>X</button>
+                                <img src={imgTwoPreview}/>
+                            </div>
+                        }
 
-                    className='listingFormInput'
-                    id='lasturlInput'
-                    onChange={(e) => setImgs({...imgs, 5: {url: e.target.value}})}
-                    />
+                        { !imgThree && imgThreePreview === undefined ?
+                            <div className="inputSubContainer">
+                                <div className="textSubDiv">
+                                    <p className="inputSubImgText">Drag & drop to upload file</p>
+                                    <p className="browse">Browse</p>
+                                </div>
+                                <input
+                                type="file"
+                                accept='image/*'
+                                // value={imgs[2]?.url} ==> No longer needed due to AWS
 
+                                className='inputSubImg'
+                                // onChange={(e) => setImgs({...imgs, 2: {url: e.target.files[0]}})} ==> From url img handling, for reference
+                                onChange={(e) => setImgThree(e.target.files[0])}
+                                />
+                            </div>
+                        :
+                            <div className="inputSubContainerPost">
+                                <button className='removeImgButton' onClick={handleImgThree} type='button'>X</button>
+                                <img src={imgThreePreview}/>
+                            </div>
+                        }
+
+                        { !imgFour && imgFourPreview === undefined ?
+                            <div className="inputSubContainer">
+                                <div className="textSubDiv">
+                                    <p className="inputSubImgText">Drag & drop to upload file</p>
+                                    <p className="browse">Browse</p>
+                                </div>
+                                <input
+                                type="file"
+                                accept='image/*'
+                                // value={imgs[2]?.url} ==> No longer needed due to AWS
+
+                                className='inputSubImg'
+                                // onChange={(e) => setImgs({...imgs, 2: {url: e.target.files[0]}})} ==> From url img handling, for reference
+                                onChange={(e) => setImgFour(e.target.files[0])}
+                                />
+                            </div>
+                        :
+                            <div className="inputSubContainerPost">
+                                <button className='removeImgButton' onClick={handleImgFour} type='button'>X</button>
+                                <img src={imgFourPreview}/>
+                            </div>
+                        }
+
+                        { !imgFive && imgFivePreview === undefined ?
+                            <div className="inputSubContainer">
+                                <div className="textSubDiv">
+                                    <p className="inputSubImgText">Drag & drop to upload file</p>
+                                    <p className="browse">Browse</p>
+                                </div>
+                                <input
+                                type="file"
+                                accept='image/*'
+                                // value={imgs[2]?.url} ==> No longer needed due to AWS
+
+                                className='inputSubImg'
+                                // onChange={(e) => setImgs({...imgs, 2: {url: e.target.files[0]}})} ==> From url img handling, for reference
+                                onChange={(e) => setImgFive(e.target.files[0])}
+                                />
+                            </div>
+                        :
+                            <div className="inputSubContainerPost">
+                                <button className='removeImgButton' onClick={handleImgFive} type='button'>X</button>
+                                <img src={imgFivePreview}/>
+                            </div>
+                        }
+
+
+
+                    </div>
+
+
+                </div>
                     {submit && errors.prevImg && (
                         <div className="createListingErrors">* {errors.prevImg}</div>
                         )}
@@ -317,10 +717,10 @@ export default function ListingForm ({listing, formType}) {
                     {submit && errors.image && (
                         <div className="createListingErrors">* {errors.image}</div>
                         )}
-                    </div>
+                </div>
 
             </section>
-            }
+
 
             <div  id='createButtonDiv'>
                 <button
@@ -334,6 +734,15 @@ export default function ListingForm ({listing, formType}) {
             </div>
 
             </form>
+
+            {loadingScreen &&
+            <div className="loadingContainer">
+                <h2>Thanks for making a post!</h2>
+                <p>You will be redirected to your listing in a moment.</p>
+                <i class="fa-solid fa-circle-notch"></i>
+            </div>
+            }
+
         </section>
     );
 };

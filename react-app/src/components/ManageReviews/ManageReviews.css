@@ -1,0 +1,21 @@
+.manageReviewsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.manageReviewsHeader {
+    margin: auto;
+    text-align: center;
+    margin: 2em 0 2em 0;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.userRevsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

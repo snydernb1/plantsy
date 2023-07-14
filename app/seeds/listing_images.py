@@ -338,285 +338,143 @@ def seed_listing_imgs():
         preview=False,
         listing_id=21,
     )
-    stone_22_1 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03656_360x.jpg',
-        preview=True,
-        listing_id=22,
-    )
-    stone_22_2 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03657_360x.jpg',
-        preview=False,
-        listing_id=22,
-    )
-    stone_22_3 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03658_360x.jpg',
-        preview=False,
-        listing_id=22,
-    )
-    stone_23_1 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03689_360x.jpg',
-        preview=True,
-        listing_id=23,
-    )
-    stone_23_2 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03690_360x.jpg',
-        preview=False,
-        listing_id=23,
-    )
-    stone_23_3 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03691_360x.jpg',
-        preview=False,
-        listing_id=23,
-    )
-    stone_24_1 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03640_360x.jpg',
-        preview=True,
-        listing_id=24,
-    )
-    stone_24_2 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03641_360x.jpg',
-        preview=False,
-        listing_id=24,
-    )
-    stone_24_3 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03642_360x.jpg',
-        preview=False,
-        listing_id=24,
-    )
-    stone_25_1 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03765_360x.jpg',
-        preview=True,
-        listing_id=25,
-    )
-    stone_25_2 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03766_360x.jpg',
-        preview=False,
-        listing_id=25,
-    )
-    stone_25_3 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03768_360x.jpg',
-        preview=False,
-        listing_id=25,
-    )
-    stone_26_1 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03753_360x.jpg',
-        preview=True,
-        listing_id=26,
-    )
-    stone_26_2 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03754_360x.jpg',
-        preview=False,
-        listing_id=26,
-    )
-    stone_26_3 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03755_360x.jpg',
-        preview=False,
-        listing_id=26,
-    )
-    stone_27_1 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03803_360x.jpg',
-        preview=True,
-        listing_id=27,
-    )
-    stone_27_2 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03804_360x.jpg',
-        preview=False,
-        listing_id=27,
-    )
-    stone_27_3 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03805_360x.jpg',
-        preview=False,
-        listing_id=27,
-    )
-    stone_28_1 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03829_grande.jpg',
-        preview=True,
-        listing_id=28,
-    )
-    stone_28_2 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03830_grande.jpg',
-        preview=False,
-        listing_id=28,
-    )
-    stone_28_3 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03831_grande.jpg',
-        preview=False,
-        listing_id=28,
-    )
-    stone_29_1 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03833_grande.jpg',
-        preview=True,
-        listing_id=29,
-    )
-    stone_29_2 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03834_grande.jpg',
-        preview=False,
-        listing_id=29,
-    )
-    stone_29_3 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03835_grande.jpg',
-        preview=False,
-        listing_id=29,
-    )
-    stone_29_4 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03836_grande.jpg',
-        preview=False,
-        listing_id=29,
-    )
-    stone_30_1 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03905_grande.jpg',
-        preview=True,
-        listing_id=30,
-    )
-    stone_30_2 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03906_grande.jpg',
-        preview=False,
-        listing_id=30,
-    )
-    stone_30_3 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03907_grande.jpg',
-        preview=False,
-        listing_id=30,
-    )
-    stone_30_4 = ListingImages(
-        img_url='https://cdn.shopify.com/s/files/1/0347/6422/6604/files/DSC03908_grande.jpg',
-        preview=False,
-        listing_id=30,
-    )
+
+
+
     stone_31_1 = ListingImages(
         img_url='https://i.etsystatic.com/24758479/r/il/3d3d69/3931136707/il_1140xN.3931136707_bmkr.jpg',
         preview=True,
-        listing_id=31,
+        listing_id=22,
     )
     stone_31_2 = ListingImages(
         img_url='https://i.etsystatic.com/24758479/r/il/c949fc/3883651484/il_1140xN.3883651484_jsix.jpg',
         preview=False,
-        listing_id=31,
+        listing_id=22,
     )
     stone_31_3 = ListingImages(
         img_url='https://i.etsystatic.com/24758479/r/il/a388a5/3883651532/il_1140xN.3883651532_4adf.jpg',
         preview=False,
-        listing_id=31,
+        listing_id=22,
     )
     stone_32_1 = ListingImages(
         img_url='https://i.etsystatic.com/33208167/r/il/a022d4/4596605401/il_1140xN.4596605401_3sb5.jpg',
         preview=True,
-        listing_id=32,
+        listing_id=23,
     )
     stone_32_2 = ListingImages(
         img_url='https://i.etsystatic.com/33208167/r/il/115219/4549212122/il_1140xN.4549212122_ja4f.jpg',
         preview=False,
-        listing_id=32,
+        listing_id=23,
     )
     stone_32_3 = ListingImages(
         img_url='https://i.etsystatic.com/33208167/r/il/e3d260/4596603769/il_1140xN.4596603769_dcq6.jpg',
         preview=False,
-        listing_id=32,
+        listing_id=23,
     )
     stone_33_1 = ListingImages(
         img_url='https://i.etsystatic.com/25029876/r/il/4d5e3c/3504605392/il_1140xN.3504605392_e9g8.jpg',
         preview=True,
-        listing_id=33,
+        listing_id=24,
     )
     stone_33_2 = ListingImages(
         img_url='https://i.etsystatic.com/25029876/r/il/11be14/3485564641/il_1140xN.3485564641_92k9.jpg',
         preview=False,
-        listing_id=33,
+        listing_id=24,
     )
     stone_33_3 = ListingImages(
         img_url='https://i.etsystatic.com/25029876/r/il/e3d5a8/3437891146/il_1140xN.3437891146_atgj.jpg',
         preview=False,
-        listing_id=33,
+        listing_id=24,
     )
     stone_34_1 = ListingImages(
         img_url='https://i.etsystatic.com/21834267/r/il/9689c0/4518161629/il_1140xN.4518161629_8ckk.jpg',
         preview=True,
-        listing_id=34,
+        listing_id=25,
     )
     stone_34_2 = ListingImages(
         img_url='https://i.etsystatic.com/21834267/r/il/694150/4518161849/il_1140xN.4518161849_kvsg.jpg',
         preview=False,
-        listing_id=34,
+        listing_id=25,
     )
     stone_34_3 = ListingImages(
         img_url='https://i.etsystatic.com/21834267/r/il/ebfa0e/3723247687/il_1140xN.3723247687_dptk.jpg',
         preview=False,
-        listing_id=34,
+        listing_id=25,
     )
     stone_35_1 = ListingImages(
         img_url='https://i.etsystatic.com/27740056/r/il/9f644a/4927411788/il_1140xN.4927411788_ctud.jpg',
         preview=True,
-        listing_id=35,
+        listing_id=26,
     )
     stone_35_2 = ListingImages(
         img_url='https://i.etsystatic.com/27740056/r/il/7ea95d/4927414736/il_1140xN.4927414736_4nxs.jpg',
         preview=False,
-        listing_id=35,
+        listing_id=26,
     )
     stone_35_3 = ListingImages(
         img_url='https://i.etsystatic.com/27740056/r/il/96960a/4489324577/il_1140xN.4489324577_61wl.jpg',
         preview=False,
-        listing_id=35,
+        listing_id=26,
     )
     stone_36_1 = ListingImages(
         img_url='https://i.etsystatic.com/8279081/r/il/f70f27/2663927592/il_1140xN.2663927592_iyfq.jpg',
         preview=True,
-        listing_id=36,
+        listing_id=27,
     )
     stone_36_2 = ListingImages(
         img_url='https://i.etsystatic.com/8279081/r/il/5ca9df/4314603208/il_1140xN.4314603208_9zmk.jpg',
         preview=False,
-        listing_id=36,
+        listing_id=27,
     )
     stone_37_1 = ListingImages(
         img_url='https://i.etsystatic.com/13346155/r/il/acad4e/3794592454/il_1140xN.3794592454_mqa5.jpg',
         preview=True,
-        listing_id=37,
+        listing_id=28,
     )
     stone_37_2 = ListingImages(
         img_url='https://i.etsystatic.com/13346155/r/il/e700f6/3793316762/il_1140xN.3793316762_83xa.jpg',
         preview=False,
-        listing_id=37,
+        listing_id=28,
     )
     stone_37_3 = ListingImages(
         img_url='https://i.etsystatic.com/13346155/r/il/ce31f8/3840898305/il_1140xN.3840898305_izlc.jpg',
         preview=False,
-        listing_id=37,
+        listing_id=28,
     )
     stone_38_1 = ListingImages(
         img_url='https://i.etsystatic.com/30566915/r/il/f43daa/4845655780/il_1140xN.4845655780_epfl.jpg',
         preview=True,
-        listing_id=38,
+        listing_id=29,
     )
     stone_38_2 = ListingImages(
         img_url='https://i.etsystatic.com/30566915/r/il/c2b031/4845648650/il_1140xN.4845648650_a7qh.jpg',
         preview=False,
-        listing_id=38,
+        listing_id=29,
     )
     stone_38_3 = ListingImages(
         img_url='https://i.etsystatic.com/30566915/r/il/c8a0a6/4845650170/il_1140xN.4845650170_px1u.jpg',
         preview=False,
-        listing_id=38,
+        listing_id=29,
     )
     stone_39_1 = ListingImages(
         img_url='https://i.etsystatic.com/7498684/r/il/4f8ccb/2714926299/il_1140xN.2714926299_r9zc.jpg',
         preview=True,
-        listing_id=39,
+        listing_id=30,
     )
     stone_39_2 = ListingImages(
         img_url='https://i.etsystatic.com/7498684/r/il/e0890b/2548414121/il_1140xN.2548414121_6nim.jpg',
         preview=False,
-        listing_id=39,
+        listing_id=30,
     )
     stone_39_3 = ListingImages(
         img_url='https://i.etsystatic.com/7498684/r/il/8d339e/2667244504/il_1140xN.2667244504_f8cf.jpg',
         preview=False,
-        listing_id=39,
+        listing_id=30,
     )
 
 
 
-    all_imgs = [bulbasaur_planter_1, bulbasaur_planter_2, bulbasaur_planter_3, gengar_planter_1, gengar_planter_2, gengar_planter_3, temple_large_1,temple_large_2,temple_large_3,temple_large_4,temple_large_5,temple_small_1,temple_small_2,temple_small_3,temple_small_4,temple_small_5,d_green_1,d_green_2,d_green_3,organic_1,organic_2,organic_3,skull_1,skull_2,organic_2_1,organic_2_2,organic_2_3,organic_2_4,stone_1,stone_2,stone_3,stone_2_1,stone_2_2,stone_2_3,stone_3_1,stone_3_2,stone_3_3,stone_4_1, stone_4_2, stone_4_3, stone_5_1, stone_5_2, stone_5_3, stone_6_1, stone_6_2, stone_6_3, stone_15_1, stone_15_2, stone_15_3, stone_16_1, stone_16_2, stone_16_3, stone_17_1, stone_17_2, stone_17_3, stone_18_1, stone_18_2, stone_18_3, stone_19_1, stone_19_2, stone_19_3, stone_20_1, stone_20_2, stone_20_3, stone_21_1, stone_21_2, stone_21_3, stone_22_1, stone_22_2, stone_22_3, stone_23_1, stone_23_2, stone_23_3, stone_24_1, stone_24_2, stone_24_3, stone_25_1, stone_25_2, stone_25_3, stone_26_1, stone_26_2, stone_26_3, stone_27_1, stone_27_2, stone_27_3, stone_28_1, stone_28_2, stone_28_3, stone_29_1, stone_29_2, stone_29_3, stone_29_4, stone_30_1, stone_30_2, stone_30_3, stone_30_4, stone_31_1, stone_31_2, stone_31_3, stone_32_1, stone_32_2, stone_32_3, stone_33_1, stone_33_2, stone_33_3, stone_34_1, stone_34_2, stone_34_3, stone_35_1, stone_35_2, stone_35_3, stone_36_1, stone_36_2, stone_37_1, stone_37_2, stone_37_3, stone_38_1, stone_38_2, stone_38_3, stone_39_1, stone_39_2, stone_39_3,]
+    all_imgs = [bulbasaur_planter_1, bulbasaur_planter_2, bulbasaur_planter_3, gengar_planter_1, gengar_planter_2, gengar_planter_3, temple_large_1,temple_large_2,temple_large_3,temple_large_4,temple_large_5,temple_small_1,temple_small_2,temple_small_3,temple_small_4,temple_small_5,d_green_1,d_green_2,d_green_3,organic_1,organic_2,organic_3,skull_1,skull_2,organic_2_1,organic_2_2,organic_2_3,organic_2_4,stone_1,stone_2,stone_3,stone_2_1,stone_2_2,stone_2_3,stone_3_1,stone_3_2,stone_3_3,stone_4_1, stone_4_2, stone_4_3, stone_5_1, stone_5_2, stone_5_3, stone_6_1, stone_6_2, stone_6_3, stone_15_1, stone_15_2, stone_15_3, stone_16_1, stone_16_2, stone_16_3, stone_17_1, stone_17_2, stone_17_3, stone_18_1, stone_18_2, stone_18_3, stone_19_1, stone_19_2, stone_19_3, stone_20_1, stone_20_2, stone_20_3, stone_21_1, stone_21_2, stone_21_3, stone_31_1, stone_31_2, stone_31_3, stone_32_1, stone_32_2, stone_32_3, stone_33_1, stone_33_2, stone_33_3, stone_34_1, stone_34_2, stone_34_3, stone_35_1, stone_35_2, stone_35_3, stone_36_1, stone_36_2, stone_37_1, stone_37_2, stone_37_3, stone_38_1, stone_38_2, stone_38_3, stone_39_1, stone_39_2, stone_39_3,]
 
     [db.session.add(img) for img in all_imgs]
     db.session.commit()
