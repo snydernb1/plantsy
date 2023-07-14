@@ -43,12 +43,6 @@
 display: flex;
 }
 
-.fa-magnifying-glass {
-  position: relative;
-  right: 4em;
-  color: rgba(46, 43, 28, 0.5);
-  scale: 120%;
-}
 
 .fa-store {
   scale: 140%;
@@ -95,6 +89,41 @@ display: flex;
 
 .navContents {
   border-bottom: .5px rgb(46, 43, 28) solid;
+}
+
+#searchForm {
+display: flex;
+align-items: center;
+}
+
+#searchBar:focus {
+  border: .5px solid rgb(46, 43, 28);
+  outline: none;
+}
+
+.fa-magnifying-glass {
+  color: rgba(46, 43, 28, 0.5);
+  scale: 120%;
+}
+
+.searchButton {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3.919em;
+  height: 3.8em;
+  z-index: 5;
+  background-color: white;
+  border: none;
+  border-top-right-radius: 2em;
+  border-bottom-right-radius: 2em;
+  right: 4em;
+  cursor: pointer;
+}
+
+.searchButton:hover {
+  background-color: rgb(144, 170, 135);
 }
 
 .titleSearch {

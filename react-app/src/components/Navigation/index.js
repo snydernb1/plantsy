@@ -38,12 +38,15 @@ function Navigation({ isLoaded }){
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
+		if (search.length > 0) {
+			const data = {searchData: search}
 
-		const data = {searchData: search}
+			const res = await dispatch(searchAllListings(data))
 
-		const res = await dispatch(searchAllListings(data))
+			setSearch('')
+			history.push('/listings/search')
+		}
 
-		history.push('/listings/search')
 	}
 
 	return (
@@ -60,13 +63,13 @@ function Navigation({ isLoaded }){
 
 					<input
 					type='text'
-					placeholder='Feature coming soon'
+					placeholder='Search for anything'
 					id='searchBar'
 					value={search}
 					onChange={(e) => setSearch(e.target.value)}
 					/>
 
-					<button>
+					<button className='searchButton'>
 						<i class="fa-solid fa-magnifying-glass"></i>
 					</button>
 

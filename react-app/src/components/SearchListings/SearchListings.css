@@ -1,3 +1,40 @@
-#blue {
-    color: blue;
+#backButton {
+        background-color: rgb(144, 170, 135);
+        border: none;
+        /* width: 4em; */
+        font-weight: 600;
+        padding: .9em 3.2em .9em 3.2em;
+        border-radius: 5em;
+        color: white;
+        margin: .5em 0 1.5em 0;
+        cursor: pointer;
+        white-space: nowrap;
+}
+
+.end {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.returnHome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.searchListings {
+    width: 100%;
+    padding: 4em 4em 4em 4em;
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    width: 1024px;
+    margin: auto;
+}
+
+.searchListingContainer {
+    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
