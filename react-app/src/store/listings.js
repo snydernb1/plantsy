@@ -4,10 +4,17 @@ const NEW_LISTING_IMG = 'listings/NEW_LISTING_IMG';
 const EDIT_LISTING = 'listings/EDIT_LISTING';
 const DELETE_LISTING = 'listings/DELETE_LISTING';
 const DELETE_LISTING_IMG = 'listings/DELETE_LISTING_IMG';
+const SEARCH_LISTING = 'listings/SEARCH_LISTING'
 
 const allListings = (listings) => {
     return {
         type: ALL_LISTINGS,
+        listings
+    };
+};
+const searchListing = (listings) => {
+    return {
+        type: SEARCH_LISTING,
         listings
     };
 };
@@ -52,6 +59,23 @@ export const fetchAllListings = () => async (dispatch) => {
 		const listings = await response.json();
 
 		dispatch(allListings(listings));
+		return null;
+	} else {
+		return ["An error occurred. Please try again."];
+	};
+};
+
+export const searchAllListings = (search) => async (dispatch) => {
+    const response = await fetch('/api/listings/', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(search)
+    })
+
+    if (response.ok) {
+		const listings = await response.json();
+
+		dispatch(searchListing(listings));
 		return null;
 	} else {
 		return ["An error occurred. Please try again."];
@@ -138,7 +162,7 @@ export const createNewListingImg = (data, objNum) => async (dispatch) => {
 };
 
 
-const initialState = { listings: {}}
+const initialState = { listings: {}, search: {}}
 
 const listingsReducer = (state = initialState, action) => {
     let listingState;
@@ -147,7 +171,7 @@ const listingsReducer = (state = initialState, action) => {
         case ALL_LISTINGS:
 
             const allListings = action.listings
-            listingState = {...state, listings: {...state.listings}}
+            listingState = {...state, listings: {...state.listings}, search: {...state.search}}
 
 
             allListings.forEach(listing => {
@@ -165,10 +189,31 @@ const listingsReducer = (state = initialState, action) => {
 
             return listingState
 
+        case SEARCH_LISTING:
+
+            const search = action.listings
+            listingState = {...state, listings: {...state.listings}, search: {...state.search}}
+
+
+            search.forEach(listing => {
+                const imgs = listing.imgs
+                delete listing.imgs
+
+                listing.imgs = {}
+
+                imgs.forEach((img, i) => {
+                    listing.imgs[i + 1] = img
+                })
+
+                listingState.search[listing.id] = listing
+            });
+
+            return listingState
+
         case NEW_LISTING:
 
             const newListing = action.listing
-            listingState = {...state, listings: {...state.listings}}
+            listingState = {...state, listings: {...state.listings}, search: {...state.search}}
 
             newListing.imgs = {}
 
@@ -180,7 +225,7 @@ const listingsReducer = (state = initialState, action) => {
 
             const editListing = action.listing
             const imgsObj = action.imgsObj
-            listingState = {...state, listings: {...state.listings}}
+            listingState = {...state, listings: {...state.listings}, search: {...state.search}}
 
             console.log('Does the edited listing come returned with an arr?',editListing)
 
@@ -193,7 +238,7 @@ const listingsReducer = (state = initialState, action) => {
         case DELETE_LISTING:
 
             const id = action.listing
-            listingState = {...state, listings: {...state.listings}}
+            listingState = {...state, listings: {...state.listings}, search: {...state.search}}
 
             delete listingState.listings[id]
 
@@ -205,14 +250,7 @@ const listingsReducer = (state = initialState, action) => {
             const listingId = action.listingImgData.listingId
             const objNum = action.objNum
 
-            listingState = {...state, listings: {...state.listings}}
-
-            // listingState.listings[listingId].imgs.forEach((img, i) => {
-            //     if (img.id === imgId) {
-            //         listingState.listings[listingId].imgs.splice(i, i)
-
-            //     }
-            // });
+            listingState = {...state, listings: {...state.listings}, search: {...state.search}}
 
             delete listingState.listings[listingId].imgs[objNum]
 
@@ -222,7 +260,7 @@ const listingsReducer = (state = initialState, action) => {
 
             const newListingImg = action.listingImg
             const num = action.objNum
-            listingState = {...state, listings: {...state.listings}}
+            listingState = {...state, listings: {...state.listings}, search: {...state.search}}
 
             listingState.listings[newListingImg.listing_id].imgs[num] = newListingImg
 

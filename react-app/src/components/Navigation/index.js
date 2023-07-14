@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {fetchAllListings} from '../../store/listings'
+import {fetchAllListings, searchAllListings} from '../../store/listings'
 import { fetchAllReviews } from '../../store/reviews';
 import { fetchUserCart } from '../../store/cart';
 import { useHistory, NavLink } from 'react-router-dom';
@@ -15,6 +15,8 @@ function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
 	const cartObj = useSelector(state => state.cart.cart);
 	const cartKeys = Object.keys(cartObj);
+
+	const [search, setSearch] = useState('')
 
 	useEffect(()=> {
         dispatch(fetchAllListings())
@@ -33,6 +35,18 @@ function Navigation({ isLoaded }){
 		history.push(`/users/${sessionUser.id}/cart`)
 	}
 
+
+	const handleSubmit = async (e) => {
+		e.preventDefault()
+
+		const data = {searchData: search}
+
+		const res = await dispatch(searchAllListings(data))
+
+		console.log('these are the results', res)
+
+	}
+
 	return (
 	<div className='navContents'>
 		<div className='navbar'>
@@ -42,9 +56,25 @@ function Navigation({ isLoaded }){
 
 			<div className='titleSearch'>
 			<NavLink exact to="/" id='plantsy'>Plantsy</NavLink>
-			<input disabled={true} placeholder='Feature coming soon' id='searchBar'/>
-			<i class="fa-solid fa-magnifying-glass"></i>
+
+				<form onSubmit={handleSubmit} id='searchForm'>
+
+					<input
+					type='text'
+					placeholder='Feature coming soon'
+					id='searchBar'
+					value={search}
+					onChange={(e) => setSearch(e.target.value)}
+					/>
+
+					<button>
+						<i class="fa-solid fa-magnifying-glass"></i>
+					</button>
+
+				</form>
+
 			</div>
+
 
 			<div className='navButtons'>
 
