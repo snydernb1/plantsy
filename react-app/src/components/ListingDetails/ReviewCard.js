@@ -7,7 +7,7 @@ import DeleteConfirm from '../DeleteConfirmModal';
 
 import './ReviewCard.css'
 
-export default function ReviewCard ({rev, listing, saveMainImg}) {
+export default function ReviewCard ({rev, listing, saveMainImg, cardType}) {
   const history = useHistory()
   const [showMenu, setShowMenu] = useState(false);
   const sessionUser = useSelector(state => state.session.user);
@@ -34,6 +34,16 @@ export default function ReviewCard ({rev, listing, saveMainImg}) {
   return (
         <section className="reviewCardContainer">
 
+            {cardType === 'manage' &&
+
+              <div className='revImgContainer'>
+                <img src={saveMainImg} className='revImage'/>
+              </div>
+
+            }
+
+          <div className='reviewTextContainer'>
+
             <div className='reviewRating'>
                 {[1,2,3,4,5].map((num)=>starRating(num))}
             </div>
@@ -45,27 +55,23 @@ export default function ReviewCard ({rev, listing, saveMainImg}) {
               <p className='nameDateSmaller'>{rev.date}</p>
 
               {hasReview && <div className='updateDelete'>
-
-                <div id='createReview'>
                     <OpenModalButton
                     buttonText="Update"
                     modalType='buttonSmall'
                     onItemClick={closeMenu}
                     modalComponent={<CreateReview listingId={listing.id} sessionUser={sessionUser} listing={listing} reviewType='edit' listingImage={saveMainImg} existReview={rev}/>}
                     />
-                </div>
 
-                <div id='deleteButton'>
                     <OpenModalButton
                     buttonText="Delete"
                     modalType='buttonDelete'
                     onItemClick={closeMenu}
                     modalComponent={<DeleteConfirm id={rev.id} deleteType='review' listingId={rev.listing_id}/>}
                     />
-                </div>
-
               </div>}
+
             </div>
+          </div>
 
         </section>
     )

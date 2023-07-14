@@ -26,9 +26,15 @@
 
 .reviewCardContainer {
     display: flex;
-    flex-direction: column;
     gap: 1em;
     margin-bottom: 2em;
+    align-items: center;
+}
+
+.reviewTextContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
 }
 
 .reviewTextLarge {
@@ -47,4 +53,16 @@
 .updateDelete {
     position: relative;
     bottom: 3px;
+}
+
+.revImgContainer {
+    width: 10em;
+    height: 10em;
+}
+
+.revImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
 }

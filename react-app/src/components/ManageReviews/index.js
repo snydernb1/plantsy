@@ -30,7 +30,7 @@ export default function ManageReviews () {
     }
 
     return (
-        <section>
+        <section className="manageReviewsContainer">
 
             {
                 userReviews.length === 0 ?
@@ -47,18 +47,21 @@ export default function ManageReviews () {
                 :
                 <div>
 
-                    <h2>Manage reviews</h2>
-                    {
-                        userReviews.map((review) => (
-                            <ReviewCard
-                            key={review.id}
-                            rev={review}
-                            listing={listingsObj[review.listing_id]}
-                            saveMainImg={listingsObj[review.listing_id].imgs[1].img_url}
-                            />
+                    <h2 className="manageReviewsHeader">Manage reviews</h2>
+                    <div className="userRevsContainer">
+                        {
+                            userReviews.map((review) => (
+                                <ReviewCard
+                                key={review.id}
+                                rev={review}
+                                listing={listingsObj[review.listing_id]}
+                                saveMainImg={listingsObj[review.listing_id].imgs[1].img_url}
+                                cardType={'manage'}
+                                />
 
-                            ))
+                                ))
                         }
+                    </div>
                 </div>
             }
 

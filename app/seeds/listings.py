@@ -191,87 +191,6 @@ def seed_listings():
         owner_id=1,
         shop_id=1
     )
-    stone_plant_22 = Listing(
-        name='4.5" Short Planter - Cubes',
-        description='This one-of-a-kind large porcelain planter is 4.5 inches (12 cm) tall and 4 inches (10 cm) wide. Hammerly Ceramics planters are perfect for succulents, cacti, or any small house plant. Every Hammerly Ceramics piece is handmade by Curt in his studio outside Denver, Colorado. Starting from a prototype designed in 3D modeling software each design then has custom molds produced in-house. These unique molds are cast in porcelain, fired, coated in handmade glazes, and high fired again in a custom computer-controlled gas kiln. Each planter is designed to grow happy, healthy plants and finished in high-quality, beautiful, colorful glazes. Made from high-fired porcelain that is strong and durable.',
-        price=80.00,
-        free_shipping=False,
-        discount=None,
-        owner_id=5,
-        shop_id=5
-    )
-    stone_plant_23 = Listing(
-        name='4.5" Short Planter - Coral',
-        description='This one-of-a-kind large porcelain planter is 4.5 inches (12 cm) tall and 4 inches (10 cm) wide. Hammerly Ceramics planters are perfect for succulents, cacti, or any small house plant. Every Hammerly Ceramics piece is handmade by Curt in his studio outside Denver, Colorado. Starting from a prototype designed in 3D modeling software each design then has custom molds produced in-house. These unique molds are cast in porcelain, fired, coated in handmade glazes, and high fired again in a custom computer-controlled gas kiln. Each planter is designed to grow happy, healthy plants and finished in high-quality, beautiful, colorful glazes. Made from high-fired porcelain that is strong and durable.',
-        price=80.00,
-        free_shipping=False,
-        discount=None,
-        owner_id=5,
-        shop_id=5
-    )
-    stone_plant_24 = Listing(
-        name='4.5" Short Planter - Web',
-        description='This one-of-a-kind large porcelain planter is 4.5 inches (12 cm) tall and 4 inches (10 cm) wide. Hammerly Ceramics planters are perfect for succulents, cacti, or any small house plant. Every Hammerly Ceramics piece is handmade by Curt in his studio outside Denver, Colorado. Starting from a prototype designed in 3D modeling software each design then has custom molds produced in-house. These unique molds are cast in porcelain, fired, coated in handmade glazes, and high fired again in a custom computer-controlled gas kiln. Each planter is designed to grow happy, healthy plants and finished in high-quality, beautiful, colorful glazes. Made from high-fired porcelain that is strong and durable.',
-        price=80.00,
-        free_shipping=False,
-        discount=None,
-        owner_id=5,
-        shop_id=5
-    )
-    stone_plant_25 = Listing(
-        name='7" Tall Planter - Cubes',
-        description='This one-of-a-kind large porcelain planter is 7 inches (18 cm) tall and 6 inches (15 cm) wide. Hammerly Ceramics planters are perfect for succulents, cacti, or any small house plant. Every Hammerly Ceramics piece is handmade by Curt in his studio outside Denver, Colorado. Starting from a prototype designed in 3D modeling software each design then has custom molds produced in-house. These unique molds are cast in porcelain, fired, coated in handmade glazes, and high fired again in a custom computer-controlled gas kiln. Each planter is designed to grow happy, healthy plants and finished in high-quality, beautiful, colorful glazes. Made from high-fired porcelain that is strong and durable.',
-        price=145.00,
-        free_shipping=False,
-        discount=None,
-        owner_id=5,
-        shop_id=5
-    )
-    stone_plant_26 = Listing(
-        name='7" Tall Planter - Web',
-        description='This one-of-a-kind large porcelain planter is 7 inches (18 cm) tall and 6 inches (15 cm) wide. Hammerly Ceramics planters are perfect for succulents, cacti, or any small house plant. Every Hammerly Ceramics piece is handmade by Curt in his studio outside Denver, Colorado. Starting from a prototype designed in 3D modeling software each design then has custom molds produced in-house. These unique molds are cast in porcelain, fired, coated in handmade glazes, and high fired again in a custom computer-controlled gas kiln. Each planter is designed to grow happy, healthy plants and finished in high-quality, beautiful, colorful glazes. Made from high-fired porcelain that is strong and durable.',
-        price=145.00,
-        free_shipping=False,
-        discount=None,
-        owner_id=5,
-        shop_id=5
-    )
-    stone_plant_27 = Listing(
-        name='7" Tall Planter - Coral',
-        description='This one-of-a-kind large porcelain planter is 7 inches (18 cm) tall and 6 inches (15 cm) wide. Hammerly Ceramics planters are perfect for succulents, cacti, or any small house plant. Every Hammerly Ceramics piece is handmade by Curt in his studio outside Denver, Colorado. Starting from a prototype designed in 3D modeling software each design then has custom molds produced in-house. These unique molds are cast in porcelain, fired, coated in handmade glazes, and high fired again in a custom computer-controlled gas kiln. Each planter is designed to grow happy, healthy plants and finished in high-quality, beautiful, colorful glazes. Made from high-fired porcelain that is strong and durable.',
-        price=145.00,
-        free_shipping=False,
-        discount=None,
-        owner_id=5,
-        shop_id=5
-    )
-    stone_plant_28 = Listing(
-        name='7" Tall Planter',
-        description='This one-of-a-kind large porcelain planter is 7 inches (18 cm) tall and 6 inches (15 cm) wide. Hammerly Ceramics planters are perfect for succulents, cacti, or any small house plant. Every Hammerly Ceramics piece is handmade by Curt in his studio outside Denver, Colorado. Starting from a prototype designed in 3D modeling software each design then has custom molds produced in-house. These unique molds are cast in porcelain, fired, coated in handmade glazes, and high fired again in a custom computer-controlled gas kiln. Each planter is designed to grow happy, healthy plants and finished in high-quality, beautiful, colorful glazes. Made from high-fired porcelain that is strong and durable.',
-        price=145.00,
-        free_shipping=False,
-        discount=None,
-        owner_id=5,
-        shop_id=5
-    )
-    stone_plant_29 = Listing(
-        name='8" Wide Planter - Fruit',
-        description='This one-of-a-kind large porcelain planter is 6 inches (18 cm) tall and 8 inches (15 cm) wide. Hammerly Ceramics planters are perfect for succulents, cacti, or any small house plant. Every Hammerly Ceramics piece is handmade by Curt in his studio outside Denver, Colorado. Starting from a prototype designed in 3D modeling software each design then has custom molds produced in-house. These unique molds are cast in porcelain, fired, coated in handmade glazes, and high fired again in a custom computer-controlled gas kiln. Each planter is designed to grow happy, healthy plants and finished in high-quality, beautiful, colorful glazes. Made from high-fired porcelain that is strong and durable.',
-        price=160.00,
-        free_shipping=False,
-        discount=None,
-        owner_id=5,
-        shop_id=5
-    )
-    stone_plant_30 = Listing(
-        name='8" Wide Planter - Oreo',
-        description='This one-of-a-kind large porcelain planter is 6 inches (18 cm) tall and 8 inches (15 cm) wide. Hammerly Ceramics planters are perfect for succulents, cacti, or any small house plant. Every Hammerly Ceramics piece is handmade by Curt in his studio outside Denver, Colorado. Starting from a prototype designed in 3D modeling software each design then has custom molds produced in-house. These unique molds are cast in porcelain, fired, coated in handmade glazes, and high fired again in a custom computer-controlled gas kiln. Each planter is designed to grow happy, healthy plants and finished in high-quality, beautiful, colorful glazes. Made from high-fired porcelain that is strong and durable.',
-        price=160.00,
-        free_shipping=False,
-        discount=None,
-        owner_id=5,
-        shop_id=5
-    )
     stone_plant_31 = Listing(
         name='Sage Green Ceramic Round Planter Pot with Saucer',
         description='Bring your plant to life with this beautifully crafted planter. It features a light sage green crackle glaze for the perfect pop of color as well as an attached saucer for essential drainage.',
@@ -355,7 +274,7 @@ def seed_listings():
     )
 
 
-    all_listings = [bulbasaur_planter, gengar_planter, conc_plant_1, conc_plant_2, d_plant_1, organic_plant_1, skull_plant_1, organic_plant_2, marble_plant_1, stone_plant_1, stone_plant_2, stone_plant_3,  stone_plant_4,  stone_plant_5,  stone_plant_15,  stone_plant_16,  stone_plant_17,  stone_plant_18,  stone_plant_19,  stone_plant_20, stone_plant_21, stone_plant_22, stone_plant_23, stone_plant_24, stone_plant_25, stone_plant_26, stone_plant_27, stone_plant_28, stone_plant_29, stone_plant_30, stone_plant_31, stone_plant_32, stone_plant_33, stone_plant_34, stone_plant_35, stone_plant_36, stone_plant_37, stone_plant_38, stone_plant_39,]
+    all_listings = [bulbasaur_planter, gengar_planter, conc_plant_1, conc_plant_2, d_plant_1, organic_plant_1, skull_plant_1, organic_plant_2, marble_plant_1, stone_plant_1, stone_plant_2, stone_plant_3,  stone_plant_4,  stone_plant_5,  stone_plant_15,  stone_plant_16,  stone_plant_17,  stone_plant_18,  stone_plant_19,  stone_plant_20, stone_plant_21, stone_plant_31, stone_plant_32, stone_plant_33, stone_plant_34, stone_plant_35, stone_plant_36, stone_plant_37, stone_plant_38, stone_plant_39,]
 
     [db.session.add(listing) for listing in all_listings]
     db.session.commit()

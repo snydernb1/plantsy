@@ -13,30 +13,30 @@ def seed_shops():
         name='Marnie\'s Flowers',
         description='Struggling to care for a plant? Look no further... Marnie\'s flowers are all crocheted by hand and do not require sunlight or water. Implossible to kill! Unless your cat decides to eat them.',
         img_url='https://imgur.com/iQFo4eL.jpg',
-        owner_id=1
+        owner_id=2
     )
-    bobbie_shop = Shop(
+    sam_shop = Shop(
         name='Coming Soon',
         description='Coming Soon',
         img_url='https://imgur.com/iQFo4eL.jpg',
-        owner_id=1
+        owner_id=3
     )
     ns_shop = Shop(
         name='Notably Special',
         description='Coming soon',
         img_url='https://imgur.com/iQFo4eL.jpg',
-        owner_id=1
+        owner_id=4
     )
     hc_shop = Shop(
         name='Hammerly Ceramics',
         description='Coming soon',
         img_url='https://imgur.com/iQFo4eL.jpg',
-        owner_id=1
+        owner_id=5
     )
 
     db.session.add(bill_shop)
     db.session.add(marnie_shop)
-    db.session.add(bobbie_shop)
+    db.session.add(sam_shop)
     db.session.add(ns_shop)
     db.session.add(hc_shop)
     db.session.commit()
