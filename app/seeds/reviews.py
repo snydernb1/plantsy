@@ -5,7 +5,7 @@ from sqlalchemy.sql import text
 def seed_reviews():
     review_1 = Review(
         review='I absolutely love this kit!!! This is so cute and adorable!!! My succulent was pretty dry upon delivery (it was a very warm week) but with some TLC, it’s thriving!!! I can’t wait to order more!!!',
-        date='May 27, 2023',
+        date='May 27, 2021',
         date_num= 1685145600000,
         rating=4,
         user_id=3,
@@ -13,7 +13,7 @@ def seed_reviews():
     )
     review_2 = Review(
         review='Perfection! Purchased for a gift and they were so happy with it! The kit and succulent sent were awesome. Instructions were curated so well. Love it!!',
-        date='Apr 3, 2023',
+        date='June 3, 2021',
         date_num=1680480000000,
         rating=3,
         user_id=4,
@@ -21,7 +21,7 @@ def seed_reviews():
     )
     review_3 = Review(
         review='Exactly as advertised and super cute. It has a hole in the bottom for water drainage. It came early.',
-        date='Mar 30, 2023',
+        date='Feb 24, 2022',
         date_num=1680134400000,
         rating=2,
         user_id=5,
@@ -29,7 +29,7 @@ def seed_reviews():
     )
     review_4 = Review(
         review='Love this pot so much!! Way more space than I imagined too (:',
-        date='Mar 2, 2023',
+        date='Mar 2, 2022',
         date_num=1677715200000,
         rating=5,
         user_id=1,
@@ -37,7 +37,7 @@ def seed_reviews():
     )
     review_5 = Review(
         review='Super adorable! Cute little booty for my succulents! It didn\'t come dirty. Like the dirt ring won\'t come off on the outside. I\'m OCD enough that it bothers me when I look but most people won\'t haven\'t noticed it.',
-        date='Mar 14, 2023',
+        date='Mar 14, 2022',
         date_num=1677715200000,
         rating=3,
         user_id=8,
@@ -45,7 +45,7 @@ def seed_reviews():
     )
     review_6 = Review(
         review='Love it! Fast shipping and it looks amazing in my bathroom!',
-        date='Jan 29, 2023',
+        date='Jun 14, 2022',
         date_num=1677715200000,
         rating=5,
         user_id=7,
@@ -53,7 +53,7 @@ def seed_reviews():
     )
     review_7 = Review(
         review='Cute pots and delivered exactly as it was described. I cannot wait to gift it this season!',
-        date='Dec 9, 2021',
+        date='Aug 9, 2022',
         date_num=1677715200000,
         rating=5,
         user_id=5,
@@ -61,7 +61,7 @@ def seed_reviews():
     )
     review_8 = Review(
         review='Amazing quality and the aesthetic goes great with my room! Love it',
-        date='Jan 24, 2023',
+        date='Nov 24, 2022',
         date_num=1677715200000,
         rating=5,
         user_id=4,
@@ -69,7 +69,7 @@ def seed_reviews():
     )
     review_9 = Review(
         review='Quality is amazing. Packaged super well I would definitely purchase again. Cant wait for more colors to be available',
-        date='May 19, 2023',
+        date='Dec 19, 2022',
         date_num=1677715200000,
         rating=5,
         user_id=3,
@@ -77,7 +77,7 @@ def seed_reviews():
     )
     review_10 = Review(
         review='The planter is nice but not exactly what I was expecting for a little over $90. The bright, white and shiny exterior makes it look like cheap plastic. Based on the photos I thought it was going to be an off white with a matte finish - which it\'s not.',
-        date='Mar 15, 2023',
+        date='Mar 10, 2023',
         date_num=1677715200000,
         rating=3,
         user_id=8,
@@ -93,7 +93,7 @@ def seed_reviews():
     )
     review_12 = Review(
         review='Nice. Would be more elegant if the edge on the saucer was clean and simple like the top edge of the pot great color and weight.',
-        date='Mar 15, 2023',
+        date='Mar 20, 2023',
         date_num=1677715200000,
         rating=4,
         user_id=7,
@@ -101,7 +101,7 @@ def seed_reviews():
     )
     review_13 = Review(
         review='The prefect size (and weight) planter for my indoor house plant shelf. I used it for a spider plant and it really pops in white.',
-        date='Mar 15, 2023',
+        date='Apr 12, 2023',
         date_num=1677715200000,
         rating=4,
         user_id=7,
@@ -109,7 +109,7 @@ def seed_reviews():
     )
     review_14 = Review(
         review='I thought it would be bigger... It\'s hard to keep a plant alive and the material is a cheap plastic',
-        date='Mar 15, 2023',
+        date='May 18, 2023',
         date_num=1677715200000,
         rating=1,
         user_id=8,
@@ -117,7 +117,7 @@ def seed_reviews():
     )
     review_15 = Review(
         review='Wish it was bigger, all my plants keep dying',
-        date='Mar 15, 2023',
+        date='May 21, 2023',
         date_num=1677715200000,
         rating=2,
         user_id=2,
@@ -125,7 +125,7 @@ def seed_reviews():
     )
     review_16 = Review(
         review='The price is amazing for the size of the pot! The color looks even better in person!',
-        date='Mar 15, 2023',
+        date='Jun 6, 2023',
         date_num=1677715200000,
         rating=5,
         user_id=8,
@@ -133,7 +133,7 @@ def seed_reviews():
     )
     review_17 = Review(
         review='Absolutely love these!! I went back and bought more after the first one arrived!! You won\'t regret it:)',
-        date='Mar 15, 2023',
+        date='Jun 15, 2023',
         date_num=1677715200000,
         rating=5,
         user_id=5,
@@ -141,7 +141,7 @@ def seed_reviews():
     )
     review_18 = Review(
         review='Amazing product!',
-        date='Mar 15, 2023',
+        date='Jun 21, 2023',
         date_num=1677715200000,
         rating=5,
         user_id=7,
@@ -149,7 +149,7 @@ def seed_reviews():
     )
     review_19 = Review(
         review='Cool design but the finish is a little underwhelming',
-        date='Mar 15, 2023',
+        date='Jul 1, 2023',
         date_num=1677715200000,
         rating=3,
         user_id=7,
@@ -157,7 +157,7 @@ def seed_reviews():
     )
     review_20 = Review(
         review='A bit small but the design is so cool! Very modern and fits well with my home.',
-        date='Mar 15, 2023',
+        date='Jul 4, 2023',
         date_num=1677715200000,
         rating=4,
         user_id=7,
@@ -165,7 +165,7 @@ def seed_reviews():
     )
     review_21 = Review(
         review='Love the design! The seller was great to deal with too!',
-        date='Mar 15, 2023',
+        date='Jul 7, 2023',
         date_num=1677715200000,
         rating=5,
         user_id=8,
