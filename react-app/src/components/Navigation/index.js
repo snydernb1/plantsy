@@ -43,8 +43,7 @@ function Navigation({ isLoaded }){
 
 		const res = await dispatch(searchAllListings(data))
 
-		console.log('these are the results', res)
-
+		history.push('/listings/search')
 	}
 
 	return (

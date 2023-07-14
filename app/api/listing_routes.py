@@ -35,6 +35,23 @@ def all_listings():
     return listing_data
 
 
+@listing_routes.route('/search', methods = ['POST'])
+def search_listings():
+    '''
+    Search for listings
+    '''
+
+    data = request.get_json()
+    search = data['searchData']
+    search_data = []
+
+    search_res = Listing.query.filter(Listing.name.like('%' + search + '%')).all()
+
+    [search_data.append(listing.to_dict()) for listing in search_res]
+
+    return search_data
+
+
 @listing_routes.route('/', methods = ['POST'])
 @login_required
 def create_listing():

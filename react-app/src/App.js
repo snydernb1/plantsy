@@ -14,6 +14,7 @@ import Cart from "./components/Cart";
 import Footer from "./components/Footer";
 import PurchaseRedirect from "./components/PurchaseRedirect";
 import FourOhFour from "./components/FourOhFour";
+import SearchListings from "./components/SearchListings";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,10 @@ function App() {
 
           <Route exact path='/listings'>
             <CreateListing/>
+          </Route>
+
+          <Route exact path='/listings/search'>
+            <SearchListings/>
           </Route>
 
           <Route path='/listings/:listId/edit'>
