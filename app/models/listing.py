@@ -33,6 +33,21 @@ class Listing(db.Model):
     #     secondary=cart,
     #     back_populates='items'
     # )
+    def find_avg_rating(self):
+        sum = 0
+        total_num = len(self.reviews)
+
+        if (len(self.reviews) == 0):
+            return 'new'
+
+        for review in self.reviews:
+            sum += review.rating
+
+        avg = sum / total_num
+
+        return avg
+
+
 
     def to_dict(self):
         return {
@@ -44,5 +59,6 @@ class Listing(db.Model):
             'discount': self.discount,
             'owner_id': self.owner_id,
             'shop_id': self.shop_id,
-            'imgs': [img.to_dict() for img in self.imgs]
+            'imgs': [img.to_dict() for img in self.imgs],
+            'rating': self.find_avg_rating()
         }

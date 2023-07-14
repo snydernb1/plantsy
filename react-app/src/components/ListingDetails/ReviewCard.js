@@ -36,8 +36,6 @@ export default function ReviewCard ({rev, listing, saveMainImg}) {
 
             <div className='reviewRating'>
                 {[1,2,3,4,5].map((num)=>starRating(num))}
-
-
             </div>
 
             <p className='reviewTextLarge'>{rev.review}</p>

@@ -36,6 +36,7 @@ export default function ListingDetails () {
     if (reviews !== undefined) reviews = Object.values(reviews)
     else {reviews = []}
 
+    reviews = reviews.reverse()
 
     const rating = () => {
         let sum = 0;

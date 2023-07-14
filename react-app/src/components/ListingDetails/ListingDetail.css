@@ -10,6 +10,11 @@
     white-space: nowrap;
 }
 
+#createReview {
+    margin: 0 0 1em 0;
+    padding: 0 0 1em 0;
+}
+
 #detailInput {
     height: 2.2em;
     border-radius: 5px;

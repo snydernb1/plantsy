@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useHistory } from "react-router-dom";
 import OpenModalMenuItem from '../OpenModalButton'
 import DeleteConfirm from '../DeleteConfirmModal';
@@ -9,10 +10,14 @@ import './ListingCard.css'
 
 export default function ListingCard ({listing, manage}) {
     const history = useHistory()
+    const reviewObj = useSelector(state =>  state.reviews.reviews)
     const [showMenu, setShowMenu] = useState(false);
 
     let prevImage = listing.imgs[1].img_url;
 
+    const reviews = reviewObj[listing.id]
+
+    console.log('this is the rview obj', reviews)
     // const imgs = listing.imgs
     // // Grabs img preview
     // for (let img of imgs) {
@@ -29,6 +34,25 @@ export default function ListingCard ({listing, manage}) {
     }
 
     const priceClass = listing.discount > 0 ? 'slash' : 'noslash'
+
+    function starRating (num) {
+        const props = {};
+
+        if (listing.rating === 'new' ) {
+            return
+        } else {
+            return (
+                <div key={num} className={`${listing.rating >= num ? "filledSmall" : "emptySmall"}`}
+                {...props}
+                >
+                <i id="1" className="fas fa-leaf"></i>
+                </div>
+
+            )
+        }
+
+
+    }
 
     return (
         <section className='listCardContainer'>
@@ -73,6 +97,14 @@ export default function ListingCard ({listing, manage}) {
 
                 <div>
                     <p className='itemName'>{listing.name}</p>
+                </div>
+
+                {/* {listing.rating === 'new' &&
+                <p>New!</p>
+                } */}
+
+                <div className='reviewRating'>
+                    {[1,2,3,4,5].map((num)=>starRating(num))}
                 </div>
 
                 <div className='price'>

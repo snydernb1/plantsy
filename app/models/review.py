@@ -13,6 +13,7 @@ class Review(db.Model):
     review = db.Column(db.String, nullable=False)
     date = db.Column(db.String, nullable=False)
     rating = db.Column(db.Float, nullable=False)
+    date_num = db.Column(db.Float, nullable=False)
     # Foreign Keys
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     listing_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('listings.id')), nullable=False)
@@ -28,6 +29,7 @@ class Review(db.Model):
             'id': self.id,
             'review': self.review,
             'date': self.date,
+            'date_num': self.date_num,
             'rating': self.rating,
             'user_id': self.user_id,
             'listing_id': self.listing_id,

@@ -38,6 +38,7 @@ def create_review():
     Creates a new review in the db
     '''
     user = current_user
+    data = request.get_json()
 
     form = NewReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token'] # Boilerplate code
@@ -46,6 +47,7 @@ def create_review():
         new_review = Review(
             review = form.data['review'],
             date = form.data['date'],
+            date_num = form.data['date_num'],
             rating = form.data['rating'],
             user_id = user.id,
             listing_id = form.data['listing_id'],
