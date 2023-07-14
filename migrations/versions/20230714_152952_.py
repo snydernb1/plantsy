@@ -31,7 +31,7 @@ def upgrade():
     sa.UniqueConstraint('email')
     )
     if environment == "production":
-        op.execute(f"ALTER TABLE users SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     op.create_table('shops',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=40), nullable=False),
@@ -43,7 +43,7 @@ def upgrade():
     sa.UniqueConstraint('name')
     )
     if environment == "production":
-        op.execute(f"ALTER TABLE shops SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE shops SET SCHEMA {SCHEMA};")
     op.create_table('listings',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=80), nullable=False),
@@ -58,7 +58,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     if environment == "production":
-        op.execute(f"ALTER TABLE listings SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE listings SET SCHEMA {SCHEMA};")
     op.create_table('carts',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('quantity', sa.Integer(), nullable=False),
@@ -69,7 +69,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     if environment == "production":
-        op.execute(f"ALTER TABLE carts SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE carts SET SCHEMA {SCHEMA};")
     op.create_table('listings_images',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('img_url', sa.String(), nullable=False),
@@ -79,7 +79,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     if environment == "production":
-        op.execute(f"ALTER TABLE listings_images SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE listings_images SET SCHEMA {SCHEMA};")
     op.create_table('reviews',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('review', sa.String(), nullable=False),
@@ -93,7 +93,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     if environment == "production":
-        op.execute(f"ALTER TABLE reviews SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE reviews SET SCHEMA {SCHEMA};")
     op.create_table('review_images',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('img_url', sa.String(), nullable=False),
