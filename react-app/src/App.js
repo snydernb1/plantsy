@@ -15,6 +15,7 @@ import Footer from "./components/Footer";
 import PurchaseRedirect from "./components/PurchaseRedirect";
 import FourOhFour from "./components/FourOhFour";
 import SearchListings from "./components/SearchListings";
+import ManageReviews from "./components/ManageReviews";
 
 function App() {
   const dispatch = useDispatch();
@@ -51,6 +52,10 @@ function App() {
 
           <Route path='/users/:userId/listings'>
             <ManageListings />
+          </Route>
+
+          <Route path='/users/:userId/reviews'>
+            <ManageReviews />
           </Route>
 
           <Route path='/users/:userId/cart'>

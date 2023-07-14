@@ -45,6 +45,12 @@ function ProfileButton({ user }) {
 
   };
 
+  const handleManageReviews = () => {
+    closeMenu()
+    history.push(`/users/${user.id}/reviews`)
+  }
+
+
   return (
     <section>
 
@@ -54,6 +60,11 @@ function ProfileButton({ user }) {
         {user ? (
           <>
             <p>{user.first_name}</p>
+
+            <div onClick={handleManageReviews} className="signOut">
+            <i class="fa-solid fa-pen-to-square"></i>
+            <p>reviews</p>
+            </div>
             <div onClick={handleLogout} className="signOut">
             <i className="fas fa-arrow-right-from-bracket" />
             <p>sign out</p>
