@@ -27,8 +27,6 @@ export default function CreateReview({listingId, sessionUser, existReview, revie
         e.preventDefault()
 
         const dateObj = new Date()
-        console.log('this is the date object', dateObj)
-        console.log('this is the num??', dateObj.getTime())
         const dateStr = `${dateObj}`
         const dateArr = dateStr.split(' ')
 

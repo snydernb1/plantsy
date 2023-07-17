@@ -24,7 +24,6 @@ export default function ManageReviews () {
         }
     }
 
-    console.log('this is user reviews', userReviews)
     const viewListings = () => {
         history.push('/')
     }

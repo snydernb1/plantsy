@@ -131,7 +131,6 @@ const reviewsReducer = (state = initialState, action) => {
 
             const ids = action.review
             reviewState = {...state, reviews: {...state.reviews}}
-            console.log(ids)
 
             delete reviewState.reviews[ids.listingId][ids.reviewId]
 
