@@ -344,7 +344,6 @@ export default function ListingForm ({listing, formType}) {
 
                 // const images = Object.values(imgs)
                 // for (let img of imgs) {
-                //     console.log('this is img in the loop',img)
                 //     if (img.name.length > 0) {
                 //         // const newImg = {
                 //         //     listing_id: newListing.id,

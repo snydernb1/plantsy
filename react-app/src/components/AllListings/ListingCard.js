@@ -17,14 +17,22 @@ export default function ListingCard ({listing, manage}) {
 
     const reviews = reviewObj[listing.id]
 
-    console.log('this is the rview obj', reviews)
-    // const imgs = listing.imgs
-    // // Grabs img preview
-    // for (let img of imgs) {
-    //     if (img.preview === true) {
-    //         prevImage = img.img_url
-    //     }
-    // }
+    let rating;
+
+    if (reviews !== undefined) {
+        const revArr = Object.values(reviews)
+        let sum = 0;
+        let len = revArr.length
+        revArr.forEach(rev => {
+            sum += rev.rating
+        });
+
+        rating = sum / len
+
+        if (sum === 0 && len === 0) {
+            rating = 0
+        }
+    }
 
     const closeMenu = () => setShowMenu(false);
 
@@ -38,11 +46,11 @@ export default function ListingCard ({listing, manage}) {
     function starRating (num) {
         const props = {};
 
-        if (listing.rating === 'new' ) {
+        if (rating === undefined || rating === 0) {
             return
         } else {
             return (
-                <div key={num} className={`${listing.rating >= num ? "filledSmall" : "emptySmall"}`}
+                <div key={num} className={`${rating >= num ? "filledSmall" : "emptySmall"}`}
                 {...props}
                 >
                 <i id="1" className="fas fa-leaf"></i>

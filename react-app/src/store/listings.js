@@ -139,7 +139,6 @@ export const deleteListingImgThunk = (data, objNum) => async (dispatch) => {
     if (response.ok) {
 		const msg = await response.json();
 		dispatch(deleteListingImg(data, objNum));
-        console.log('msg from backend', msg)
 		return null;
 	} else {
 		return ["An error occurred. Please try again."];
@@ -229,8 +228,6 @@ const listingsReducer = (state = initialState, action) => {
             const editListing = action.listing
             const imgsObj = action.imgsObj
             listingState = {...state, listings: {...state.listings}, search: {...state.search}, searchTerm: {...state.searchTerm}}
-
-            console.log('Does the edited listing come returned with an arr?',editListing)
 
             editListing.imgs = imgsObj
 
