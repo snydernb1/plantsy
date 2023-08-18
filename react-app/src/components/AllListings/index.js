@@ -13,15 +13,16 @@ import { useEffect, useState } from "react";
 export default function AllListings(){
     const listingsObj = useSelector(state => state.listings.listings)
     const sessionUser = useSelector(state => state.session.user);
-    const [showListings, setShowListings] = useState(false)
     const listings = Object.values(listingsObj)
+    console.log('what is listsingsObj before load', listings)
+    const [showListings, setShowListings] = useState(listings ? true : false)
 
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         setShowListings(true)
-    //     }, '3500')
+    useEffect(() => {
+        setTimeout(() => {
+            setShowListings(true)
+        }, '3500')
 
-    // }, [])
+    }, [])
 
 
     return (

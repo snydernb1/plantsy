@@ -1,7 +1,20 @@
+import { useEffect, useState } from 'react';
 import './Footer.css'
 import img from './imgs/footer-med.png'
 
 export default function Footer ({}) {
+    const [showFooter, setShowFooter] = useState(false)
+
+    useEffect(() => {
+        setTimeout(() => {
+            setShowFooter(true)
+        }, '3500')
+    }, [])
+
+    if (showFooter === false) {
+        return false
+    }
+
     return (
         <footer id='footer'>
 
