@@ -2,6 +2,51 @@
     text-decoration: underline;
 }
 
+#colorChangeLeaf {
+    font-size: 18em;
+    position: relative;
+    top: .25em;
+    animation: changeColor 5s;
+    color: rgb(212, 104, 68);
+}
+
+@keyframes changeColor {
+    0% {color: rgb(212, 104, 68);}
+    100% {color: rgb(144, 170, 135);}
+}
+
+/* #greenLeaf {
+    position: relative;
+    z-index: 3;
+    top: 5em;
+    right: 9.5em;
+    width: 19em;
+    height: 32em;
+}
+
+#greyLeaf {
+    width: 19em;
+    /* opacity: 90%; */
+    /* left: 9.5em;
+    height: 32em;
+    position: relative;
+    z-index: 4;
+    top: 5em;
+    animation: fadeOut 3s;
+    animation: name duration timing-function delay iteration-count direction fill-mode;
+}
+
+*/
+
+#loadingLeaf {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    max-width: 1024px;
+    align-items: center;
+    margin: auto;
+}
+
 #welcomeMessage {
     margin-top: 2em;
     justify-content: center;
