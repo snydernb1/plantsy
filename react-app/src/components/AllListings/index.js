@@ -15,14 +15,14 @@ export default function AllListings(){
     const sessionUser = useSelector(state => state.session.user);
     const listings = Object.values(listingsObj)
     console.log('what is listsingsObj before load', listings)
-    const [showListings, setShowListings] = useState(listings ? true : false)
+    const [showListings, setShowListings] = useState(true)
 
-    useEffect(() => {
-        setTimeout(() => {
-            setShowListings(true)
-        }, '3500')
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         setShowListings(true)
+    //     }, '1000')
 
-    }, [])
+    // }, [])
 
 
     return (

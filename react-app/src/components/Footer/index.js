@@ -8,7 +8,7 @@ export default function Footer ({}) {
     useEffect(() => {
         setTimeout(() => {
             setShowFooter(true)
-        }, '3500')
+        }, '1500')
     }, [])
 
     if (showFooter === false) {
