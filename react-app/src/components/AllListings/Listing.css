@@ -6,7 +6,7 @@
     font-size: 18em;
     position: relative;
     top: .25em;
-    animation: changeColor 5s;
+    animation: changeColor 1.5s;
     color: rgb(212, 104, 68);
 }
 
