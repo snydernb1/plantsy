@@ -51,7 +51,7 @@ export default function ListingDetails () {
 
     const closeMenu = () => setShowMenu(false);
 
-    let prevImage = listing.imgs[1].img_url;
+    let prevImage = listing?.imgs[1].img_url;
 
     useEffect(()=> {
         setMainImg(prevImage)
