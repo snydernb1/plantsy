@@ -16,6 +16,7 @@ import PurchaseRedirect from "./components/PurchaseRedirect";
 import FourOhFour from "./components/FourOhFour";
 import SearchListings from "./components/SearchListings";
 import ManageReviews from "./components/ManageReviews";
+import ScrollToTop from "./components/ScrollToTop/scrollToTop";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ function App() {
 
   return (
     <>
+      <ScrollToTop/>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
